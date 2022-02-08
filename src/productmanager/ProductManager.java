@@ -1,6 +1,11 @@
 package productmanager;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ProductManager implements IProductManager, Runnable{
 
@@ -9,11 +14,14 @@ public class ProductManager implements IProductManager, Runnable{
     private ArrayList<Product> productArray;
     private ArrayList<Product> updatedProductArray;
 
-    private int updateInterval = 10;    //Minutes
+    private int updateInterval;    //Minutes
+    private String config = "config.txt";
 
     public ProductManager(){
         productArray = new ArrayList<>();
         updatedProductArray = null;
+
+        updateInterval = readConfig();
     }
 
     public static void main(String[] args) {
@@ -103,17 +111,19 @@ public class ProductManager implements IProductManager, Runnable{
     public boolean update(int productId, Product p) {
         checkForUpdates();
 
+        boolean success = false;
         /*
         for(Product pT : productArray){
             if(pT.get(ProductAttribute.ID) == productId){
                 pT = p;
+                success = Objects.equals(pT, p);
                 break;
             }
         }
          */
         updateSource();
 
-        return false;
+        return success;
     }
 
     @Override
@@ -131,7 +141,7 @@ public class ProductManager implements IProductManager, Runnable{
 
 
          */
-        return false;
+        return toReturn;
     }
 
     @Override
@@ -176,6 +186,21 @@ public class ProductManager implements IProductManager, Runnable{
 
     private void updateSource(){
         jsonparser.write(productArray);
+    }
+
+    private int readConfig(){
+        int toReturn = 0;
+
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(config));
+            toReturn = Integer.valueOf(br.readLine());
+            br.close();
+
+        }catch (IOException e){
+            e.printStackTrace();
+            toReturn = 5;
+        }
+        return toReturn;
     }
 
 
