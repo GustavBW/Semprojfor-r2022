@@ -9,7 +9,7 @@ public class JSONParser {
         return null;
     }
 
-    public boolean write(Product product){
+    public boolean write(ArrayList<Product> product){
         return false;
     }
 }
