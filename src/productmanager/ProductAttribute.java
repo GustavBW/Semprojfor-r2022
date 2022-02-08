@@ -1,4 +1,6 @@
 package productmanager;
 
 public enum ProductAttribute {
+
+    UUID, ID, AVERAGE_USER_REVIEW, IN_STOCK, EAN, PRICE, PUBLISHED_DATE, EXPIRATION_DATE, CATEGORY, NAME, WEIGHT, DESCRIPTION;
 }
