@@ -30,7 +30,6 @@ public class JSONReader {
             Product currentProduct = new Product();
             ArrayList<String> array = new ArrayList<>();
             String line;
-            String arrayLine;
 
             br.readLine(); //Skipping the first line as to not break the array detection.
             currentLine++;
@@ -43,45 +42,21 @@ public class JSONReader {
                 containsData = line.contains("\"");
                 containsProductStart = line.contains("{");
 
-                if(!(newProduct || containsArray || containsProductStart) && containsData) {
-                    int valueStart = line.indexOf(":");
-                    int valueEnd = findLastOccurence(",",line);
-                    int propertyStart = line.indexOf("\"");
 
-                    String propertyValue = line.substring(valueStart + 3, valueEnd - 1);
-                    String propertyName = line.substring(propertyStart, valueStart - 1);
 
-                    for(ProductAttribute pA : ProductAttribute.values()){
-                        if(pA.alias.equalsIgnoreCase(propertyName)){
-                            currentProduct.set(pA, propertyValue);
-                            break;
-                        }
-                    }
+                if(containsArray){
 
-                }else if(containsArray){
-
-                    while((arrayLine = br.readLine()) != null && arrayLine.contains("\"")){
-                        currentLine++;
-                        int entryStart = arrayLine.indexOf("\"");
-                        int entryEnd = arrayLine.lastIndexOf("\"");
-
-                        array.add(arrayLine.substring(entryStart,entryEnd));
-                    }
-
-                    String[] actualArray = new String[array.size()];
-
-                    for(int i = 0; i < array.size(); i++){
-                        actualArray[i] = array.get(i);
-                    }
-
-                    array.clear();
-
-                    currentProduct.set(ProductAttribute.IN_STOCK, actualArray);
-
+                    currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(currentLine, br, currentProduct, array));
 
                 }else if(newProduct){
+
                     output.add(currentProduct);
                     currentProduct = new Product();
+
+                }else if(!containsProductStart && containsData) {
+
+                    setProductAttribute(line, currentProduct);
+
                 }
 
             }
@@ -99,6 +74,53 @@ public class JSONReader {
         }
 
         return output;
+    }
+
+    private String[] calculateInStockArray(int currentLine, BufferedReader br, Product currentProduct, ArrayList<String> array) throws IOException {
+        String arrayLine;
+
+        while((arrayLine = br.readLine()) != null && arrayLine.contains("\"")){
+            currentLine++;
+            int entryStart = arrayLine.indexOf("\"");
+            int entryEnd = arrayLine.lastIndexOf("\"");
+
+            array.add(arrayLine.substring(entryStart,entryEnd));
+        }
+
+        String[] actualArray = new String[array.size()];
+
+        for(int i = 0; i < array.size(); i++){
+            actualArray[i] = array.get(i);
+        }
+
+        array.clear();
+        return actualArray;
+    }
+
+    private String getPropertyName(String line){
+        int propertyStart = line.indexOf("\"");
+        int propertyEnd = line.indexOf(":");
+
+        return line.substring(propertyStart, propertyEnd - 1);
+    }
+
+    private String getPropertyValue(String line){
+        int valueStart = line.indexOf(":");
+        int valueEnd = findLastOccurence(",",line);
+
+        return line.substring(valueStart + 3, valueEnd - 1);
+    }
+
+    private void setProductAttribute(String line, Product p){
+
+        String propertyName = getPropertyName(line);
+
+        for(ProductAttribute pA : ProductAttribute.values()){
+            if(pA.alias.equalsIgnoreCase(propertyName)){
+                p.set(pA, getPropertyValue(line));
+                break;
+            }
+        }
     }
 
     public boolean write(ArrayList<Product> list, String filepath){

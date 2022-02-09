@@ -16,6 +16,7 @@ public class Product {
 
 
     public String get(ProductAttribute pA){
+        productAttributes.putIfAbsent(pA, "unavailable");
         return productAttributes.get(pA);
     }
     public String[] getLocations(){
@@ -25,8 +26,13 @@ public class Product {
         productAttributes.put(pA,value);
         return Objects.equals(productAttributes.get(pA), value);
     }
-    public boolean set(ProductAttribute pA, String[] values){
+    public boolean setLocations(ProductAttribute pA, String[] values){
         availableAt = values;
         return availableAt.length > 1;
+    }
+
+    @Override
+    public String toString(){
+        return "Product: " + productAttributes.get(ProductAttribute.NAME) + " " + productAttributes.get(ProductAttribute.PRICE);
     }
 }
