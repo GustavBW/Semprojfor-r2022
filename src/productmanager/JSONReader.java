@@ -57,7 +57,6 @@ public class JSONReader {
             e.printStackTrace();
         }
     }
-
     private void addNewProfilingData(File fileToAddTo, String data){
 
         loadInPreviousProfilingData();
@@ -81,7 +80,6 @@ public class JSONReader {
             e.printStackTrace();
         }
     }
-
     public void printProfilingAverages(){
 
         String[] readSpeedEntries = readFileContents.split("\n");
@@ -107,10 +105,32 @@ public class JSONReader {
 
 
     }
-
     public void resetProfiling(){
         writeFileContents = "ns\n";
         readFileContents = "ns\n";
+
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(writeProfFile));
+            String output = "";
+
+            bw.write(output);
+
+            bw.flush();
+            bw.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(readProfFile));
+            String output = "";
+
+            bw.write(output);
+
+            bw.flush();
+            bw.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<Product> read(){
@@ -128,6 +148,8 @@ public class JSONReader {
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(filepath2));
+            ArrayList<String> fileContents = new ArrayList<>();
+
             Product currentProduct = new Product();
             ArrayList<String> array = new ArrayList<>();
             String line;
@@ -144,10 +166,9 @@ public class JSONReader {
                 containsProductStart = line.contains("{");
 
 
-
                 if(containsArray){
 
-                    currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, currentProduct, array));
+                    currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, array));
 
                 }else if(newProduct){
 
@@ -177,7 +198,7 @@ public class JSONReader {
         return output;
     }
 
-    private String[] calculateInStockArray(BufferedReader br, Product currentProduct, ArrayList<String> array) throws IOException {
+    private String[] calculateInStockArray(BufferedReader br, ArrayList<String> array) throws IOException {
         String arrayLine;
 
         while((arrayLine = br.readLine()) != null && arrayLine.contains("\"")){

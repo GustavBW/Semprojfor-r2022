@@ -29,14 +29,17 @@ public class ProductManager implements IProductManager, Runnable{
 
         File file = new File("resources/productsWriteTest.json");
         System.out.println("File is at " + file.getAbsolutePath());
-        reader.write(manager.productArray, file.getAbsolutePath());
 
-        for(int i = 0; i < 20; i++){
+        //manager.printAllProducts();
+
+
+        for(int i = 0; i < 200; i++){
             reader.read();
-            reader.write(manager.productArray);
+            reader.write(manager.productArray, file.getAbsolutePath());
         }
 
         reader.printProfilingAverages();
+
         //manager.printAllProducts();
         // write your code here
     }
