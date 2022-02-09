@@ -1,8 +1,6 @@
 package productmanager;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class JSONReader {
@@ -16,26 +14,29 @@ public class JSONReader {
 
 
     public ArrayList<Product> read(){
+        return read(filepath);
+    }
+    public ArrayList<Product> read(String filepath2){
 
         ArrayList<Product> output = new ArrayList<>();
-        boolean newProduct = true;
-        boolean containsArray = false;
-        boolean containsData = false;
-        boolean containsProductStart = true;
+        boolean newProduct;
+        boolean containsArray;
+        boolean containsData;
+        boolean containsProductStart;
         int currentLine = 1;
 
         try{
-            BufferedReader br = new BufferedReader(new FileReader(filepath));
+            BufferedReader br = new BufferedReader(new FileReader(filepath2));
+            Product currentProduct = new Product();
             ArrayList<String> array = new ArrayList<>();
-            String line = "";
-            String arrayLine = "";
+            String line;
+            String arrayLine;
 
             br.readLine(); //Skipping the first line as to not break the array detection.
             currentLine++;
 
             while((line = br.readLine()) != null){
                 currentLine++;
-                Product currentProduct = new Product();
 
                 newProduct = line.contains("}");
                 containsArray = line.contains("[");
@@ -100,10 +101,61 @@ public class JSONReader {
         return output;
     }
 
+    public boolean write(ArrayList<Product> list, String filepath){
+        boolean success = true;
+        StringBuilder builder = new StringBuilder();
+
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
+            String propertyValue = null;
+
+            builder.append("[");
+
+            for(Product p : list){
+                builder.append("\n{");
+
+                for(ProductAttribute pAttr : ProductAttribute.values()){
+
+                    if(pAttr != ProductAttribute.IN_STOCK) {
+                        if((propertyValue = p.get(pAttr)) != null || !propertyValue.isEmpty()) {
+                            builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\",");
+                        }
+                    }
+                }
+
+                builder = new StringBuilder(removeLastOccurence(",", builder.toString()));
+                builder.append("\n},");
+            }
+
+            builder.append("\n]");
+
+            if(builder.isEmpty()){
+                success = false;
+
+            }else{
+                bw.write(builder.toString());
+                success = true;
+            }
+
+            bw.flush();
+            bw.close();
+        }catch (IOException e){
+            success = false;
+            e.printStackTrace();
+        }
+
+
+        return success;
+    }
+
+    public boolean write(ArrayList<Product> list){
+        return write(list, filepath);
+    }
+
     private int findLastOccurence(String whatToFind, String line){
         int index = line.length();
         boolean foundIt = false;
-        System.out.println("Searching: " + line + " of length " + index +" for; \"" + whatToFind + "\"");
+        //System.out.println("Searching: " + line + "\t\t" +  " of length " + index +" for; \"" + whatToFind + "\"");
 
         for(int i = index; i > 0; i--){
             if(line.substring(i - 1,i).contains(whatToFind)){
@@ -112,14 +164,18 @@ public class JSONReader {
             }
             index--;
         }
-        if(foundIt) {
-            System.out.println("Occurence found at index " + index);
-        }else{
-            System.out.println("No occourence found returning line length");
-            index = line.length() +1 ;
+        if(!foundIt) {
+            //System.out.println("No occourence found returning line length");
+            index = line.length() +1;
         }
 
         return index;
     }
+    private String removeLastOccurence(String whatToRemove, String line){
+        int index = findLastOccurence(whatToRemove, line);
+
+        return line.substring(index - 1, index).replace(",","");
+    }
+
 
 }

@@ -19,6 +19,7 @@ public enum ProductAttribute {
 
     String alias;
 
+
     ProductAttribute(String alias){
         this.alias = alias;
     }
