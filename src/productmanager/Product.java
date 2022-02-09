@@ -45,7 +45,15 @@ public class Product {
         System.out.println("Product : " + productAttributes.get(ProductAttribute.NAME));
 
         for(ProductAttribute pA : ProductAttribute.values()){
-            System.out.println("\t " + pA.alias + ": " + get(pA));
+            if(pA == ProductAttribute.IN_STOCK){
+                StringBuilder toPrint = new StringBuilder();
+                for(String s : availableAt){
+                    toPrint.append(s).append("\t");
+                }
+                System.out.println("\t " + pA.alias + ": " + toPrint);
+            }else {
+                System.out.println("\t " + pA.alias + ": " + get(pA));
+            }
         }
     }
 }

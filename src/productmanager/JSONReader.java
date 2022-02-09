@@ -1,12 +1,14 @@
 package productmanager;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class JSONReader {
 
     private final String filepath;
     private final int amountOfProperties = 11;
+    private int currentLineNumber = 1;
 
     public JSONReader(String filepath){
         this.filepath = filepath;
@@ -23,7 +25,8 @@ public class JSONReader {
         boolean containsArray;
         boolean containsData;
         boolean containsProductStart;
-        int currentLine = 1;
+        currentLineNumber = 1;
+        int amountOfProducts = 1;
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(filepath2));
@@ -32,10 +35,10 @@ public class JSONReader {
             String line;
 
             br.readLine(); //Skipping the first line as to not break the array detection.
-            currentLine++;
+            currentLineNumber++;
 
             while((line = br.readLine()) != null){
-                currentLine++;
+                currentLineNumber++;
 
                 newProduct = line.contains("}");
                 containsArray = line.contains("[");
@@ -46,12 +49,14 @@ public class JSONReader {
 
                 if(containsArray){
 
-                    currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(currentLine, br, currentProduct, array));
+                    currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, currentProduct, array));
 
                 }else if(newProduct){
 
+                    currentProduct.set(ProductAttribute.ID, String.valueOf(amountOfProducts));
                     output.add(currentProduct);
                     currentProduct = new Product();
+                    amountOfProducts++;
 
                 }else if(!containsProductStart && containsData) {
 
@@ -60,13 +65,11 @@ public class JSONReader {
                 }
 
             }
-
-
-
+            
             br.close();
 
         }catch (StringIndexOutOfBoundsException e){
-            System.out.println("String index out of bounds at line " + currentLine);
+            System.out.println("String index out of bounds at line " + currentLineNumber);
             e.printStackTrace();
         }catch (IOException e){
             e.printStackTrace();
@@ -76,15 +79,15 @@ public class JSONReader {
         return output;
     }
 
-    private String[] calculateInStockArray(int currentLine, BufferedReader br, Product currentProduct, ArrayList<String> array) throws IOException {
+    private String[] calculateInStockArray(BufferedReader br, Product currentProduct, ArrayList<String> array) throws IOException {
         String arrayLine;
 
         while((arrayLine = br.readLine()) != null && arrayLine.contains("\"")){
-            currentLine++;
+            currentLineNumber++;
             int entryStart = arrayLine.indexOf("\"");
             int entryEnd = arrayLine.lastIndexOf("\"");
 
-            array.add(arrayLine.substring(entryStart,entryEnd));
+            array.add(arrayLine.substring(entryStart + 1,entryEnd));
         }
 
         String[] actualArray = new String[array.size()];
@@ -107,8 +110,8 @@ public class JSONReader {
     }
 
     private String getPropertyValue(String line){
-        int valueStart = line.indexOf(":");
         int valueEnd = findLastOccurence(",",line);
+        int valueStart = countOccurences(line, '"') < 4 ? line.indexOf(":") - 1 : line.indexOf(":");
 
         return line.substring(valueStart + 3, valueEnd - 1);
     }
@@ -207,10 +210,26 @@ public class JSONReader {
 
         return index;
     }
+
     private String removeLastOccurence(String whatToRemove, String line){
         int index = findLastOccurence(whatToRemove, line);
 
         return line.substring(index - 1, index).replace(",","");
+    }
+
+    private int countOccurences(String line, Character whatToCount){
+
+        byte[] asByteArray = line.getBytes(StandardCharsets.UTF_8);
+        int occurences = 0;
+
+        for(byte b : asByteArray){
+            if(b == whatToCount){
+                occurences++;
+            }
+        }
+
+        System.out.println("Found " + occurences + " occurences of: " + whatToCount + " at line: " + currentLineNumber);
+        return occurences;
     }
 
 
