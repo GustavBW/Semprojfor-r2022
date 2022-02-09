@@ -15,22 +15,22 @@ public class ProductManager implements IProductManager, Runnable{
     private ArrayList<Product> updatedProductArray;
 
     private int updateInterval;    //Minutes
-    private String config = "config.txt";
+    private String config = "resources/config.txt";
 
     public ProductManager(){
         productArray = new ArrayList<>();
         updatedProductArray = null;
 
+
         updateInterval = readConfig();
     }
 
     public static void main(String[] args) {
-        String test = "\"id\": \"1cf3d1fd-7787-4b64-8ef9-0b6f131a9f4e\"";
-        int start = test.indexOf(":");
-        int end = test.lastIndexOf("\"");
+        JSONReader reader = new JSONReader("resources/products.json");
+        ProductManager manager = new ProductManager();
+        manager.productArray = reader.read();
 
-        String property = test.substring(start +3, end);
-        System.out.println(property);
+        manager.print();
 	    // write your code here
     }
 
@@ -209,6 +209,11 @@ public class ProductManager implements IProductManager, Runnable{
         return toReturn;
     }
 
+    public void print(){
+        for(Product p : productArray){
+            System.out.println(p);
+        }
+    }
 
     @Override
     public ArrayList<Product> getAllProducts() {
