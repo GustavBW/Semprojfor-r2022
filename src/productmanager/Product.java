@@ -7,6 +7,7 @@ public class Product {
 
 
 
+
     public boolean set(ProductAttribute pA, String value){
 
 
