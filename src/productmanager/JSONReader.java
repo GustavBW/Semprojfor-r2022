@@ -117,9 +117,21 @@ public class JSONReader {
                 for(ProductAttribute pAttr : ProductAttribute.values()){
 
                     if(pAttr != ProductAttribute.IN_STOCK) {
+
                         if((propertyValue = p.get(pAttr)) != null || !propertyValue.isEmpty()) {
                             builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\",");
                         }
+
+                    }else{
+
+                        builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\": [");
+
+                        for(String s : p.getLocations()){
+                            builder.append("\n\t\"").append(s).append("\",");
+                        }
+
+                        builder = new StringBuilder(removeLastOccurence(",", builder.toString()));
+                        builder.append("\n],");
                     }
                 }
 

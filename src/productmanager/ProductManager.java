@@ -1,9 +1,6 @@
 package productmanager;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -31,6 +28,10 @@ public class ProductManager implements IProductManager, Runnable{
         manager.productArray = reader.read();
 
         manager.print();
+
+        File file = new File("productsWriteTest.json");
+        System.out.println("File is at " + file.getAbsolutePath());
+        reader.write(manager.productArray, file.getAbsolutePath());
 	    // write your code here
     }
 
