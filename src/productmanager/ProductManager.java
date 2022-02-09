@@ -25,6 +25,21 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     public static void main(String[] args) {
+        String uhhh = "Yellow milk pedistals on a hill in the morning sun. I'm going for a jolly walk";
+        String meh = uhhh.substring(0,1);
+        meh += uhhh.substring(4,5);
+        meh += uhhh.substring(6,8);
+        meh += uhhh.substring(22,23);
+        meh += uhhh.substring(39,40);
+
+        int posPoints = uhhh.indexOf('.');
+        meh += " " + uhhh.substring(posPoints + 6, posPoints + 7);
+        meh += uhhh.substring(posPoints + 16, posPoints + 17);
+        meh += uhhh.substring(posPoints + 22, posPoints + 23);
+
+        System.out.println(meh);
+
+
 	    // write your code here
     }
 
@@ -193,7 +208,7 @@ public class ProductManager implements IProductManager, Runnable{
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(config));
-            toReturn = Integer.valueOf(br.readLine());
+            toReturn = Integer.parseInt(br.readLine());
             br.close();
 
         }catch (IOException e){
