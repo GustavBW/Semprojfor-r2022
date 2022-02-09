@@ -19,7 +19,7 @@ public class JSONReader {
         return read(filepath);
     }
     public ArrayList<Product> read(String filepath2){
-
+        long timeA = System.nanoTime();
         ArrayList<Product> output = new ArrayList<>();
         boolean newProduct;
         boolean containsArray;
@@ -75,7 +75,7 @@ public class JSONReader {
             e.printStackTrace();
 
         }
-
+        System.out.println("Time for JSONReader.read(): " + ((System.nanoTime() - timeA) / 1_000_000) + "ms");
         return output;
     }
 
@@ -129,7 +129,10 @@ public class JSONReader {
     }
 
     public boolean write(ArrayList<Product> list, String filepath){
+        long timeA = System.nanoTime();
         boolean success;
+        int productNumber = 0;
+        int attributeNumber = 1;
         StringBuilder builder = new StringBuilder();
 
         try{
@@ -143,10 +146,12 @@ public class JSONReader {
 
                 for(ProductAttribute pAttr : ProductAttribute.values()){
 
+                    String lineEnd = pAttr == ProductAttribute.CLOCKSPEED ? "" : ",";
+
                     if(pAttr != ProductAttribute.IN_STOCK) {
 
                         if((propertyValue = p.get(pAttr)) != null || !propertyValue.isEmpty()) {
-                            builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\",");
+                            builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\"" + lineEnd);
                         }
 
                     }else{
@@ -163,11 +168,18 @@ public class JSONReader {
                             }
                         }
 
-                        builder.append("\n\t],");
+                        builder.append("\n\t]").append(lineEnd);
                     }
+                    attributeNumber++;
+                }
+                productNumber++;
+
+                if(productNumber == list.size()) {
+                    builder.append("\n}");
+                }else{
+                    builder.append("\n},");
                 }
 
-                builder.append("\n},");
             }
 
             builder.append("\n]");
@@ -187,7 +199,7 @@ public class JSONReader {
             e.printStackTrace();
         }
 
-
+        System.out.println("Time for JSONReader.write() " + ((System.nanoTime() - timeA) / 1_000_000) + "ms");
         return success;
     }
 

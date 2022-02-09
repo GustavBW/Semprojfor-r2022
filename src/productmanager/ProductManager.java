@@ -31,7 +31,7 @@ public class ProductManager implements IProductManager, Runnable{
         System.out.println("File is at " + file.getAbsolutePath());
         reader.write(manager.productArray, file.getAbsolutePath());
 
-        manager.printAllProducts();
+        //manager.printAllProducts();
         // write your code here
     }
 

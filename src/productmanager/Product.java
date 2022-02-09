@@ -24,6 +24,10 @@ public class Product {
         return availableAt;
     }
 
+    public HashMap<ProductAttribute,String> getAttributeMap(){
+        return productAttributes;
+    }
+
     public boolean set(ProductAttribute pA, String value){
 
         if(value.endsWith("\"")){
