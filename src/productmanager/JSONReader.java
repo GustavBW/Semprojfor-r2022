@@ -10,10 +10,83 @@ public class JSONReader {
     private final int amountOfProperties = 11;
     private int currentLineNumber = 1;
 
+    private final File writeProfFile;
+    private final File readProfFile;
+    private String writeFileContents = "ns\n";
+    private String readFileContents = "ns\n";
+
+
     public JSONReader(String filepath){
         this.filepath = filepath;
+        writeProfFile = new File("resources/JSONReaderProfiling/writeSpeed.txt");
+        readProfFile = new File("resources/JSONReaderProfiling/readSpeed.txt");
+
+        loadInPreviousProfilingData();
     }
 
+    private void loadInPreviousProfilingData() {
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(writeProfFile.getAbsolutePath()));
+            StringBuilder contentsWrite = new StringBuilder();
+            String line;
+
+            while((line = br.readLine()) != null){
+                contentsWrite.append(line).append("\n");
+            }
+
+            writeFileContents = contentsWrite.toString();
+
+            br.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(readProfFile.getAbsolutePath()));
+            StringBuilder contentsRead = new StringBuilder();
+            String line;
+
+            while((line = br.readLine()) != null){
+                contentsRead.append(line).append("\n");
+            }
+
+            readFileContents = contentsRead.toString();
+
+            br.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void addNewProfilingData(File fileToAddTo, String data){
+
+        loadInPreviousProfilingData();
+
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter(fileToAddTo));
+            String output = "";
+
+            if(fileToAddTo == writeProfFile){
+                output += writeFileContents + data + "\n";
+
+            }else{
+                output += readFileContents + data + "\n";
+            }
+
+            bw.write(output);
+
+            bw.flush();
+            bw.close();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void printProfilingAverages(){
+
+        
+
+    }
 
     public ArrayList<Product> read(){
         return read(filepath);
@@ -75,7 +148,7 @@ public class JSONReader {
             e.printStackTrace();
 
         }
-        System.out.println("Time for JSONReader.read(): " + ((System.nanoTime() - timeA) / 1_000_000) + "ms");
+        addNewProfilingData(readProfFile, String.valueOf(System.nanoTime() - timeA));
         return output;
     }
 
@@ -199,7 +272,7 @@ public class JSONReader {
             e.printStackTrace();
         }
 
-        System.out.println("Time for JSONReader.write() " + ((System.nanoTime() - timeA) / 1_000_000) + "ms");
+        addNewProfilingData(writeProfFile, String.valueOf(System.nanoTime() - timeA));
         return success;
     }
 
