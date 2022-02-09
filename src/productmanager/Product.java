@@ -19,9 +19,11 @@ public class Product {
         productAttributes.putIfAbsent(pA, "unavailable");
         return productAttributes.get(pA);
     }
+
     public String[] getLocations(){
         return availableAt;
     }
+
     public boolean set(ProductAttribute pA, String value){
 
         if(value.endsWith("\"")){
@@ -29,11 +31,11 @@ public class Product {
         }
 
         productAttributes.put(pA,value);
-        return Objects.equals(productAttributes.get(pA), value);
+        return productAttributes.get(pA).equalsIgnoreCase(value);
     }
     public boolean setLocations(ProductAttribute pA, String[] values){
         availableAt = values;
-        return availableAt.length > 1;
+        return availableAt.length > 0;
     }
 
     @Override
@@ -45,13 +47,16 @@ public class Product {
         System.out.println("Product : " + productAttributes.get(ProductAttribute.NAME));
 
         for(ProductAttribute pA : ProductAttribute.values()){
+
             if(pA == ProductAttribute.IN_STOCK){
                 StringBuilder toPrint = new StringBuilder();
                 for(String s : availableAt){
                     toPrint.append(s).append("\t");
                 }
                 System.out.println("\t " + pA.alias + ": " + toPrint);
+
             }else {
+
                 System.out.println("\t " + pA.alias + ": " + get(pA));
             }
         }

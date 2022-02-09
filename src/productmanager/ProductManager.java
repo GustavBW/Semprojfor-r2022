@@ -27,8 +27,6 @@ public class ProductManager implements IProductManager, Runnable{
         ProductManager manager = new ProductManager();
         manager.productArray = reader.read();
 
-        manager.print();
-
         File file = new File("productsWriteTest.json");
         System.out.println("File is at " + file.getAbsolutePath());
         reader.write(manager.productArray, file.getAbsolutePath());

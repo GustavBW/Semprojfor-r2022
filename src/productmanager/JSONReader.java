@@ -65,7 +65,7 @@ public class JSONReader {
                 }
 
             }
-            
+
             br.close();
 
         }catch (StringIndexOutOfBoundsException e){
@@ -153,16 +153,20 @@ public class JSONReader {
 
                         builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\": [");
 
-                        for(String s : p.getLocations()){
-                            builder.append("\n\t\"").append(s).append("\",");
+                        String[] locations = p.getLocations();
+
+                        for(int i = 0; i < locations.length; i++){
+                            if(i == locations.length - 1){
+                                builder.append("\n\t\t\"").append(locations[i]).append("\"");
+                            }else{
+                                builder.append("\n\t\t\"").append(locations[i]).append("\",");
+                            }
                         }
 
-                        builder = new StringBuilder(removeLastOccurence(",", builder.toString()));
-                        builder.append("\n],");
+                        builder.append("\n\t],");
                     }
                 }
 
-                builder = new StringBuilder(removeLastOccurence(",", builder.toString()));
                 builder.append("\n},");
             }
 
@@ -228,7 +232,7 @@ public class JSONReader {
             }
         }
 
-        System.out.println("Found " + occurences + " occurences of: " + whatToCount + " at line: " + currentLineNumber);
+        //System.out.println("Found " + occurences + " occurences of: " + whatToCount + " at line: " + currentLineNumber);
         return occurences;
     }
 
