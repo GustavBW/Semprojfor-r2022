@@ -25,21 +25,12 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     public static void main(String[] args) {
-        String uhhh = "Yellow milk pedistals on a hill in the morning sun. I'm going for a jolly walk";
-        String meh = uhhh.substring(0,1);
-        meh += uhhh.substring(4,5);
-        meh += uhhh.substring(6,8);
-        meh += uhhh.substring(22,23);
-        meh += uhhh.substring(39,40);
+        String test = "\"id\": \"1cf3d1fd-7787-4b64-8ef9-0b6f131a9f4e\"";
+        int start = test.indexOf(":");
+        int end = test.lastIndexOf("\"");
 
-        int posPoints = uhhh.indexOf('.');
-        meh += " " + uhhh.substring(posPoints + 6, posPoints + 7);
-        meh += uhhh.substring(posPoints + 16, posPoints + 17);
-        meh += uhhh.substring(posPoints + 22, posPoints + 23);
-
-        System.out.println(meh);
-
-
+        String property = test.substring(start +3, end);
+        System.out.println(property);
 	    // write your code here
     }
 
