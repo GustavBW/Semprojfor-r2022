@@ -35,6 +35,8 @@ public class ProductManager implements IProductManager, Runnable{
             reader.read();
             reader.write(manager.productArray);
         }
+
+        reader.printProfilingAverages();
         //manager.printAllProducts();
         // write your code here
     }

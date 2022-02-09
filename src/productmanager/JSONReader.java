@@ -84,8 +84,33 @@ public class JSONReader {
 
     public void printProfilingAverages(){
 
-        
+        String[] readSpeedEntries = readFileContents.split("\n");
+        String[] writeSpeedEntries = writeFileContents.split("\n");
+        long readSpeedAverage;
+        long readSum = 0;
+        long writeSpeedAverage;
+        long writeSum = 0;
 
+        for(int i = 1; i < readSpeedEntries.length - 1; i++){   //Ignoring the first line, as it contains non-numerical data
+            readSum += Long.parseLong(readSpeedEntries[i]);     //Ignoring the last line, as it does not contain any data
+        }
+        readSpeedAverage = (long) (readSum / (readSpeedEntries.length - 2.00));
+
+        for(int i = 1; i < writeSpeedEntries.length - 1; i++){
+            writeSum += Long.parseLong(writeSpeedEntries[i]);
+        }
+        writeSpeedAverage = (long) (writeSum / (writeSpeedEntries.length - 2.00));
+
+        System.out.println("JSONReader Average Read/Write Speed");
+        System.out.println("Read: " + readSpeedAverage + "ns\t\tOR \t " + (readSpeedAverage / 1_000_000) + "ms");
+        System.out.println("Write: " + writeSpeedAverage + "ns\t\tOR \t " + (writeSpeedAverage / 1_000_000) + "ms");
+
+
+    }
+
+    public void resetProfiling(){
+        writeFileContents = "ns\n";
+        readFileContents = "ns\n";
     }
 
     public ArrayList<Product> read(){
