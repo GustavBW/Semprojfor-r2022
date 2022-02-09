@@ -32,7 +32,9 @@ public class ProductManager implements IProductManager, Runnable{
         File file = new File("productsWriteTest.json");
         System.out.println("File is at " + file.getAbsolutePath());
         reader.write(manager.productArray, file.getAbsolutePath());
-	    // write your code here
+
+        manager.printAllProducts();
+        // write your code here
     }
 
     @Override
@@ -220,5 +222,11 @@ public class ProductManager implements IProductManager, Runnable{
     public ArrayList<Product> getAllProducts() {
         checkForUpdates();
         return productArray;
+    }
+
+    public void printAllProducts(){
+        for(Product p : productArray){
+            p.print();
+        }
     }
 }

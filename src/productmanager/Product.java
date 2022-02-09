@@ -23,6 +23,11 @@ public class Product {
         return availableAt;
     }
     public boolean set(ProductAttribute pA, String value){
+
+        if(value.endsWith("\"")){
+            value = value.substring(0,value.length() - 1);
+        }
+
         productAttributes.put(pA,value);
         return Objects.equals(productAttributes.get(pA), value);
     }
@@ -33,6 +38,14 @@ public class Product {
 
     @Override
     public String toString(){
-        return "Product: " + productAttributes.get(ProductAttribute.NAME) + " " + productAttributes.get(ProductAttribute.PRICE);
+        return "Product: " + productAttributes.get(ProductAttribute.NAME) + " price: " + productAttributes.get(ProductAttribute.PRICE);
+    }
+
+    public void print(){
+        System.out.println("Product : " + productAttributes.get(ProductAttribute.NAME));
+
+        for(ProductAttribute pA : ProductAttribute.values()){
+            System.out.println("\t " + pA.alias + ": " + get(pA));
+        }
     }
 }

@@ -101,7 +101,9 @@ public class JSONReader {
         int propertyStart = line.indexOf("\"");
         int propertyEnd = line.indexOf(":");
 
-        return line.substring(propertyStart, propertyEnd - 1);
+        String toReturn =  line.substring(propertyStart + 1, propertyEnd - 1).trim();
+
+        return toReturn;
     }
 
     private String getPropertyValue(String line){
@@ -124,12 +126,12 @@ public class JSONReader {
     }
 
     public boolean write(ArrayList<Product> list, String filepath){
-        boolean success = true;
+        boolean success;
         StringBuilder builder = new StringBuilder();
 
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
-            String propertyValue = null;
+            String propertyValue;
 
             builder.append("[");
 
@@ -200,7 +202,7 @@ public class JSONReader {
         }
         if(!foundIt) {
             //System.out.println("No occourence found returning line length");
-            index = line.length() +1;
+            index = line.length() + 1;
         }
 
         return index;
