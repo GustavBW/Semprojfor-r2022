@@ -62,21 +62,20 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public Product read(int productId) {
+    public Product read(String productId) {
         checkForUpdates();
 
         Product toReturn = null;
 
-        /*
+
 
         for(Product p : productArray){
-            if(p.get(ProductAttribute.ID) == productId){
+            if(p.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
                 toReturn = p;
                 break;
             }
         }
 
-         */
         updateSource();
 
 
@@ -84,79 +83,78 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public Product[] readAll(int[] productIds) {
+    public Product[] readAll(String[] productIds) {
         checkForUpdates();
 
         Product[] returnArray = new Product[productIds.length];
 
-        /*
+
         for(int i = 0; i < productIds.length; i++){
             for(Product p : productArray){
 
-                if(p.get(ProductAttribute.ID) == productIds[i]){
+                if(p.get(ProductAttribute.ID).equalsIgnoreCase(productIds[i])){
                     returnArray[i] = p;
                     break;
                 }
             }
         }
-        */
+
         updateSource();
 
         return returnArray;
     }
 
     @Override
-    public boolean update(int productId, ProductAttribute a, String s) {
+    public boolean update(String productId, ProductAttribute a, String s) {
         checkForUpdates();
 
         boolean succes = false;
-        /*
+
         for(Product pT : productArray){
-            if(pT.get(ProductAttribute.ID) == productId){
+            if(Objects.equals(pT.get(ProductAttribute.ID), productId)){
                 succes = pT.set(a,s);
                 break;
             }
         }
-         */
+
         updateSource();
 
         return succes;
     }
 
     @Override
-    public boolean update(int productId, Product p) {
+    public boolean update(String productId, Product p) {
         checkForUpdates();
 
         boolean success = false;
-        /*
+
         for(Product pT : productArray){
-            if(pT.get(ProductAttribute.ID) == productId){
+            if(pT.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
                 pT = p;
                 success = Objects.equals(pT, p);
                 break;
             }
         }
-         */
+
         updateSource();
 
         return success;
     }
 
     @Override
-    public boolean remove(int productId) {
+    public boolean remove(String productId) {
         checkForUpdates();
         boolean toReturn = false;
 
-        /*
+
         for(Product p : productArray){
-            if (p.get(ProductAttribute.ID) == productId){
+            if (p.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
                 toReturn = productArray.remove(p);
                 break;
             }
         }
 
 
-         */
         return toReturn;
     }
 

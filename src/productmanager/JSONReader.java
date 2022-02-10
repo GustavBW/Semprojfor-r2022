@@ -148,7 +148,6 @@ public class JSONReader {
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(filepath2));
-            ArrayList<String> fileContents = new ArrayList<>();
 
             Product currentProduct = new Product();
             ArrayList<String> array = new ArrayList<>();
@@ -182,7 +181,6 @@ public class JSONReader {
                     setProductAttribute(line, currentProduct);
 
                 }
-
             }
 
             br.close();

@@ -6,11 +6,11 @@ public interface IProductManager {
 
     boolean create(Product p);
     boolean createAll(ArrayList<Product> p);
-    Product read(int productId);
-    Product[] readAll(int[] productIds);
-    boolean update(int productId, ProductAttribute a, String s);
-    boolean update(int productId, Product p);
-    boolean remove(int productId);
+    Product read(String productId);
+    Product[] readAll(String[] productIds);
+    boolean update(String productId, ProductAttribute a, String s);
+    boolean update(String productId, Product p);
+    boolean remove(String productId);
     void setUpdateInterval(int time);
     void reparse();
 
