@@ -100,8 +100,8 @@ public class JSONReader {
         writeSpeedAverage = (long) (writeSum / (writeSpeedEntries.length - 2.00));
 
         System.out.println("JSONReader Average Read/Write Speed");
-        System.out.println("Read: " + readSpeedAverage + "ns\t\tOR \t " + (readSpeedAverage / 1_000_000) + "ms");
-        System.out.println("Write: " + writeSpeedAverage + "ns\t\tOR \t " + (writeSpeedAverage / 1_000_000) + "ms");
+        System.out.println("Read: " + readSpeedAverage + "ns\t\tOR \t " + (readSpeedAverage / 1_000_000.00) + "ms");
+        System.out.println("Write: " + writeSpeedAverage + "ns\t\tOR \t " + (writeSpeedAverage / 1_000_000.00) + "ms");
 
 
     }
@@ -139,51 +139,13 @@ public class JSONReader {
     public ArrayList<Product> read(String filepath2){
         long timeA = System.nanoTime();
         ArrayList<Product> output = new ArrayList<>();
-        boolean newProduct;
-        boolean containsArray;
-        boolean containsData;
-        boolean containsProductStart;
         currentLineNumber = 1;
         int amountOfProducts = 1;
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(filepath2));
 
-            Product currentProduct = new Product();
-            ArrayList<String> array = new ArrayList<>();
-            String line;
-
-            br.readLine(); //Skipping the first line as to not break the array detection.
-            currentLineNumber++;
-
-            while((line = br.readLine()) != null){
-                currentLineNumber++;
-
-                newProduct = line.contains("}");
-                containsArray = line.contains("[");
-                containsData = line.contains("\"");
-                containsProductStart = line.contains("{");
-
-
-                if(containsArray){
-
-                    currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, array));
-
-                }else if(newProduct){
-
-                    currentProduct.set(ProductAttribute.ID, String.valueOf(amountOfProducts));
-                    output.add(currentProduct);
-                    currentProduct = new Product();
-                    amountOfProducts++;
-
-                }else if(!containsProductStart && containsData) {
-
-                    setProductAttribute(line, currentProduct);
-
-                }
-            }
-
-            br.close();
+            readLines(output, amountOfProducts, br);
 
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("String index out of bounds at line " + currentLineNumber);
@@ -194,6 +156,48 @@ public class JSONReader {
         }
         addNewProfilingData(readProfFile, String.valueOf(System.nanoTime() - timeA));
         return output;
+    }
+
+    private void readLines(ArrayList<Product> output, int amountOfProducts, BufferedReader br) throws IOException {
+        boolean containsArray;
+        boolean containsProductStart;
+        boolean newProduct;
+        boolean containsData;
+        Product currentProduct = new Product();
+        ArrayList<String> array = new ArrayList<>();
+        String line;
+
+        br.readLine(); //Skipping the first line as to not break the array detection.
+        currentLineNumber++;
+
+        while((line = br.readLine()) != null){
+            currentLineNumber++;
+
+            newProduct = line.contains("}");
+            containsArray = line.contains("[");
+            containsData = line.contains("\"");
+            containsProductStart = line.contains("{");
+
+
+            if(containsArray){
+
+                currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, array));
+
+            }else if(newProduct){
+
+                currentProduct.set(ProductAttribute.ID, String.valueOf(amountOfProducts));
+                output.add(currentProduct);
+                currentProduct = new Product();
+                amountOfProducts++;
+
+            }else if(!containsProductStart && containsData) {
+
+                setProductAttribute(line, currentProduct);
+
+            }
+        }
+
+        br.close();
     }
 
     private String[] calculateInStockArray(BufferedReader br, ArrayList<String> array) throws IOException {
