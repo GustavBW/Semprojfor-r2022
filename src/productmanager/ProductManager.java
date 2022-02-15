@@ -6,20 +6,21 @@ import java.util.Objects;
 
 public class ProductManager implements IProductManager, Runnable{
 
-    private JSONReader jsonReader;
+    private final JSONReader jsonReader;
 
     private ArrayList<Product> productArray;
     private ArrayList<Product> updatedProductArray;
     private boolean backgroundThreadIsRunning = false;
-    private Thread backgroundThread;
+    private final Thread backgroundThread;
     private long lastCall;
 
     private int updateInterval;    //Minutes
-    private String config = "resources/config.txt";
+    private final String config = "resources/config.txt";
 
     public ProductManager(){
 
         //When you create a new object of this class, the backgroundThread is started automatically.
+        //If you wan't to alter an attribute on a product, you MUST do this through the C.U.D. functions in this class.
 
         jsonReader = new JSONReader("resources/products.json");
         productArray = new ArrayList<>();
@@ -72,6 +73,8 @@ public class ProductManager implements IProductManager, Runnable{
     public Product read(String productId) {
 
         //This function returns a single product based on the UUID
+        //Since the read() function doesn't alter any attribute values on the product
+        //There's no reason to update the source.
 
         checkForUpdates();
 
@@ -107,13 +110,14 @@ public class ProductManager implements IProductManager, Runnable{
             }
         }
 
-        updateSource();
-
         return returnArray;
     }
 
     @Override
     public boolean update(String productId, ProductAttribute a, String s) {
+
+        //This function sets the value (String) of an attribute on a product
+
         checkForUpdates();
 
         boolean succes = false;
@@ -132,6 +136,11 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public boolean update(String productId, Product p) {
+
+        //This function updates the attributes of a product based on its UUID
+        //By replacing it entirely with a new one. Make sure this new product has all it's attributes set correctly.
+        //Any missing attribute on this other product is also removed from the source file.
+
         checkForUpdates();
 
         boolean success = false;
@@ -139,7 +148,7 @@ public class ProductManager implements IProductManager, Runnable{
         for(Product pT : productArray){
             if(pT.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
                 pT = p;
-                success = Objects.equals(pT, p);
+                success = true;
                 break;
             }
         }
@@ -151,6 +160,9 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public boolean remove(String productId) {
+
+        //Removes a product from the array, and consequently from the source file as well.
+
         checkForUpdates();
         boolean toReturn = false;
 
@@ -162,8 +174,31 @@ public class ProductManager implements IProductManager, Runnable{
             }
         }
 
+        updateSource();
 
         return toReturn;
+    }
+
+    public boolean removeAll(String[] productIds){
+
+        //This function removes all products from the productArray that matches any of the given productIds
+        //It returns whether it was able to find products matching all the id's or not.
+
+        checkForUpdates();
+        int counter = 0;
+
+        for (String productId : productIds) {
+            for (Product p : productArray) {
+
+                if (p.get(ProductAttribute.ID).equalsIgnoreCase(productId)) {
+                    productArray.remove(p);
+                    counter++;
+                    break;
+                }
+            }
+        }
+
+        return counter == productIds.length;
     }
 
     @Override
@@ -195,7 +230,7 @@ public class ProductManager implements IProductManager, Runnable{
         //Then reads the json file again and prepares a new ArrayList<Product> for use.
 
         while(System.currentTimeMillis() < lastCall + (updateInterval * 60000L)){
-            System.out.println("");
+            System.out.println();
         }
 
         lastCall = System.currentTimeMillis();
@@ -205,16 +240,22 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public void reparse(){
+
+        //Reads a new productArray from the jsonReader.
+        //The current array is swapped out with the new one next time any CRUD operation is called.
+        //This is done as such, to prevent the backgroundThread and external calls to reparse() to cause issues.
+
         updatedProductArray = jsonReader.read();
     }
 
     private boolean checkForUpdates(){
+
+        //This function is called from every create, update or delete operation and checks if a newer version of the productArray is available
+        //This newer version may come from an external call to reparse() or from the backgroundThread from run()
+        //Alternatively, use clone(). It might be more performant.
+
         boolean output = false;
         if(updatedProductArray != null){
-
-            //This function is called from every CRUD operation and checks if a newer version of the productArray is available
-            //This newer version may come from an external call to reparse() or from the backgroundThread from run()
-            //Alternatively, use clone(). It might be more performant.
 
             productArray.clear();
             productArray.addAll(updatedProductArray);
@@ -238,13 +279,17 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     private int readConfig(){
-        int toReturn = 0;
+
+        //This function reads off the config file to get the update interval
+        //Furthermore, the config file must only contain 1 numerical value
+
+        int toReturn;
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(config));
             toReturn = Integer.parseInt(br.readLine());
-            br.close();
 
+            br.close();
         }catch (IOException e){
             e.printStackTrace();
             toReturn = 5;
@@ -253,6 +298,9 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     public void print(){
+
+        //Prints each products name and price.
+
         for(Product p : productArray){
             System.out.println(p);
         }
@@ -260,11 +308,18 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public ArrayList<Product> getAllProducts() {
+
+        //This function returns the entire product array. Using this function may result in errors,
+        //rather use readAll()
+
         checkForUpdates();
         return productArray;
     }
 
     public void printAllProducts(){
+
+        //Prints a detailed describtion of each product.
+
         for(Product p : productArray){
             p.print();
         }
