@@ -14,12 +14,9 @@ class JSONReaderTest {
 
     private static JSONReader reader = new JSONReader("resources/products.json");
 
-    @org.junit.jupiter.api.Test
-    void printProfilingAverages() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void resetProfiling() {
+    public void runAllTests(){
+        read();
+        write();
     }
 
     @org.junit.jupiter.api.Test
