@@ -38,7 +38,11 @@ public class ProductManager implements IProductManager, Runnable{
         //This is only used for testing right now.
 
         ProductManager manager = new ProductManager();
-        manager.productArray = manager.jsonReader.read();
+        try {
+            manager.productArray = manager.jsonReader.read();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
 
         File file = new File("resources/productsWriteTest.json");
         System.out.println("File is at " + file.getAbsolutePath());
@@ -52,6 +56,7 @@ public class ProductManager implements IProductManager, Runnable{
 
         //Adds new product to the productArray.
         //Returns whether this was possible or not.
+
         checkForUpdates();
         boolean success = productArray.add(p);
         updateSource();
@@ -245,7 +250,11 @@ public class ProductManager implements IProductManager, Runnable{
         //The current array is swapped out with the new one next time any CRUD operation is called.
         //This is done as such, to prevent the backgroundThread and external calls to reparse() to cause issues.
 
-        updatedProductArray = jsonReader.read();
+        try {
+            updatedProductArray = jsonReader.read();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private boolean checkForUpdates(){
@@ -271,7 +280,13 @@ public class ProductManager implements IProductManager, Runnable{
         //This !.isEmpty and != null redundancy might not be necessary, but it's here just in case.
 
         if(!productArray.isEmpty() || productArray != null) {
-            jsonReader.write(productArray);
+
+            try {
+                jsonReader.write(productArray);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+
         }else{
             System.err.println("ERROR function call ignored: Tried to write an empty or null array to source file.");
             System.err.println("\t  Error occurred at ProductManager.updateSource() line " + (Thread.currentThread().getStackTrace()[1].getLineNumber() - 3));

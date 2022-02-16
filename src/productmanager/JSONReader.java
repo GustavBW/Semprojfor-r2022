@@ -3,17 +3,15 @@ package productmanager;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class JSONReader {
 
     private final String filepath;
-    private final int amountOfProperties = 11;
     private int currentLineNumber = 1;
 
     private final File writeProfFile;
     private final File readProfFile;
-    private String writeFileContents = "ns\n";
-    private String readFileContents = "ns\n";
 
 
     public JSONReader(String filepath){
@@ -21,122 +19,13 @@ public class JSONReader {
         writeProfFile = new File("resources/JSONReaderProfiling/writeSpeed.txt");
         readProfFile = new File("resources/JSONReaderProfiling/readSpeed.txt");
 
-        loadInPreviousProfilingData();
     }
 
-    private void loadInPreviousProfilingData() {
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(writeProfFile.getAbsolutePath()));
-            StringBuilder contentsWrite = new StringBuilder();
-            String line;
-
-            while((line = br.readLine()) != null){
-                contentsWrite.append(line).append("\n");
-            }
-
-            writeFileContents = contentsWrite.toString();
-
-            br.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(readProfFile.getAbsolutePath()));
-            StringBuilder contentsRead = new StringBuilder();
-            String line;
-
-            while((line = br.readLine()) != null){
-                contentsRead.append(line).append("\n");
-            }
-
-            readFileContents = contentsRead.toString();
-
-            br.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-    private void addNewProfilingData(File fileToAddTo, String data){
-
-        loadInPreviousProfilingData();
-
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter(fileToAddTo));
-            String output = "";
-
-            if(fileToAddTo == writeProfFile){
-                output += writeFileContents + data + "\n";
-
-            }else{
-                output += readFileContents + data + "\n";
-            }
-
-            bw.write(output);
-
-            bw.flush();
-            bw.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-    public void printProfilingAverages(){
-
-        String[] readSpeedEntries = readFileContents.split("\n");
-        String[] writeSpeedEntries = writeFileContents.split("\n");
-        long readSpeedAverage;
-        long readSum = 0;
-        long writeSpeedAverage;
-        long writeSum = 0;
-
-        for(int i = 1; i < readSpeedEntries.length - 1; i++){   //Ignoring the first line, as it contains non-numerical data
-            readSum += Long.parseLong(readSpeedEntries[i]);     //Ignoring the last line, as it does not contain any data
-        }
-        readSpeedAverage = (long) (readSum / (readSpeedEntries.length - 2.00));
-
-        for(int i = 1; i < writeSpeedEntries.length - 1; i++){
-            writeSum += Long.parseLong(writeSpeedEntries[i]);
-        }
-        writeSpeedAverage = (long) (writeSum / (writeSpeedEntries.length - 2.00));
-
-        System.out.println("JSONReader Average Read/Write Speed");
-        System.out.println("Read: " + readSpeedAverage + "ns\t\tOR \t " + (readSpeedAverage / 1_000_000.00) + "ms");
-        System.out.println("Write: " + writeSpeedAverage + "ns\t\tOR \t " + (writeSpeedAverage / 1_000_000.00) + "ms");
-
-
-    }
-    public void resetProfiling(){
-        writeFileContents = "ns\n";
-        readFileContents = "ns\n";
-
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter(writeProfFile));
-            String output = "";
-
-            bw.write(output);
-
-            bw.flush();
-            bw.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter(readProfFile));
-            String output = "";
-
-            bw.write(output);
-
-            bw.flush();
-            bw.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public ArrayList<Product> read(){
+    public ArrayList<Product> read() throws IOException{
         return read(filepath);
     }
-    public ArrayList<Product> read(String filepath2){
+
+    public ArrayList<Product> read(String filepath2) throws IOException{
         long timeA = System.nanoTime();
         ArrayList<Product> output = new ArrayList<>();
         currentLineNumber = 1;
@@ -150,11 +39,7 @@ public class JSONReader {
         }catch (StringIndexOutOfBoundsException e){
             System.out.println("String index out of bounds at line " + currentLineNumber);
             e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-
         }
-        addNewProfilingData(readProfFile, String.valueOf(System.nanoTime() - timeA));
         return output;
     }
 
@@ -225,9 +110,7 @@ public class JSONReader {
         int propertyStart = line.indexOf("\"");
         int propertyEnd = line.indexOf(":");
 
-        String toReturn =  line.substring(propertyStart + 1, propertyEnd - 1).trim();
-
-        return toReturn;
+        return line.substring(propertyStart + 1, propertyEnd - 1).trim();
     }
 
     private String getPropertyValue(String line){
@@ -249,63 +132,29 @@ public class JSONReader {
         }
     }
 
-    public boolean write(ArrayList<Product> list, String filepath){
+    public boolean write(ArrayList<Product> list, String filepath) throws IOException{
+        Objects.requireNonNull(list);
         long timeA = System.nanoTime();
-        boolean success;
+        boolean success = false;
         int productNumber = 0;
-        int attributeNumber = 1;
+        String propertyValue;
         StringBuilder builder = new StringBuilder();
 
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(filepath));
-            String propertyValue;
 
-            builder.append("[");
 
-            for(Product p : list){
-                builder.append("\n{");
+            builder.append("[");                    //The file works as an array of objects with certain attributes, thus an "array-starter" here. This, however, is ignored upon reading it.
 
-                for(ProductAttribute pAttr : ProductAttribute.values()){
+            for(Product p : list){                  //For each current product
+                builder.append("\n{");              //Open a new "object" to be written
 
-                    String lineEnd = pAttr == ProductAttribute.CLOCKSPEED ? "" : ",";
-
-                    if(pAttr != ProductAttribute.IN_STOCK) {
-
-                        if((propertyValue = p.get(pAttr)) != null || !propertyValue.isEmpty()) {
-                            builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\"" + lineEnd);
-                        }
-
-                    }else{
-
-                        builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\": [");
-
-                        String[] locations = p.getLocations();
-
-                        for(int i = 0; i < locations.length; i++){
-                            if(i == locations.length - 1){
-                                builder.append("\n\t\t\"").append(locations[i]).append("\"");
-                            }else{
-                                builder.append("\n\t\t\"").append(locations[i]).append("\",");
-                            }
-                        }
-
-                        builder.append("\n\t]").append(lineEnd);
-                    }
-                    attributeNumber++;
-                }
-                productNumber++;
-
-                if(productNumber == list.size()) {
-                    builder.append("\n}");
-                }else{
-                    builder.append("\n},");
-                }
-
+                addProductToBuilder(productNumber, builder, p, (productNumber == list.size()));
             }
 
             builder.append("\n]");
 
-            if(builder.isEmpty()){
+            if(builder.isEmpty()){  //Preventing a complete dataloss if something messed up
                 success = false;
 
             }else{
@@ -315,16 +164,63 @@ public class JSONReader {
 
             bw.flush();
             bw.close();
-        }catch (IOException e){
-            success = false;
-            e.printStackTrace();
-        }
+        }catch (Exception e){e.printStackTrace();}
 
-        addNewProfilingData(writeProfFile, String.valueOf(System.nanoTime() - timeA));
         return success;
     }
 
-    public boolean write(ArrayList<Product> list){
+    private int addProductToBuilder(int productNumber, StringBuilder builder, Product p, boolean isLast) {
+
+        String propertyValue;
+        for(ProductAttribute pAttr : ProductAttribute.values()){    //Go through all known attributes
+
+            String lineEnd = pAttr == ProductAttribute.CLOCKSPEED ? "" : ","; //Since writing does not ignore the attributes with no value, "Clockspeed" will always be last, and so, to get the proper JSON formating
+                                                                              //this ternary is used to either add the , if there's more data in the line, or add an empty string.
+
+            if(pAttr != ProductAttribute.IN_STOCK) {    //Append a line containing the string name of that attribute and it's value
+
+                addPropertyToBuilder(builder, p, pAttr, lineEnd);
+
+            }else{  //If it happens to be the "inStock" array, it needs to notate it as an array.
+
+                addArrayToBuilder(builder, p, pAttr, lineEnd);
+            }
+        }
+        productNumber++;    //Tracking which number product we're at
+
+        if(isLast) {  //If it's the last product to be written, it should not include a comma
+            builder.append("\n}");
+        }else{
+            builder.append("\n},");
+        }
+        return productNumber;
+    }
+
+    private void addPropertyToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd) {
+        String propertyValue;
+        if((propertyValue = p.get(pAttr)) != null || !propertyValue.isEmpty()) {
+            //Getting the correct formatting: "<attr name>": "<attr value>", (Comma if it's not the last line in the product)
+            builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\"").append(lineEnd);
+        }
+    }
+
+    private void addArrayToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd) {
+        builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\": ["); //Opening the array with formatting "<attr name>": [
+
+        String[] locations = p.getLocations();
+
+        for(int i = 0; i < locations.length; i++){      //As it's an array, each attribute value in it does not have it's own name, and can be written out like this: "<value>",
+            if(i == locations.length - 1){
+                builder.append("\n\t\t\"").append(locations[i]).append("\"");   //If it's the last value in an array, it must not have a comma in the end
+            }else{
+                builder.append("\n\t\t\"").append(locations[i]).append("\",");
+            }
+        }
+
+        builder.append("\n\t]").append(lineEnd);    //Finally closing the array using ]
+    }
+
+    public boolean write(ArrayList<Product> list) throws IOException{
         return write(list, filepath);
     }
 
@@ -348,11 +244,6 @@ public class JSONReader {
         return index;
     }
 
-    private String removeLastOccurence(String whatToRemove, String line){
-        int index = findLastOccurence(whatToRemove, line);
-
-        return line.substring(index - 1, index).replace(",","");
-    }
 
     private int countOccurences(String line, Character whatToCount){
 
