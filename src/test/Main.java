@@ -6,5 +6,9 @@ public class Main {
         JSONReaderTest readerTester = new JSONReaderTest();
 
         readerTester.runAllTests();
+
+        ProductAttributeTest productAttributeTest = new ProductAttributeTest();
+        productAttributeTest.values();
+        productAttributeTest.valueOf();
     }
 }
