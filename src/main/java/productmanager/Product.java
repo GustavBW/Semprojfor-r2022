@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Product { //initialize class
 
     private final HashMap<ProductAttribute, String> productAttributes; //initialize hashmap to contain product attributes
-    private List<String> availableAt; //initialize array of strings to contain local stores with stock
+    private final ArrayList<String> availableAt; //initialize array of strings to contain local stores with stock
 
     public Product(){ //product constructor w.o. attribute input
         productAttributes = new HashMap<>(); //initialize hashmap
