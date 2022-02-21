@@ -38,6 +38,7 @@ public class Product { //initialize class
         productAttributes.put(pA,value);
         return productAttributes.get(pA).equalsIgnoreCase(value);
     }
+
     public boolean setLocations(ProductAttribute pA, String[] values){
         availableAt = values;
         return availableAt.length > 0;
