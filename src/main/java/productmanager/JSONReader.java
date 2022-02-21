@@ -200,13 +200,13 @@ public class JSONReader {
     private void addArrayToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd) {
         builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\": ["); //Opening the array with formatting "<attr name>": [
 
-        String[] locations = p.getLocations();
+        ArrayList<String> locations = p.getLocations();
 
-        for(int i = 0; i < locations.length; i++){      //As it's an array, each attribute value in it does not have it's own name, and can be written out like this: "<value>",
-            if(i == locations.length - 1){
-                builder.append("\n\t\t\"").append(locations[i]).append("\"");   //If it's the last value in an array, it must not have a comma in the end
+        for(int i = 0; i < locations.size(); i++){      //As it's an array, each attribute value in it does not have it's own name, and can be written out like this: "<value>",
+            if(i == locations.size() - 1){
+                builder.append("\n\t\t\"").append(locations.get(i)).append("\"");   //If it's the last value in an array, it must not have a comma in the end
             }else{
-                builder.append("\n\t\t\"").append(locations[i]).append("\",");
+                builder.append("\n\t\t\"").append(locations.get(i)).append("\",");
             }
         }
 
