@@ -57,8 +57,8 @@ class JSONReaderTest {
     @org.junit.jupiter.api.Test
     void write() {
         try {
-            assertTrue(reader.write(reader.read()));
-            assertThrows(NullPointerException.class, () -> reader.write(null));
+            assertTrue(reader.write(reader.read()));                                //Does it succeed?
+            assertThrows(NullPointerException.class, () -> reader.write(null));  //
         }catch (IOException e){
             e.printStackTrace();
         }
