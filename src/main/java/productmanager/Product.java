@@ -1,26 +1,27 @@
 package productmanager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
-public class Product {
+public class Product { //initialize class
 
-    private final HashMap<ProductAttribute, String> productAttributes;
-    private String[] availableAt;
+    private final HashMap<ProductAttribute, String> productAttributes; //initialize hashmap to contain product attributes
+    private String[] availableAt; //initialize array of strings to contain local stores with stock
 
-    public Product(){
-        productAttributes = new HashMap<>();
-        availableAt = new String[10];
+    public Product(){ //product constructor w.o. attribute input
+        productAttributes = new HashMap<>(); //initialize hashmap
+        availableAt = new ArrayList<String>(); //initialize string array
     }
 
 
-    public String get(ProductAttribute pA){
-        productAttributes.putIfAbsent(pA, "unavailable");
-        return productAttributes.get(pA);
+    public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
+        productAttributes.putIfAbsent(pA, "unavailable"); //replace nulls with string "unavailable" >function may be removed?
+        return productAttributes.get(pA); //returns hashmap pf pA's
     }
 
-    public String[] getLocations(){
+    public String[] getLocations(){ //String array method returning the class attribute availableAt
         return availableAt;
     }
 
