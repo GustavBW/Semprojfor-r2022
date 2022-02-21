@@ -1,5 +1,6 @@
 package productmanager;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,11 +9,11 @@ import java.util.Objects;
 public class Product { //initialize class
 
     private final HashMap<ProductAttribute, String> productAttributes; //initialize hashmap to contain product attributes
-    private String[] availableAt; //initialize array of strings to contain local stores with stock
+    private List<String> availableAt; //initialize array of strings to contain local stores with stock
 
     public Product(){ //product constructor w.o. attribute input
         productAttributes = new HashMap<>(); //initialize hashmap
-        availableAt = new ArrayList<String>(); //initialize string array
+        availableAt = new ArrayList<>(); //initialize string array
     }
 
 
@@ -21,7 +22,7 @@ public class Product { //initialize class
         return productAttributes.get(pA); //returns hashmap pf pA's
     }
 
-    public String[] getLocations(){ //String array method returning the class attribute availableAt
+    public ArrayList<String> getLocations(){ //String array method returning the class attribute availableAt
         return availableAt;
     }
 
@@ -39,9 +40,9 @@ public class Product { //initialize class
         return productAttributes.get(pA).equalsIgnoreCase(value);
     }
 
-    public boolean setLocations(ProductAttribute pA, String[] values){
+    public boolean setLocations(ProductAttribute pA, ArrayList<String> values){
         availableAt = values;
-        return availableAt.length > 0;
+        return availableAt.size() > 0;
     }
 
     @Override
