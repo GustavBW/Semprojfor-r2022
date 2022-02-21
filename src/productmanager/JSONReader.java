@@ -85,7 +85,7 @@ public class JSONReader {
         br.close();
     }
 
-    private String[] calculateInStockArray(BufferedReader br, ArrayList<String> array) throws IOException {
+    private ArrayList<String> calculateInStockArray(BufferedReader br, ArrayList<String> array) throws IOException {
         String arrayLine;
 
         while((arrayLine = br.readLine()) != null && arrayLine.contains("\"")){
@@ -96,14 +96,7 @@ public class JSONReader {
             array.add(arrayLine.substring(entryStart + 1,entryEnd));
         }
 
-        String[] actualArray = new String[array.size()];
-
-        for(int i = 0; i < array.size(); i++){
-            actualArray[i] = array.get(i);
-        }
-
-        array.clear();
-        return actualArray;
+        return array;
     }
 
     private String getPropertyName(String line){
