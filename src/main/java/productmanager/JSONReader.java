@@ -67,6 +67,7 @@ public class JSONReader {
             if(containsArray){
 
                 currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, array));
+                array.clear();
 
             }else if(newProduct){
 
@@ -165,6 +166,8 @@ public class JSONReader {
     private int addProductToBuilder(int productNumber, StringBuilder builder, Product p, boolean isLast) {
 
         String propertyValue;
+        ArrayList<String> inStockArray = new ArrayList<>();
+
         for(ProductAttribute pAttr : ProductAttribute.values()){    //Go through all known attributes
 
             String lineEnd = pAttr == ProductAttribute.CLOCKSPEED ? "" : ","; //Since writing does not ignore the attributes with no value, "Clockspeed" will always be last, and so, to get the proper JSON formating
@@ -175,8 +178,8 @@ public class JSONReader {
                 addPropertyToBuilder(builder, p, pAttr, lineEnd);
 
             }else{  //If it happens to be the "inStock" array, it needs to notate it as an array.
-
-                addArrayToBuilder(builder, p, pAttr, lineEnd);
+                inStockArray.clear();
+                addArrayToBuilder(builder, p, pAttr, lineEnd,inStockArray);
             }
         }
         productNumber++;    //Tracking which number product we're at
@@ -197,21 +200,20 @@ public class JSONReader {
         }
     }
 
-    private void addArrayToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd) {
+    private void addArrayToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd,ArrayList<String> inStockArray) {
         builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\": ["); //Opening the array with formatting "<attr name>": [
 
-        ArrayList<String> locations = p.getLocations();
+        inStockArray.addAll(p.getLocations());
 
-        for(int i = 0; i < locations.size(); i++){      //As it's an array, each attribute value in it does not have it's own name, and can be written out like this: "<value>",
-            if(i == locations.size() - 1){
-                builder.append("\n\t\t\"").append(locations.get(i)).append("\"");   //If it's the last value in an array, it must not have a comma in the end
+        for(int i = 0; i < inStockArray.size(); i++){      //As it's an array, each attribute value in it does not have it's own name, and can be written out like this: "<value>",
+            if(i == inStockArray.size() - 1){
+                builder.append("\n\t\t\"").append(inStockArray.get(i)).append("\"");   //If it's the last value in an array, it must not have a comma in the end
             }else{
-                builder.append("\n\t\t\"").append(locations.get(i)).append("\",");
+                builder.append("\n\t\t\"").append(inStockArray.get(i)).append("\",");
             }
         }
 
         builder.append("\n\t]").append(lineEnd);    //Finally closing the array using
-        locations.clear();
     }
 
     public boolean write(ArrayList<Product> list) throws IOException{

@@ -45,10 +45,8 @@ public class ProductManager implements IProductManager, Runnable{
             e.printStackTrace();
         }
 
-        File file = new File("resources/productsWriteTest.json");
-        System.out.println("File is at " + file.getAbsolutePath());
 
-        //manager.printAllProducts();
+        manager.printAllProducts();
         // write your code here
     }
 
