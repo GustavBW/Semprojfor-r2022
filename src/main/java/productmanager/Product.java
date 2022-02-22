@@ -19,7 +19,7 @@ public class Product { //initialize class
 
     public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
         productAttributes.putIfAbsent(pA, "unavailable"); //replace nulls with string "unavailable" >function may be removed?
-        return productAttributes.get(pA); //returns hashmap pf pA's
+        return productAttributes.get(pA); //returns hashmap of pA's
     }
 
     public ArrayList<String> getLocations(){ //String array method returning the class attribute availableAt
@@ -41,7 +41,7 @@ public class Product { //initialize class
     }
 
     public boolean setLocations(ProductAttribute pA, ArrayList<String> values){
-        availableAt = values;
+        availableAt.addAll(values);
         return availableAt.size() > 0;
     }
 
