@@ -210,7 +210,8 @@ public class JSONReader {
             }
         }
 
-        builder.append("\n\t]").append(lineEnd);    //Finally closing the array using ]
+        builder.append("\n\t]").append(lineEnd);    //Finally closing the array using
+        locations.clear();
     }
 
     public boolean write(ArrayList<Product> list) throws IOException{

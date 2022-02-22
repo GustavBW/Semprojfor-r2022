@@ -40,6 +40,7 @@ public class ProductManager implements IProductManager, Runnable{
         ProductManager manager = new ProductManager();
         try {
             manager.productArray = manager.jsonReader.read();
+            manager.jsonReader.write(manager.productArray);
         }catch (IOException e){
             e.printStackTrace();
         }
