@@ -24,19 +24,19 @@ public class Product { //initialize class
 
     public ArrayList<String> getLocations(){ //String array method returning the class attribute availableAt
         return availableAt;
-    }
+    } //returns an arraylist of the available shops
 
     public HashMap<ProductAttribute,String> getAttributeMap(){
         return productAttributes;
-    }
+    } //makes productAttributes available for other classes
 
     public boolean set(ProductAttribute pA, String value){
 
         if(value.endsWith("\"")){
-            value = value.substring(0,value.length() - 1);
+            value = value.substring(0,value.length() - 1); //?
         }
 
-        productAttributes.put(pA,value);
+        productAttributes.put(pA,value); //assigns key and values to map
         return productAttributes.get(pA).equalsIgnoreCase(value);
     }
 
