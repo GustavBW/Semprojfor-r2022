@@ -42,20 +42,20 @@ public class Product { //initialize class
 
     public boolean setLocations(ProductAttribute pA, ArrayList<String> values){
         availableAt.addAll(values);
-        return availableAt.size() > 0;
+        return availableAt.size() > 0; //checks if there is stock of the product in any shop
     }
 
     @Override
-    public String toString(){
+    public String toString(){ //overrides toString method, returning product name and price
         return "Product: " + productAttributes.get(ProductAttribute.NAME) + " price: " + productAttributes.get(ProductAttribute.PRICE);
     }
 
     public void print(){
-        System.out.println("Product : " + productAttributes.get(ProductAttribute.NAME));
+        System.out.println("Product : " + productAttributes.get(ProductAttribute.NAME)); //returns product name
 
-        for(ProductAttribute pA : ProductAttribute.values()){
+        for(ProductAttribute pA : ProductAttribute.values()){ //runs through all product attributes
 
-            if(pA == ProductAttribute.IN_STOCK){
+            if(pA == ProductAttribute.IN_STOCK){ //if product is in stock, prints the available locations
                 StringBuilder toPrint = new StringBuilder();
                 for(String s : availableAt){
                     toPrint.append(s).append("\t");
