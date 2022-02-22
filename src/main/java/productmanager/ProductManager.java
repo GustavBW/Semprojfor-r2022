@@ -19,8 +19,8 @@ public class ProductManager implements IProductManager, Runnable{
 
     public ProductManager(){
 
-        //When you create a new object of this class, the backgroundThread is started automatically.
-        //If you wan't to alter an attribute on a product, you MUST do this through the C.U.D. functions in this class.
+        //When you create a new object of this class, the background thread is started automatically.
+        //If you want to alter an attribute on a product, you MUST do this through the C.U.D. functions in this class.
 
         jsonReader = new JSONReader("resources/products.json");
         productArray = new ArrayList<>();
@@ -86,7 +86,7 @@ public class ProductManager implements IProductManager, Runnable{
         Product toReturn = null;
 
         for(Product p : productArray){
-            if(p.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
+            if(p.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
                 toReturn = p;
                 break;
             }
