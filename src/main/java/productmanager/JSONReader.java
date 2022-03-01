@@ -240,7 +240,6 @@ public class JSONReader {
         return index;
     }
 
-
     private int countOccurences(String line, Character whatToCount){
 
         byte[] asByteArray = line.getBytes(StandardCharsets.UTF_8);
