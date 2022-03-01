@@ -1,17 +1,9 @@
 package test;
+import org.junit.platform.suite.api.SelectPackages;
+import org.junit.platform.suite.api.Suite;
 
-public class Main {
+@Suite
+@SelectPackages({"test"})
+public class TestSuite {
 
-    public static void main(String[] args) {
-        JSONReaderTest readerTester = new JSONReaderTest();
-        readerTester.runAllTests();
-
-        ProductAttributeTest productAttributeTest = new ProductAttributeTest();
-        productAttributeTest.values();
-        productAttributeTest.valueOf();
-
-        ProductManagerTest productManagerTest = new ProductManagerTest();
-
-
-    }
 }
