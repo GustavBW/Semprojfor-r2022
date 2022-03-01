@@ -11,7 +11,7 @@ public class Main {
         productAttributeTest.valueOf();
 
         ProductManagerTest productManagerTest = new ProductManagerTest();
-        productManagerTest.testAll();
+
 
     }
 }

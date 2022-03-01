@@ -8,7 +8,7 @@ public class ProductManager implements IProductManager, Runnable{
 
     private final JSONReader jsonReader;
 
-    private ArrayList<Product> productArray;
+    public ArrayList<Product> productArray;
     private ArrayList<Product> updatedProductArray;
     private boolean backgroundThreadIsRunning = false;
     private final Thread backgroundThread;
@@ -127,7 +127,7 @@ public class ProductManager implements IProductManager, Runnable{
         boolean succes = false;
 
         for(Product pT : productArray){
-            if(Objects.equals(pT.get(ProductAttribute.ID), productId)){
+            if(Objects.equals(pT.get(ProductAttribute.UUID), productId)){
                 succes = pT.set(a,s);
                 break;
             }
@@ -150,7 +150,7 @@ public class ProductManager implements IProductManager, Runnable{
         boolean success = false;
 
         for(Product pT : productArray){
-            if(pT.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
+            if(pT.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
                 pT = p;
                 success = true;
                 break;
@@ -172,7 +172,7 @@ public class ProductManager implements IProductManager, Runnable{
 
 
         for(Product p : productArray){
-            if (p.get(ProductAttribute.ID).equalsIgnoreCase(productId)){
+            if (p.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
                 toReturn = productArray.remove(p);
                 break;
             }
@@ -194,7 +194,7 @@ public class ProductManager implements IProductManager, Runnable{
         for (String productId : productIds) {
             for (Product p : productArray) {
 
-                if (p.get(ProductAttribute.ID).equalsIgnoreCase(productId)) {
+                if (p.get(ProductAttribute.UUID).equalsIgnoreCase(productId)) {
                     productArray.remove(p);
                     counter++;
                     break;
@@ -312,7 +312,6 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     public void print(){
-
         //Prints each products name and price.
 
         for(Product p : productArray){
@@ -332,7 +331,7 @@ public class ProductManager implements IProductManager, Runnable{
 
     public void printAllProducts(){
 
-        //Prints a detailed describtion of each product.
+        //Prints a detailed description of each product.
 
         for(Product p : productArray){
             p.print();

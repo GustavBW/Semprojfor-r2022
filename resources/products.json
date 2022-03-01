@@ -1,6 +1,23 @@
 [
 {
-	"id": "unavailable",
+	"id": "50",
+	"pId": "unavailable",
+	"averageUserReview": "unavailable",
+	"inStock": [
+	],
+	"ean": "unavailable",
+	"price": "unavailable",
+	"publishedDate": "unavailable",
+	"expirationDate": "unavailable",
+	"category": "unavailable",
+	"name": "unavailable",
+	"description": "unavailable",
+	"weight": "unavailable",
+	"size": "unavailable",
+	"clockSpeed": "unavailable"
+},
+{
+	"id": "50",
 	"pId": "unavailable",
 	"averageUserReview": "unavailable",
 	"inStock": [
