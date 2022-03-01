@@ -3,10 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import productmanager.ProductAttribute;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static productmanager.ProductAttribute.*;
 
 class ProductAttributeTest {
 
