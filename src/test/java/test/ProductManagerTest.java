@@ -1,8 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import productmanager.Product;
 import productmanager.ProductAttribute;
 import productmanager.ProductManager;
@@ -11,12 +9,17 @@ import java.util.ArrayList;
 
 class ProductManagerTest {
 
-private Product product = new Product();
-private ProductManager productManager = new ProductManager();
+private final Product product = new Product();
+private final ProductManager productManager = new ProductManager();
+
+    @BeforeAll
+    static void initialize(){
+        System.out.println("============ ProductManager TEST SETUP ============");
+    }
 
     @BeforeEach
     void setup(){
-        System.out.println("============ ProductManager TEST SETUP ============");
+        System.out.println("============ INITIALIZING ============");
     }
 
     @Test
@@ -60,10 +63,6 @@ private ProductManager productManager = new ProductManager();
 
     @Test
     void readAll() {
-        //Initializing String array of possible product UUIDs
-        String[] ids = {"35", "42", "1", "364"};
-
-        //assertArrayEquals(something, something);
     }
 
     @Test
@@ -146,20 +145,13 @@ private ProductManager productManager = new ProductManager();
         System.out.println("========== removeAll() TEST DONE ============");
     }
 
-    @Test
-    void setUpdateInterval() {
-    }
-
-    @Test
-    void run() {
-    }
-
-    @Test
-    void reparse() {
-    }
-
     @AfterEach
     void teardown(){
-        System.out.println("============ ProductManager TEST TEARDOWN ============");
+        System.out.println("============ TEARDOWN ============");
+    }
+
+    @AfterAll
+    static void ending(){
+        System.out.println("============ TEST COMPLETED SUCCESSFULLY ============");
     }
 }

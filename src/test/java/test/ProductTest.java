@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
     private static JSONReader reader = new JSONReader("resources/products.json");
-
+/*
     @Test
     void get() {
         ArrayList<Product> productList;
@@ -83,4 +83,6 @@ class ProductTest {
     @Test
     void print() {
     }
+
+ */
 }
