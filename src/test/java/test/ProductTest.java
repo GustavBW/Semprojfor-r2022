@@ -17,18 +17,18 @@ class ProductTest {
 
     @Test
     void get() {
-        ArrayList<Product> productTestList = new ArrayList<>();
-        int i = 0;
-        Product p1 = new Product();
-        productTestList.add(0, p1);
-        try {
+        ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
+        int i = 0; //int for counting unavailable attributes
+        Product p1 = new Product(); //initializing new product
+        productTestList.add(0, p1); //adding said product to test list
+        try { //trying read function
             productTestList = reader.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Product p : productTestList) {
-            for (ProductAttribute pA : ProductAttribute.values()) {
-                if (p.get(pA) == "unavailable") {
+        for (Product p : productTestList) { //running through test list
+            for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
+                if (p.get(pA) == "unavailable") { //if pA is "unavailable" add i+1
                     i++;
                 }
                 assertNotNull(pA);
