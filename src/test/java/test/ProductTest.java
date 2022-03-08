@@ -38,74 +38,111 @@ class ProductTest {
         assertFalse(productTestList.isEmpty());
         assertNotNull(p1);
 
+        for(Product p : productTestList) {
+            for (ProductAttribute pattr : ProductAttribute.values()) {   //Has all attributes been assigned correctly?
+                assertNotNull(p.get(pattr));
+            }
+        }
+
+        String currentUUIDInspected;
+        for(Product p : productTestList){
+            assertNotNull(currentUUIDInspected = p.get(ProductAttribute.UUID)); //Does each product have an UUID?
+            assertEquals(36, currentUUIDInspected.length());            //Does each product's UUID have 36 characters? (It must)
+        }
+
     }
 
     @Test
     void getAsNumeric(){
-        Product p1 = new Product();
-        for (ProductAttribute pA : ProductAttribute.values()); {
-        assertEquals(0.00,null);
-        assertTrue(pA=>0);
+
+        ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
+        try {                                                   //trying read function
+            productTestList = reader.read();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        /*
-        double pA1 = 69.99;
-        String pA2 = "Ultimate Performance";
-        assertEquals(69.99,pA1);
-        assertEquals(0.00, pA2);*/
+        for (ProductAttribute pA : ProductAttribute.values()) {
+            for(Product p : productTestList) {
+
+                assertNotEquals(p.getAsNumeric(pA), null);
+                assertTrue(p.getAsNumeric(pA) >= 0);
+
+            }
+        }
+
     }
 
     @Test
     void getLocations() {
-        ArrayList<Product> availableAt;
-        try {
-            availableAt = reader.read();
+
+        ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
+        try {                                                   //trying read function
+            productTestList = reader.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertEquals("Odense","Odense");
+
+        for(Product p : productTestList) {
+
+
+            assertNotEquals(p.getLocations(), null);
+            assertFalse(p.getLocations().isEmpty());
+
+            assertTrue(p.getLocations().size() > 0);
+
+            //Testing if the city name is actually a name (No danish city has a name of less than 1 character)
+            assertTrue(p.getLocations().get(0).length() > 1);
+
+            //Testing for duplicates - Product.getLocations() return a new ArrayList<String>
+            ArrayList<String> currentArray = p.getLocations();
+            ArrayList<String> arrayCopy = p.getLocations();
+            for(String s1 : currentArray){
+                int counter = 0;
+
+                for(String s2 : arrayCopy){
+                    if(s1.equalsIgnoreCase(s2)){
+                        counter++;
+                    }
+                }
+                //We expect there to be only one of each city name in the locations array
+                assertFalse(counter > 1);
+            }
+        }
     }
 
     @Test
-    void getAttributeMap() {
-        ArrayList<Product> attributeTestList = new ArrayList<>();
-        try {
-            attributeTestList = reader.read();
+    void set() {
+
+        ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
+        try {                                                   //trying read function
+            productTestList = reader.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //for (Product product:attributeTestList) {
+        String baseTestString = "hello there";
 
-        //}
-    }
+        for(Product p : productTestList){
+            for(ProductAttribute pA : ProductAttribute.values()){
 
-    @Test
-    void set() { //na
+                String previousValue = p.get(pA);
+
+                assertTrue(p.set(pA, baseTestString));
+                assertTrue(p.get(pA).equalsIgnoreCase(baseTestString));
+
+                assertNotEquals(previousValue, p.get(pA));  //Was the value actually changed
+            }
+        }
+
     }
 
     @Test
     void setLocations() {
-        ArrayList<Product> locationList = new ArrayList<>();
-        try {
-            locationList = reader.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+        Product testProduct = new Product();
 
-    @Test
-    void testToString() {
-        ArrayList<Product> productTitle = new ArrayList<>();
-        try {
-            productTitle = reader.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        assertEquals("Product: Monitor","Monitor");
-    }
+        ArrayList<String> namesTest = new ArrayList<>(List.of("Some","Body","Once","Told","me","The","World","Was"));
+        assertTrue(testProduct.setLocations(new ArrayList<>(namesTest)));
+        assertEquals(namesTest.size(), testProduct.getLocations());
 
-    /*@Test
-    void print() {
     }
-     */
 }

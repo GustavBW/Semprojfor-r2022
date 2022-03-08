@@ -66,7 +66,7 @@ public class JSONReader {
 
             if(containsArray){
 
-                currentProduct.setLocations(ProductAttribute.IN_STOCK, calculateInStockArray(br, array));
+                currentProduct.setLocations(calculateInStockArray(br, array));
                 array.clear();
 
             }else if(newProduct){
