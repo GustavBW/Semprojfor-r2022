@@ -13,17 +13,27 @@ public class Product { //initialize class
         availableAt = new ArrayList<>(); //initialize string array
     }
 
-
     public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
-        productAttributes.putIfAbsent(pA, "unavailable"); //replace nulls with string "unavailable" >function may be removed?
+        productAttributes.putIfAbsent(pA, "unavailable"); //replace nulls with string "unavailable" >function may get removed based on feedback
         return productAttributes.get(pA); //returns hashmap of pA's
+    }
+
+    public double getAsNumeric(ProductAttribute pA){
+        double result;
+        try{
+            result = Double.parseDouble(productAttributes.get(pA));
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            return 0.00D;
+        }
+        return result;
     }
 
     public ArrayList<String> getLocations(){ //String array method returning the class attribute availableAt
         return availableAt;
     } //returns an arraylist of the available shops
 
-    public HashMap<ProductAttribute,String> getAttributeMap(){
+    HashMap<ProductAttribute,String> getAttributeMap(){
         return productAttributes;
     } //makes productAttributes available for other classes
 
