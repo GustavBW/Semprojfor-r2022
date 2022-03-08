@@ -1,6 +1,6 @@
 package test;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import productmanager.JSONReader;
 import productmanager.Product;
 import productmanager.ProductAttribute;
@@ -14,6 +14,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
     private static JSONReader reader = new JSONReader("resources/products.json");
+
+    @BeforeAll
+    static void initialize(){
+        System.out.println("============ ProductTest TEST SETUP ============");
+    }
+
+    @BeforeEach
+    void setup(){
+        System.out.println("============ INITIALIZING ============");
+    }
 
     @Test
     void get() {
@@ -143,6 +153,15 @@ class ProductTest {
         ArrayList<String> namesTest = new ArrayList<>(List.of("Some","Body","Once","Told","me","The","World","Was"));
         assertTrue(testProduct.setLocations(new ArrayList<>(namesTest)));
         assertEquals(namesTest.size(), testProduct.getLocations());
+    }
 
+    @AfterEach
+    void teardown(){
+        System.out.println("============ TEARDOWN ============");
+    }
+
+    @AfterAll
+    static void ending(){
+        System.out.println("============ TEST COMPLETED SUCCESSFULLY ============");
     }
 }
