@@ -41,6 +41,14 @@ class ProductTest {
     }
 
     @Test
+    void getAsNumeric(){
+        double pA1 = 69.99;
+        String pA2 = "Ultimate Performance";
+        assertEquals(69.99,pA1);
+        assertEquals(0.00, pA2);
+    }
+
+    @Test
     void getLocations() {
         ArrayList<Product> availableAt;
         try {
