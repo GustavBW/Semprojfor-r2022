@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
     private static JSONReader reader = new JSONReader("resources/products.json");
-/*
+
     @Test
     void get() {
         ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
@@ -89,9 +89,8 @@ class ProductTest {
         assertEquals("Product: Monitor","Monitor");
     }
 
-    @Test
+    /*@Test
     void print() {
     }
-
- */
+     */
 }

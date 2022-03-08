@@ -62,10 +62,6 @@ private final ProductManager productManager = new ProductManager();
     }
 
     @Test
-    void readAll() {
-    }
-
-    @Test
     void update() {
         //testing with nothing in the productArray
         assertFalse(productManager.update("30", ProductAttribute.UUID, "50"));
