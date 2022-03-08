@@ -3,6 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import productmanager.JSONReader;
 import productmanager.Product;
+import productmanager.ProductAttribute;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,19 +17,27 @@ class ProductTest {
 /*
     @Test
     void get() {
-        ArrayList<Product> productList;
-        try {
-            productList = reader.read();
+        ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
+        int i = 0; //int for counting unavailable attributes
+        Product p1 = new Product(); //initializing new product
+        productTestList.add(0, p1); //adding said product to test list
+        try { //trying read function
+            productTestList = reader.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertEquals("unavailable", null);
-        try {
-            productList = reader.read();
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (Product p : productTestList) { //running through test list
+            for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
+                if (p.get(pA) == "unavailable") { //if pA is "unavailable" add i+1
+                    i++;
+                }
+                assertNotNull(pA);
+                assertFalse(i>2);
+            }
         }
-        assertEquals("2054647099864","2054647099864");
+        assertFalse(productTestList.isEmpty());
+        assertNotNull(p1);
+
     }
 
     @Test
@@ -43,14 +52,16 @@ class ProductTest {
     }
 
     @Test
-    public ArrayList<String> getAttributeMap() {
-        ArrayList<String> atributteList = new ArrayList<>();
+    void getAttributeMap() {
+        ArrayList<Product> attributeTestList = new ArrayList<>();
         try {
-                atributteList = reader.read();
+            attributeTestList = reader.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return atributteList;
+        //for (Product product:attributeTestList) {
+
+        //}
     }
 
     @Test
@@ -58,20 +69,18 @@ class ProductTest {
     }
 
     @Test
-    public ArrayList<String> setLocations() {
-            ArrayList<String> locationList = new ArrayList<>();
-            try {
-                    locationList = reader.read();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return locationList;
-
+    void setLocations() {
+        ArrayList<Product> locationList = new ArrayList<>();
+        try {
+            locationList = reader.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     void testToString() {
-        ArrayList<String> productTitle = new ArrayList<>();
+        ArrayList<Product> productTitle = new ArrayList<>();
         try {
             productTitle = reader.read();
         } catch (IOException e) {
