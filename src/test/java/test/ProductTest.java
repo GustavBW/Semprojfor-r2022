@@ -45,7 +45,7 @@ class ProductTest {
         Product p1 = new Product();
         for (ProductAttribute pA : ProductAttribute.values()); {
         assertEquals(0.00,null);
-        assertTrue(pA=>0);
+        assertTrue(pA>=0);
         }
 
         /*
