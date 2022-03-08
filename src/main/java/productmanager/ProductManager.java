@@ -17,12 +17,12 @@ public class ProductManager implements IProductManager, Runnable{
     private int updateInterval;    //Minutes
     private final String config = "resources/config.txt";
 
-    public ProductManager(){
+    public ProductManager(String sourcePath){
 
         //When you create a new object of this class, the background thread is started automatically.
         //If you want to alter an attribute on a product, you MUST do this through the C.U.D. functions in this class.
 
-        jsonReader = new JSONReader("resources/products.json");
+        jsonReader = new JSONReader(sourcePath);
         productArray = new ArrayList<>();
         updatedProductArray = null;
 
@@ -31,6 +31,9 @@ public class ProductManager implements IProductManager, Runnable{
 
         lastCall = System.currentTimeMillis();
         updateInterval = readConfig();
+    }
+    public ProductManager(){
+        this("resources/products.json");
     }
 
     public static void main(String[] args) {
