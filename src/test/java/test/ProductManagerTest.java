@@ -10,7 +10,7 @@ import java.util.ArrayList;
 class ProductManagerTest {
 
 private final Product product = new Product();
-private final ProductManager productManager = new ProductManager();
+private final ProductManager productManager = new ProductManager("resources/cheese.txt");
 
     @BeforeAll
     static void initialize(){
