@@ -42,10 +42,17 @@ class ProductTest {
 
     @Test
     void getAsNumeric(){
+        Product p1 = new Product();
+        for (ProductAttribute pA : ProductAttribute.values()); {
+        assertEquals(0.00,null);
+        assertTrue(pA=>0);
+        }
+
+        /*
         double pA1 = 69.99;
         String pA2 = "Ultimate Performance";
         assertEquals(69.99,pA1);
-        assertEquals(0.00, pA2);
+        assertEquals(0.00, pA2);*/
     }
 
     @Test
