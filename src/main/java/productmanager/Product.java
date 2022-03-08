@@ -30,12 +30,12 @@ public class Product { //initialize class
     }
 
     public ArrayList<String> getLocations(){ //String array method returning the class attribute availableAt
-        return availableAt;
+        return new ArrayList<>(availableAt);
     } //returns an arraylist of the available shops
 
     HashMap<ProductAttribute,String> getAttributeMap(){
         return productAttributes;
-    } //makes productAttributes available for other classes
+    }                               //makes productAttributes available for other classes
 
     public boolean set(ProductAttribute pA, String value){
 
@@ -47,8 +47,17 @@ public class Product { //initialize class
         return productAttributes.get(pA).equalsIgnoreCase(value);
     }
 
-    public boolean setLocations(ProductAttribute pA, ArrayList<String> values){
-        availableAt.addAll(values);
+    public boolean setLocations(ArrayList<String> values){
+
+        for(String val : values){
+            for(String location : availableAt){
+
+                if(!val.equalsIgnoreCase(location)){
+                    availableAt.add(val);
+                }
+
+            }
+        }
         return availableAt.size() > 0; //checks if there is stock of the product in any shop
     }
 
