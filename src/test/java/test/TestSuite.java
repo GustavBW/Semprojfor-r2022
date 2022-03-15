@@ -5,7 +5,7 @@ import org.junit.platform.suite.api.Suite;
 import productmanager.ProductAttribute;
 
 @Suite
-@SelectClasses({ProductManagerTest.class, ProductAttribute.class, JSONReaderTest.class, ProductTest.class})
+@SelectClasses({ProductManagerTest.class, ProductAttributeTest.class, JSONReaderTest.class, ProductTest.class})
 //@SelectPackages({"test"})
 public class TestSuite {
 
