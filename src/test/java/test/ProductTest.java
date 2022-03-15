@@ -152,7 +152,7 @@ class ProductTest {
 
         ArrayList<String> namesTest = new ArrayList<>(List.of("Some","Body","Once","Told","me","The","World","Was"));
         assertTrue(testProduct.setLocations(new ArrayList<>(namesTest)));
-        assertEquals(namesTest.size(), testProduct.getLocations());
+        assertEquals(namesTest, testProduct.getLocations());
     }
 
     @AfterEach
