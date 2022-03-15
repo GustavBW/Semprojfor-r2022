@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Product { //initialize class
 
     private final HashMap<ProductAttribute, String> productAttributes; //initialize hashmap to contain product attributes
-    private final ArrayList<String> availableAt; //initialize array of strings to contain local stores with stock
+    private ArrayList<String> availableAt; //initialize array of strings to contain local stores with stock
 
     public Product(){ //product constructor w.o. attribute input
         productAttributes = new HashMap<>(); //initialize hashmap
@@ -51,15 +51,14 @@ public class Product { //initialize class
 
     public boolean setLocations(ArrayList<String> values){
 
-        for(String val : values){
-            for(String location : availableAt){
+        availableAt = values;
 
-                if(!val.equalsIgnoreCase(location)){
-                    availableAt.add(val);
-                }
-
-            }
+        StringBuilder sB = new StringBuilder();
+        for(String s : availableAt){
+            sB.append(s).append(",");
         }
+        productAttributes.put(ProductAttribute.IN_STOCK, sB.toString());
+
         return availableAt.size() > 0; //checks if there is stock of the product in any shop
     }
 
