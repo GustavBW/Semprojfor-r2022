@@ -49,7 +49,6 @@ public class JSONReader {
         boolean newProduct;
         boolean containsData;
         Product currentProduct = new Product();
-        ArrayList<String> array = new ArrayList<>();
         String line;
 
         br.readLine(); //Skipping the first line as to not break the array detection.
@@ -66,8 +65,7 @@ public class JSONReader {
 
             if(containsArray){
 
-                currentProduct.setLocations(calculateInStockArray(br, array));
-                array.clear();
+                currentProduct.setLocations(calculateInStockArray(br));
 
             }else if(newProduct){
 
@@ -86,7 +84,8 @@ public class JSONReader {
         br.close();
     }
 
-    private ArrayList<String> calculateInStockArray(BufferedReader br, ArrayList<String> array) throws IOException {
+    private ArrayList<String> calculateInStockArray(BufferedReader br) throws IOException {
+        ArrayList<String> array = new ArrayList<>();
         String arrayLine;
 
         while((arrayLine = br.readLine()) != null && arrayLine.contains("\"")){
