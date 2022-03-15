@@ -22,6 +22,7 @@ private final ProductManager productManager = new ProductManager("resources/chee
         System.out.println("============ INITIALIZING ============");
     }
 
+    @Order(1)
     @Test
     void create() {
 
@@ -29,7 +30,8 @@ private final ProductManager productManager = new ProductManager("resources/chee
     assertTrue(productManager.create(product));
     System.out.println("========== create() TEST DONE ============");
     }
-
+    
+    @Order(2)
     @Test
     void createAll() {
 
@@ -46,7 +48,8 @@ private final ProductManager productManager = new ProductManager("resources/chee
 
     System.out.println("========== createAll() TEST DONE ============");
     }
-
+    
+    @Order(3)
     @Test
     void read() {
 
@@ -60,7 +63,8 @@ private final ProductManager productManager = new ProductManager("resources/chee
     assertEquals(product.get(ProductAttribute.UUID), "25");
         System.out.println("========== read() TEST DONE ============");
     }
-
+    
+    @Order(4)
     @Test
     void update() {
         //testing with nothing in the productArray
@@ -77,8 +81,8 @@ private final ProductManager productManager = new ProductManager("resources/chee
         assertTrue(productManager.update("30", ProductAttribute.UUID, "50"));
         System.out.println("========== update() TEST DONE ============");
     }
-
-
+    
+    @Order(5)
     @Test
     void remove() {
 
@@ -99,7 +103,8 @@ private final ProductManager productManager = new ProductManager("resources/chee
         assertTrue(productManager.remove("30"));
         System.out.println("========== remove() TEST DONE ============");
     }
-
+    
+    @Order(6)
     @Test
     void removeAll() {
         //Initializing String array of possible product UUIDs
