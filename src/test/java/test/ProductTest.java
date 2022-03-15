@@ -28,7 +28,6 @@ class ProductTest {
     @Test
     void get() {
         ArrayList<Product> productTestList = new ArrayList<>(); //initializing test arraylist
-        int i = 0; //int for counting unavailable attributes
         Product p1 = new Product(); //initializing new product
         productTestList.add(0, p1); //adding said product to test list
         try { //trying read function
@@ -38,6 +37,7 @@ class ProductTest {
         }
 
         for (Product p : productTestList) { //running through test list
+            int i = 0; //int for counting unavailable attributes
             for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
                 if (p.get(pA) == "unavailable") { //if pA is "unavailable" add i+1
                     i++;
