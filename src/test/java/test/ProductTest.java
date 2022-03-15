@@ -36,6 +36,7 @@ class ProductTest {
 
         for (Product p : productTestList) { //running through test list
             int i = 0; //int for counting unavailable attributes
+            p.print();
 
             for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
                 if (p.get(pA).equalsIgnoreCase("unavailable")) { //if pA is "unavailable" add i+1
