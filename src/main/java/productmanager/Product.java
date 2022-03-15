@@ -19,9 +19,10 @@ public class Product { //initialize class
     }
 
     public double getAsNumeric(ProductAttribute pA){
+        String pattr = get(pA).replaceAll("\"","");
         double result;
         try{
-            result = Double.parseDouble(productAttributes.get(pA));
+            result = Double.parseDouble(pattr);
         }catch (NumberFormatException e){
             return 0.00D;
         }catch (NullPointerException e){
