@@ -5,22 +5,35 @@ import productmanager.Product;
 import productmanager.ProductAttribute;
 import productmanager.ProductManager;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.*;
 import java.util.ArrayList;
 
 class ProductManagerTest {
 
-private final Product product = new Product();
-private final ProductManager productManager = new ProductManager("resources/cheese.txt");
 
     @BeforeAll
     static void initialize(){
         System.out.println("============ ProductManager TEST SETUP ============");
+    }
+    PrintWriter print;
+    {
+        try {
+            print = new PrintWriter("cheese.txt");
+            print.write("");
+            print.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @BeforeEach
     void setup(){
         System.out.println("============ INITIALIZING ============");
     }
+    private final ProductManager productManager = new ProductManager("resources/cheese.txt");
+    private final Product product = new Product();
+
 
     @Order(1)
     @Test
@@ -68,7 +81,7 @@ private final ProductManager productManager = new ProductManager("resources/chee
     @Test
     void update() {
         //testing with nothing in the productArray
-        assertFalse(productManager.update("30", ProductAttribute.UUID, "50"));
+        assertFalse(productManager.update("46", ProductAttribute.UUID, "50"));
 
         //adding product to productArray
         productManager.create(product);
