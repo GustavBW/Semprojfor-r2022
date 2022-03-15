@@ -23,7 +23,8 @@ public class Product { //initialize class
         try{
             result = Double.parseDouble(productAttributes.get(pA));
         }catch (NumberFormatException e){
-            e.printStackTrace();
+            return 0.00D;
+        }catch (NullPointerException e){
             return 0.00D;
         }
         return result;

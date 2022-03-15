@@ -36,13 +36,14 @@ class ProductTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         for (Product p : productTestList) { //running through test list
             for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
                 if (p.get(pA) == "unavailable") { //if pA is "unavailable" add i+1
                     i++;
                 }
                 assertNotNull(pA);
-                assertFalse(i>2);
+                assertFalse(i>=2);
             }
         }
         assertFalse(productTestList.isEmpty());
