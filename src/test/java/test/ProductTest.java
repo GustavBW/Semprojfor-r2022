@@ -43,7 +43,7 @@ class ProductTest {
                     i++;
                 }
                 assertNotNull(pA);
-                assertFalse(i>=2);
+                assertFalse(i>2);
             }
         }
         assertFalse(productTestList.isEmpty());
@@ -95,7 +95,6 @@ class ProductTest {
         }
 
         for(Product p : productTestList) {
-
 
             assertNotEquals(p.getLocations(), null);
             assertFalse(p.getLocations().isEmpty());
