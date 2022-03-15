@@ -127,7 +127,11 @@ public class JSONReader {
     }
 
     public boolean write(ArrayList<Product> list, String filepath) throws IOException{
-        Objects.requireNonNull(list);
+
+        if(list == null || list.isEmpty()){
+            throw new NullPointerException("Invalid List to write to file");
+        }
+
         long timeA = System.nanoTime();
         boolean success = false;
         int productNumber = 0;
