@@ -23,7 +23,7 @@ public class ProductManager implements IProductManager, Runnable{
         //If you want to alter an attribute on a product, you MUST do this through the C.U.D. functions in this class.
 
         jsonReader = new JSONReader(sourcePath);
-        productArray = new ArrayList<>();
+        productArray = getFromSource();
         updatedProductArray = null;
 
         backgroundThread = new Thread(this);
@@ -339,5 +339,14 @@ public class ProductManager implements IProductManager, Runnable{
         for(Product p : productArray){
             p.print();
         }
+    }
+
+    private ArrayList<Product> getFromSource(){
+        try{
+            return jsonReader.read();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return new ArrayList<Product>();
     }
 }
