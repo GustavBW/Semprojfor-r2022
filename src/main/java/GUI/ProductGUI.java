@@ -26,7 +26,9 @@ public class ProductGUI {
         ArrayList<Text> output = new ArrayList<>();
 
         for(ProductAttribute pattr : ProductAttribute.values()){
-            output.add(new Text(product.get(pattr)));
+            Text newText = new Text(product.get(pattr));
+            newText.setDisable(true);
+            output.add(newText);
         }
 
         return output;
