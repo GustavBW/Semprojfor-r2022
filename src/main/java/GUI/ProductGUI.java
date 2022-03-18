@@ -17,7 +17,7 @@ public class ProductGUI {
     public ProductGUI(Product product){
         this.product = product;
         textBoxes = generateGUI();
-        
+
         container = new VBox();
         container.getChildren().addAll(textBoxes);
     }
