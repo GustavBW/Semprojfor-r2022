@@ -14,16 +14,16 @@ import java.util.List;
 
 public class ProductGUI {
 
-    private Product product;
-    private boolean isInEditMode = false;
-    private final List<Text> editables;
-    private final List<HBox> subContainers;
-    private final HashMap<Text, ProductAttribute> textPattrMap;
-    private final HashMap<ProductAttribute, Text> pattrTextMap;
-    private final VBox container;
-    private final Button editButton;
-    private final Button saveButton;
-    private final Button cancelButton;
+    private Product product;    //The Product displayed through this GUI
+    private boolean isInEditMode = false; //Boolean tracking if the GUI is in edit mode
+    private final List<Text> editables; //Attributes of the Product that the user can edit.
+    private final List<HBox> subContainers; //Pairs of an attribute name (Text obj) and the attribute value (Text obj)
+    private final HashMap<Text, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
+    private final HashMap<ProductAttribute, Text> pattrTextMap; //A way to get a text field using a ProductAttribute
+    private final VBox container;   //The entire page is one large container. Might be changed to something else later, but this is the entire UI.
+    private final Button editButton;    //Button to enter edit mode
+    private final Button saveButton;    //Button to save changes and exit edit mode
+    private final Button cancelButton;  //Button to exit edit mode.
 
     public ProductGUI(Product product){
         this.product = product;
@@ -31,10 +31,12 @@ public class ProductGUI {
         this.pattrTextMap = new HashMap<>();
         this.subContainers = new ArrayList<>();
         this.container = new VBox();
-        this.editables = generateGUI();
+        this.editables = new ArrayList<>();
         this.editButton = new Button("Edit");
         this.saveButton = new Button("Save");
         this.cancelButton = new Button("Cancel");
+
+        generateGUI();
 
         editButton.setOnMouseClicked(e -> startEditMode());
         saveButton.setDisable(true);
@@ -67,6 +69,7 @@ public class ProductGUI {
                 Text attrText = new Text(product.get(pattr));
                 Text attrNameText = new Text(pattr.alias);
 
+                //The user should only be able to make changes in the fields when edit mode is started. This way it's easier to make sure nothing goes wrong.
                 attrText.setDisable(true);
                 attrNameText.setDisable(true);
 
@@ -74,17 +77,18 @@ public class ProductGUI {
 
                 subContainers.add(subContainer);
 
-
                 textPattrMap.put(attrText, pattr);
                 pattrTextMap.put(pattr, attrText);
 
             if(pattr != ProductAttribute.UUID) {
+                //The UUID shouldn't ever change. Thus it now can't.
                 output.add(attrText);
             }
         }
 
         product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll("\n",","));
         container.getChildren().addAll(subContainers);
+        editables.addAll(output);
         return output;
     }
 
@@ -98,6 +102,8 @@ public class ProductGUI {
 
         unlockAll();
 
+        editButton.setDisable(true);
+        editButton.setVisible(false);
         saveButton.setDisable(false);
         saveButton.setVisible(true);
         cancelButton.setDisable(false);
@@ -107,11 +113,13 @@ public class ProductGUI {
     }
 
     private void unlockAll(){
+        //This unlocks all the text fields that are editable. Meaning the user can change their values now.
         for(Text t : editables){
             t.setDisable(false);
         }
     }
     private void lockAll(){
+        //This locks all the text fields that are editable. Meaning the user cannot make changes in their values.
         for(Text t : editables){
             t.setDisable(true);
         }
@@ -121,15 +129,23 @@ public class ProductGUI {
         System.out.println("Saved Changes to Product " + product.get(ProductAttribute.UUID));
         isInEditMode = false;
 
+        //Step 0: Lock all fields so no changes can be made. Also disable the Save and Cancel Buttons.
         lockAll();
 
+        editButton.setDisable(false);
+        editButton.setVisible(true);
         saveButton.setDisable(true);
         saveButton.setVisible(false);
         cancelButton.setVisible(false);
         cancelButton.setDisable(true);
 
-        App.productManager.update(product.get(ProductAttribute.UUID),getModProduct());
-        product = getModProduct();
+        //Step 1: Read all information in the text fields and make a new product from this.
+        Product modProd = getModProduct();
+        //Step 2: Update the product to equal this new one. (Their UUID's will always be the same, but this is just to make sure the right product is overridden)
+        App.productManager.update(product.get(ProductAttribute.UUID),modProd);
+        //Step 3: Change what product this GUI is using.
+        product = modProd;
+        //Step 4: Remake the GUI using the new changed product.
         generateGUI();
 
         return isInEditMode;
@@ -139,6 +155,14 @@ public class ProductGUI {
         isInEditMode = false;
 
         lockAll();
+
+        editButton.setDisable(false);
+        editButton.setVisible(true);
+        saveButton.setDisable(true);
+        saveButton.setVisible(false);
+        cancelButton.setVisible(false);
+        cancelButton.setDisable(true);
+
         generateGUI();
 
         return !isInEditMode;
@@ -147,9 +171,11 @@ public class ProductGUI {
     private Product getModProduct(){
         Product output = new Product();
 
+        //Using the HashMap to pull out all the information stored in the text fields.
         for(ProductAttribute pattr : ProductAttribute.values()){
             output.set(pattr,pattrTextMap.get(pattr).getText());
         }
+        //Then being a little creative when filling in the .setLocation string list.
         output.setLocations(new ArrayList<>(List.of(pattrTextMap.get(ProductAttribute.IN_STOCK).getText().split(","))));
 
         return output;
@@ -157,5 +183,6 @@ public class ProductGUI {
     public Product getProduct(){
         return product;
     }
+    public boolean isInEditMode(){return isInEditMode;}
 
 }
