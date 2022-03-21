@@ -92,7 +92,7 @@ public class ProductGUI {
         return output;
     }
 
-    public Node getContainerNode(){
+    public Node getGUI(){
         return container;
     }
 
