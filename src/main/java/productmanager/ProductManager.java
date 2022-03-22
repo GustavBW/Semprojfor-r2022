@@ -238,7 +238,7 @@ public class ProductManager implements IProductManager, Runnable{
         //Then reads the json file again and prepares a new ArrayList<Product> for use.
 
         while(System.currentTimeMillis() < lastCall + (updateInterval * 60000L)){
-            System.out.println();
+            System.out.print("");
         }
 
         lastCall = System.currentTimeMillis();

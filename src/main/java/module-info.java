@@ -4,7 +4,8 @@ module GUI {
     
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
-    
+    requires javafx.graphics;
+
     opens GUI to javafx.fxml;
     exports GUI;
 }

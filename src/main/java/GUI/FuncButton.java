@@ -12,6 +12,8 @@ public abstract class FuncButton {
         this.button = new Button(text);
 
         button.setOnMouseClicked(e -> onClicked());
+        button.setPrefWidth(App.dim.getX() * 0.15);
+        button.setPrefHeight(App.dim.getY() * 0.1);
     }
 
     public abstract void onClicked();
