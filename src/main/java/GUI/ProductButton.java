@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.scene.control.Button;
 import productmanager.Product;
+import productmanager.ProductAttribute;
 
 /*
 It seems to me that all the functionality of this class is already found is the pGUI class.
@@ -16,6 +17,7 @@ public class ProductButton extends FuncButton {
     private final Button button;
 
     public ProductButton(Product p, ProductGUIManager pGUIM) {
+        super(p.get(ProductAttribute.NAME));
         this.prodGUIManager = pGUIM;
         this.product = p;
 

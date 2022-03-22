@@ -16,6 +16,7 @@ public class ProductGUI {
 
     private Product product;    //The Product displayed through this GUI
     private boolean isInEditMode = false; //Boolean tracking if the GUI is in edit mode
+    private boolean creatingNotEditing = false; //Boolean tracking whether to update an existing product or make a make a new one for Saving (.saveChanges())
     private final List<Text> editables; //Attributes of the Product that the user can edit.
     private final List<HBox> subContainers; //Pairs of an attribute name (Text obj) and the attribute value (Text obj)
     private final HashMap<Text, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
@@ -50,6 +51,7 @@ public class ProductGUI {
 
     public ProductGUI(){
         this(getBlankProduct());
+        creatingNotEditing = true;
         startEditMode();
     }
 
@@ -170,7 +172,12 @@ public class ProductGUI {
         //Step 1: Read all information in the text fields and make a new product from this.
         Product modProd = getModProduct();
         //Step 2: Update the product to equal this new one. (Their UUID's will always be the same, but this is just to make sure the right product is overridden)
-        App.productManager.update(product.get(ProductAttribute.UUID),modProd);
+        if(creatingNotEditing){
+            App.productManager.create(modProd);
+            creatingNotEditing = false;
+        }else {
+            App.productManager.update(product.get(ProductAttribute.UUID), modProd);
+        }
         //Step 3: Change what product this GUI is using.
         product = modProd;
         //Step 4: Remake the GUI using the new changed product.
