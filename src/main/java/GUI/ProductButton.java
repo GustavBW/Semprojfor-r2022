@@ -14,7 +14,6 @@ public class ProductButton extends FuncButton {
     private final ProductGUIManager prodGUIManager;
     private final Product product;
     private final ProductGUI prodGUI;
-    private final Button button;
 
     public ProductButton(Product p, ProductGUIManager pGUIM) {
         super(p.get(ProductAttribute.NAME));
@@ -22,10 +21,6 @@ public class ProductButton extends FuncButton {
         this.product = p;
 
         prodGUI = new ProductGUI(product);
-        button = new Button(product.toString());
-        //Make the button
-        //Make ProductGUI
-        button.setOnMouseClicked(e -> onClicked());
     }
 
     @Override
