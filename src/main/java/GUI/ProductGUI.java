@@ -45,6 +45,7 @@ public class ProductGUI {
         cancelButton.setVisible(false);
         cancelButton.setDisable(true);
         cancelButton.setOnMouseClicked(e -> cancelEditMode());
+
     }
 
     private ArrayList<Text> generateGUI(){

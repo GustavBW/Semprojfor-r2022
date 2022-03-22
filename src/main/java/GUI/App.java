@@ -52,8 +52,9 @@ public class App extends Application {
         ArrayList<Product> products = productManager.getAllProducts();
 
         for(Product p : products){
+            //ProductButton pB = new ProductButton(p, prodGUIManager);
             //vbox.getChildren().add(
-            //        new ProductButton(p, prodGUIManager)
+            //        pB.getButton()
             //);
         }
 
