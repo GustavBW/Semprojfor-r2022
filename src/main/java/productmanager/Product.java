@@ -55,6 +55,7 @@ public class Product { //initialize class
         }
         return setLocations(values);
     }
+    
     public boolean setLocations(ArrayList<String> values){
 
         availableAt = values;
