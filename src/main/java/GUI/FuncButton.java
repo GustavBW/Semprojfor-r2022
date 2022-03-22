@@ -2,7 +2,7 @@ package GUI;
 
 import javafx.scene.control.Button;
 
-public class FuncButton {
+public abstract class FuncButton {
 
     protected Button button;
     protected String text;
