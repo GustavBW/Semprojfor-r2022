@@ -23,11 +23,11 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         Pane mainPane = new Pane();
         Pane prodGUIPane = new Pane();
+        prodGUIManager = new ProductGUIManager(prodGUIPane);
 
         addProductButtons(mainPane);
         addFuncButtons(mainPane);
 
-        prodGUIManager = new ProductGUIManager(prodGUIPane);
         mainPane.getChildren().add(prodGUIPane);
         Scene scene = new Scene(mainPane, dim.getX(),dim.getY());
 
@@ -52,10 +52,8 @@ public class App extends Application {
         ArrayList<Product> products = productManager.getAllProducts();
 
         for(Product p : products){
-            //ProductButton pB = new ProductButton(p, prodGUIManager);
-            //vbox.getChildren().add(
-            //        pB.getButton()
-            //);
+            ProductButton pB = new ProductButton(p, prodGUIManager);
+            vbox.getChildren().add(pB.getButton());
         }
 
         node.getChildren().add(vbox);
