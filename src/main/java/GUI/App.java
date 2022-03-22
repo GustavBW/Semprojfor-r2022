@@ -35,6 +35,7 @@ public class App extends Application {
         stage.setTitle("PIM-1 GUI");
         stage.show();
         stage.requestFocus();
+        stage.setOnCloseRequest(e -> stop());
     }
 
     private void addFuncButtons(Pane node) {
@@ -57,6 +58,10 @@ public class App extends Application {
         }
 
         node.getChildren().add(vbox);
+    }
+
+    public synchronized void stop(){
+        System.exit(69);
     }
 
     public static void main(String[] args) {
