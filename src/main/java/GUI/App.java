@@ -1,17 +1,14 @@
 package GUI;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import productmanager.Product;
 import productmanager.ProductManager;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.net.URL;
 
 public class App extends Application {
 
@@ -20,8 +17,20 @@ public class App extends Application {
     private ProductGUIManager prodGUIManager;
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Pane mainPane = new Pane();
+    public void start(Stage stage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIapplication.fxml"));
+        Scene scene = new Scene(loader.load(), 1280, 720);
+        stage.setTitle("PIM-1 GUI");
+        stage.setScene(scene);
+        stage.show();
+
+
+            //Scene scene = new Scene(content);
+            //stage.setScene(scene);
+            //stage.show();
+
+
+        /*Pane mainPane = new Pane();
         Pane prodGUIPane = new Pane();
 
         addProductButtons(mainPane);
@@ -59,6 +68,7 @@ public class App extends Application {
         }
 
         node.getChildren().add(vbox);
+         */
     }
 
     public static void main(String[] args) {
