@@ -3,10 +3,10 @@ package GUI;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
-import productmanager.ProductManager;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 
 public class ProductGUIManager {
     private ProductGUI currentGUI;
@@ -20,11 +20,13 @@ public class ProductGUIManager {
         if (currentGUI != null && currentGUI.isInEditMode()){
             //https://stackoverflow.com/questions/8309981/how-to-create-and-show-common-dialog-error-warning-confirmation-in-javafx-2
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have unsaved changes!\nDo you want to save your changes?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-            alert.showAndWait();
+            alert.initModality(Modality.WINDOW_MODAL);
+            alert.initOwner(hostPane.getScene().getWindow());
+            Optional<ButtonType> result = alert.showAndWait();
     
-            if (alert.getResult() == ButtonType.YES) {
+            if (result.get() == ButtonType.YES) {
                 currentGUI.saveChanges();
-            } else if (alert.getResult() == ButtonType.NO) {
+            } else if (result.get() == ButtonType.NO) {
                 currentGUI.cancelEditMode();
             } else {
                 return;
@@ -33,5 +35,6 @@ public class ProductGUIManager {
         
         hostPane.getChildren().clear();
         hostPane.getChildren().add(pGUI.getGUI());
+        currentGUI = pGUI;
     }
 }

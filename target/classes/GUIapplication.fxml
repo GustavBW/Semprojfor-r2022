@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutY="36.0" prefHeight="684.0" prefWidth="66.0">
+         <content>
+            <VBox fx:id="btnVbox" prefHeight="698.0" prefWidth="54.0" />
+         </content>
+      </ScrollPane>
+      <Pane fx:id="productPane" layoutX="66.0" layoutY="36.0" prefHeight="684.0" prefWidth="1215.0" style="-fx-background-color: beige;" />
+      <HBox fx:id="btnHbox" prefHeight="37.0" prefWidth="1280.0" style="-fx-background-color: green;" />
+   </children>
+</Pane>
