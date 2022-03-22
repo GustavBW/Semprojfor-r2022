@@ -2,14 +2,13 @@ package GUI;
 
 public class CreateNewProductButton extends FuncButton{
 
-
-
-    public CreateNewProductButton(String text) {
-        super(text);
+    public CreateNewProductButton() {
+        super("Create New");
     }
 
     @Override
     public void onClicked(){
+        ProductGUI newProductGUI = new ProductGUI();
 
     }
 }

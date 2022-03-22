@@ -48,6 +48,32 @@ public class ProductGUI {
 
     }
 
+    public ProductGUI(){
+        this(getBlankProduct());
+        startEditMode();
+    }
+
+    private static Product getBlankProduct() {
+        Product blankProduct = new Product();
+
+        blankProduct.set(ProductAttribute.UUID, "e.g. ea6954c2-64ec-4a65-b1a5-d614907e8b65");
+        blankProduct.set(ProductAttribute.ID, "e.g. 25");
+        blankProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "e.g. 4.523");
+        blankProduct.set(ProductAttribute.IN_STOCK, "e.g. København,Hørsholm,Vejle...");
+        blankProduct.set(ProductAttribute.EAN, "e.g. 1122334455667");
+        blankProduct.set(ProductAttribute.PRICE, "e.g. 1875.95");
+        blankProduct.set(ProductAttribute.PUBLISHED_DATE, "dd/mm/yyyy");
+        blankProduct.set(ProductAttribute.EXPIRATION_DATE, "dd/mm/yyyy");
+        blankProduct.set(ProductAttribute.CATEGORY, "e.g. 'Laptops'");
+        blankProduct.set(ProductAttribute.NAME, "");
+        blankProduct.set(ProductAttribute.DESCRIPTION, "");
+        blankProduct.set(ProductAttribute.WEIGHT, "in KG");
+        blankProduct.set(ProductAttribute.SIZE, "e.g. length by width by height");
+        blankProduct.set(ProductAttribute.CLOCKSPEED, "e.g. 4.5GHz");
+
+        return blankProduct;
+    }
+
     private ArrayList<Text> generateGUI(){
         //Resetting the container
         container.getChildren().clear();
