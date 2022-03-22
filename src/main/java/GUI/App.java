@@ -17,7 +17,7 @@ public class App extends Application {
 
     public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
     public static Point2D dim = new Point2D(1280,720);
-    //private ProductGUIManager prodGUIManager;
+    private ProductGUIManager prodGUIManager;
 
     @Override
     public void start(Stage stage) throws Exception {

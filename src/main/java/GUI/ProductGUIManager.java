@@ -15,6 +15,6 @@ public class ProductGUIManager {
     }
     
     public void onGUIChange(ProductGUI pGUI){
-    
+
     }
 }
