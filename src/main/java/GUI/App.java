@@ -14,7 +14,7 @@ public class App extends Application {
 
     public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
     public static Point2D dim = new Point2D(1280,720);
-    private ProductGUIManager prodGUIManager;
+    public static ProductGUIManager prodGUIManager;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -32,11 +32,11 @@ public class App extends Application {
 
         /*Pane mainPane = new Pane();
         Pane prodGUIPane = new Pane();
+        prodGUIManager = new ProductGUIManager(prodGUIPane);
 
         addProductButtons(mainPane);
         addFuncButtons(mainPane);
 
-        //prodGUIManager = new ProductGUIManager(prodGUIPane);
         mainPane.getChildren().add(prodGUIPane);
         Scene scene = new Scene(mainPane, dim.getX(),dim.getY());
 
@@ -44,12 +44,13 @@ public class App extends Application {
         stage.setTitle("PIM-1 GUI");
         stage.show();
         stage.requestFocus();
+        stage.setOnCloseRequest(e -> stop());
     }
 
     private void addFuncButtons(Pane node) {
         HBox hbox = new HBox();
 
-
+        hbox.getChildren().add(new CreateNewProductButton().getButton());
         //Add all the FuncButtons here
 
 
@@ -61,14 +62,16 @@ public class App extends Application {
         ArrayList<Product> products = productManager.getAllProducts();
 
         for(Product p : products){
-            //ProductButton pB = new ProductButton(p, prodGUIManager);
-            //vbox.getChildren().add(
-            //        pB.getButton()
-            //);
+            ProductButton pB = new ProductButton(p, prodGUIManager);
+            vbox.getChildren().add(pB.getButton());
         }
 
         node.getChildren().add(vbox);
          */
+    }
+
+    public synchronized void stop(){
+        System.exit(69);
     }
 
     public static void main(String[] args) {
