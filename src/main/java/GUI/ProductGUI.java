@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -17,10 +18,10 @@ public class ProductGUI {
     private Product product;    //The Product displayed through this GUI
     private boolean isInEditMode = false; //Boolean tracking if the GUI is in edit mode
     private boolean creatingNotEditing = false; //Boolean tracking whether to update an existing product or make a make a new one for Saving (.saveChanges())
-    private final List<Text> editables; //Attributes of the Product that the user can edit.
+    private final List<TextField> editables; //Attributes of the Product that the user can edit.
     private final List<HBox> subContainers; //Pairs of an attribute name (Text obj) and the attribute value (Text obj)
-    private final HashMap<Text, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
-    private final HashMap<ProductAttribute, Text> pattrTextMap; //A way to get a text field using a ProductAttribute
+    private final HashMap<TextField, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
+    private final HashMap<ProductAttribute, TextField> pattrTextMap; //A way to get a text field using a ProductAttribute
     private final VBox container;   //The entire page is one large container. Might be changed to something else later, but this is the entire UI.
     private final Button editButton;    //Button to enter edit mode
     private final Button saveButton;    //Button to save changes and exit edit mode
@@ -76,7 +77,7 @@ public class ProductGUI {
         return blankProduct;
     }
 
-    private ArrayList<Text> generateGUI(){
+    private ArrayList<TextField> generateGUI(){
         //Resetting the container
         container.getChildren().clear();
         subContainers.clear();
@@ -87,7 +88,7 @@ public class ProductGUI {
         HBox topBox = new HBox(titleText,editButton, saveButton, cancelButton);
         container.getChildren().add(topBox);
 
-        ArrayList<Text> output = new ArrayList<>();
+        ArrayList<TextField> output = new ArrayList<>();
         //This makes the IN_STOCK display correctly for GUI purposes. It shouldn't change anything anywhere else. But for good measure this change is reverted later
         product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll(",","\n"));
 
@@ -95,12 +96,14 @@ public class ProductGUI {
         for(ProductAttribute pattr : ProductAttribute.values()){
 
                 HBox subContainer = new HBox();
+                subContainer.setPrefWidth(App.dim.getX() * 0.85);
+                subContainer.setPrefWidth(App.dim.getY() * 0.95);
 
-                Text attrText = new Text(product.get(pattr));
-                Text attrNameText = new Text(pattr.alias);
+                TextField attrText = new TextField(product.get(pattr));
+                TextField attrNameText = new TextField(pattr.alias);
 
                 //The user should only be able to make changes in the fields when edit mode is started. This way it's easier to make sure nothing goes wrong.
-                attrText.setDisable(true);
+                attrText.setEditable(false);
                 attrNameText.setDisable(true);
 
                 subContainer.getChildren().addAll(List.of(attrNameText, attrText));
@@ -144,14 +147,14 @@ public class ProductGUI {
 
     private void unlockAll(){
         //This unlocks all the text fields that are editable. Meaning the user can change their values now.
-        for(Text t : editables){
-            t.setDisable(false);
+        for(TextField t : editables){
+            t.setEditable(true);
         }
     }
     private void lockAll(){
         //This locks all the text fields that are editable. Meaning the user cannot make changes in their values.
-        for(Text t : editables){
-            t.setDisable(true);
+        for(TextField t : editables){
+            t.setEditable(false);
         }
     }
 
