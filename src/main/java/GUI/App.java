@@ -53,7 +53,7 @@ public class App extends Application {
 
         for(Product p : products){
             //vbox.getChildren().add(
-            //        new ProductButton(p)
+            //        new ProductButton(p, prodGUIManager)
             //);
         }
 
