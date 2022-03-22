@@ -27,6 +27,7 @@ public class ProductManager implements IProductManager, Runnable{
         updatedProductArray = null;
 
         backgroundThread = new Thread(this);
+        backgroundThread.setPriority(Thread.MIN_PRIORITY);
         backgroundThread.start();
 
         lastCall = System.currentTimeMillis();

@@ -90,28 +90,32 @@ public class ProductGUI {
 
         ArrayList<TextField> output = new ArrayList<>();
         //This makes the IN_STOCK display correctly for GUI purposes. It shouldn't change anything anywhere else. But for good measure this change is reverted later
-        product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll(",","\n"));
+        //product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll(",","\n"));
 
         //Generates a table of Hboxes in VBoxes of all product attributes, however, ignore the first since that is the UUID which must not be changed
         for(ProductAttribute pattr : ProductAttribute.values()){
 
-                HBox subContainer = new HBox();
-                subContainer.setPrefWidth(App.dim.getX() * 0.85);
-                subContainer.setPrefWidth(App.dim.getY() * 0.95);
+            HBox subContainer = new HBox();
+            subContainer.setPrefWidth(App.dim.getX() * 0.85);
+            subContainer.setPrefWidth(App.dim.getY() * 0.95);
 
-                TextField attrText = new TextField(product.get(pattr));
-                TextField attrNameText = new TextField(pattr.alias);
+            TextField attrText = new TextField(product.get(pattr));
+            attrText.setPrefWidth(subContainer.getPrefWidth() * 0.8);
+            attrText.setPrefHeight(subContainer.getPrefHeight() * (1.00 / ProductAttribute.values().length));
 
-                //The user should only be able to make changes in the fields when edit mode is started. This way it's easier to make sure nothing goes wrong.
-                attrText.setEditable(false);
-                attrNameText.setDisable(true);
+            TextField attrNameText = new TextField(pattr.alias);
+            attrNameText.setPrefWidth(subContainer.getPrefWidth() * 0.2);
 
-                subContainer.getChildren().addAll(List.of(attrNameText, attrText));
+            //The user should only be able to make changes in the fields when edit mode is started. This way it's easier to make sure nothing goes wrong.
+            attrText.setEditable(false);
+            attrNameText.setEditable(false);
 
-                subContainers.add(subContainer);
+            subContainer.getChildren().addAll(List.of(attrNameText, attrText));
 
-                textPattrMap.put(attrText, pattr);
-                pattrTextMap.put(pattr, attrText);
+            subContainers.add(subContainer);
+
+            textPattrMap.put(attrText, pattr);
+            pattrTextMap.put(pattr, attrText);
 
             if(pattr != ProductAttribute.UUID) {
                 //The UUID shouldn't ever change. Thus it now can't.
