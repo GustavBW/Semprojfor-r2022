@@ -9,6 +9,6 @@ public class CreateNewProductButton extends FuncButton{
     @Override
     public void onClicked(){
         ProductGUI newProductGUI = new ProductGUI();
-
+        App.prodGUIManager.onGUIChange(newProductGUI);
     }
 }

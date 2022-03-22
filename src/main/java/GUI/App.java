@@ -41,7 +41,7 @@ public class App extends Application {
     private void addFuncButtons(Pane node) {
         HBox hbox = new HBox();
 
-
+        hbox.getChildren().add(new CreateNewProductButton().getButton());
         //Add all the FuncButtons here
 
 
