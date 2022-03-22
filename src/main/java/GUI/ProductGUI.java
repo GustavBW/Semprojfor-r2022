@@ -1,7 +1,9 @@
 package GUI;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,6 +28,7 @@ public class ProductGUI {
     private final Button editButton;    //Button to enter edit mode
     private final Button saveButton;    //Button to save changes and exit edit mode
     private final Button cancelButton;  //Button to exit edit mode.
+    private static final Point2D cDim = new Point2D(App.dim.getX() * 0.85, App.dim.getY() * 0.95);
 
     public ProductGUI(Product product){
         this.product = product;
@@ -83,8 +86,11 @@ public class ProductGUI {
         subContainers.clear();
 
         //Title text
-        Text titleText = new Text(product.get(ProductAttribute.NAME));
+        TextArea titleText = new TextArea(product.get(ProductAttribute.NAME));
         titleText.setDisable(true);
+        titleText.setPrefWidth(cDim.getX());
+        titleText.setPrefHeight(cDim.getY() * 0.1);
+
         HBox topBox = new HBox(titleText,editButton, saveButton, cancelButton);
         container.getChildren().add(topBox);
 
@@ -96,8 +102,8 @@ public class ProductGUI {
         for(ProductAttribute pattr : ProductAttribute.values()){
 
             HBox subContainer = new HBox();
-            subContainer.setPrefWidth(App.dim.getX() * 0.85);
-            subContainer.setPrefWidth(App.dim.getY() * 0.95);
+            subContainer.setPrefWidth(cDim.getX());
+            subContainer.setPrefWidth(cDim.getY());
 
             TextField attrText = new TextField(product.get(pattr));
             attrText.setPrefWidth(subContainer.getPrefWidth() * 0.8);
