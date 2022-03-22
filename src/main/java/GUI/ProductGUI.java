@@ -51,6 +51,7 @@ public class ProductGUI {
     private ArrayList<Text> generateGUI(){
         //Resetting the container
         container.getChildren().clear();
+        subContainers.clear();
 
         //Title text
         Text titleText = new Text(product.get(ProductAttribute.NAME));
