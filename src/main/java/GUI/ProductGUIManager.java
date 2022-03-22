@@ -17,7 +17,7 @@ public class ProductGUIManager {
     }
     
     public void onGUIChange(ProductGUI pGUI){
-        if (currentGUI.isInEditMode()){
+        if (currentGUI != null && currentGUI.isInEditMode()){
             //https://stackoverflow.com/questions/8309981/how-to-create-and-show-common-dialog-error-warning-confirmation-in-javafx-2
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have unsaved changes!\nDo you want to save your changes?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.showAndWait();
