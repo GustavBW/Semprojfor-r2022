@@ -14,9 +14,7 @@ public abstract class FuncButton {
         button.setOnMouseClicked(e -> onClicked());
     }
 
-    public void onClicked(){
-
-    }
+    public abstract void onClicked();
 
     public Button getButton(){
         return button;
