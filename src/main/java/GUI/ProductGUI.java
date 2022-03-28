@@ -1,12 +1,16 @@
 package GUI;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import productmanager.Product;
 import productmanager.ProductAttribute;
@@ -20,10 +24,10 @@ public class ProductGUI {
     private Product product;    //The Product displayed through this GUI
     private boolean isInEditMode = false; //Boolean tracking if the GUI is in edit mode
     private boolean creatingNotEditing = false; //Boolean tracking whether to update an existing product or make a make a new one for Saving (.saveChanges())
-    private final List<TextField> editables; //Attributes of the Product that the user can edit.
+    private final List<TextArea> editables; //Attributes of the Product that the user can edit.
     private final List<HBox> subContainers; //Pairs of an attribute name (Text obj) and the attribute value (Text obj)
-    private final HashMap<TextField, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
-    private final HashMap<ProductAttribute, TextField> pattrTextMap; //A way to get a text field using a ProductAttribute
+    private final HashMap<TextArea, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
+    private final HashMap<ProductAttribute, TextArea> pattrTextMap; //A way to get a text field using a ProductAttribute
     private final VBox container;   //The entire page is one large container. Might be changed to something else later, but this is the entire UI.
     private final Button editButton;    //Button to enter edit mode
     private final Button saveButton;    //Button to save changes and exit edit mode
@@ -44,11 +48,12 @@ public class ProductGUI {
         generateGUI();
 
         editButton.setOnMouseClicked(e -> startEditMode());
+        editButton.setPrefWidth(cDim.getX() / 3.0);
         saveButton.setDisable(true);
-        saveButton.setVisible(false);
+        saveButton.setPrefWidth(cDim.getX() / 3.0);
         saveButton.setOnMouseClicked(e -> saveChanges());
-        cancelButton.setVisible(false);
         cancelButton.setDisable(true);
+        cancelButton.setPrefWidth(cDim.getX() / 3.0);
         cancelButton.setOnMouseClicked(e -> cancelEditMode());
 
     }
@@ -68,8 +73,8 @@ public class ProductGUI {
         blankProduct.set(ProductAttribute.IN_STOCK, "e.g. København,Hørsholm,Vejle...");
         blankProduct.set(ProductAttribute.EAN, "e.g. 1122334455667");
         blankProduct.set(ProductAttribute.PRICE, "e.g. 1875.95");
-        blankProduct.set(ProductAttribute.PUBLISHED_DATE, "dd/mm/yyyy");
-        blankProduct.set(ProductAttribute.EXPIRATION_DATE, "dd/mm/yyyy");
+        blankProduct.set(ProductAttribute.PUBLISHED_DATE, "yyyy-mm-dd");
+        blankProduct.set(ProductAttribute.EXPIRATION_DATE, "yyyy-mm-dd");
         blankProduct.set(ProductAttribute.CATEGORY, "e.g. 'Laptops'");
         blankProduct.set(ProductAttribute.NAME, "");
         blankProduct.set(ProductAttribute.DESCRIPTION, "");
@@ -80,21 +85,26 @@ public class ProductGUI {
         return blankProduct;
     }
 
-    private ArrayList<TextField> generateGUI(){
+    private List<TextArea> generateGUI(){
         //Resetting the container
         container.getChildren().clear();
         subContainers.clear();
 
         //Title text
         TextArea titleText = new TextArea(product.get(ProductAttribute.NAME));
-        titleText.setDisable(true);
+        titleText.setEditable(false);
+        titleText.setWrapText(true);
+
+        titleText.setFont(Font.font("Verdana",20));
         titleText.setPrefWidth(cDim.getX());
-        titleText.setPrefHeight(cDim.getY() * 0.1);
+        titleText.setPrefHeight(cDim.getY() * 0.015);
 
-        HBox topBox = new HBox(titleText,editButton, saveButton, cancelButton);
+        HBox topBox = new HBox(titleText);
         container.getChildren().add(topBox);
+        HBox subTopBox = new HBox(editButton, saveButton, cancelButton);
+        container.getChildren().add(subTopBox);
 
-        ArrayList<TextField> output = new ArrayList<>();
+        List<TextArea> output = new ArrayList<>();
         //This makes the IN_STOCK display correctly for GUI purposes. It shouldn't change anything anywhere else. But for good measure this change is reverted later
         //product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll(",","\n"));
 
@@ -103,11 +113,12 @@ public class ProductGUI {
 
             HBox subContainer = new HBox();
             subContainer.setPrefWidth(cDim.getX());
-            subContainer.setPrefWidth(cDim.getY());
+            subContainer.setPrefHeight((cDim.getY() - (topBox.getPrefHeight() + subTopBox.getPrefHeight())) * (1.00 / (ProductAttribute.values().length + 2)));
 
-            TextField attrText = new TextField(product.get(pattr));
+            TextArea attrText = new TextArea(product.get(pattr));
             attrText.setPrefWidth(subContainer.getPrefWidth() * 0.8);
-            attrText.setPrefHeight(subContainer.getPrefHeight() * (1.00 / ProductAttribute.values().length));
+            attrText.setPrefHeight(subContainer.getPrefHeight());
+            attrText.setWrapText(true);
 
             TextField attrNameText = new TextField(pattr.alias);
             attrNameText.setPrefWidth(subContainer.getPrefWidth() * 0.2);
@@ -123,10 +134,9 @@ public class ProductGUI {
             textPattrMap.put(attrText, pattr);
             pattrTextMap.put(pattr, attrText);
 
-            if(pattr != ProductAttribute.UUID) {
-                //The UUID shouldn't ever change. Thus it now can't.
-                output.add(attrText);
-            }
+
+            output.add(attrText);
+
         }
 
         product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll("\n",","));
@@ -136,7 +146,8 @@ public class ProductGUI {
     }
 
     public Node getGUI(){
-        return container;
+        ScrollPane asScrollPane = new ScrollPane(container);
+        return asScrollPane;
     }
 
     public boolean startEditMode(){
@@ -146,24 +157,21 @@ public class ProductGUI {
         unlockAll();
 
         editButton.setDisable(true);
-        editButton.setVisible(false);
         saveButton.setDisable(false);
-        saveButton.setVisible(true);
         cancelButton.setDisable(false);
-        cancelButton.setVisible(true);
 
         return isInEditMode;
     }
 
     private void unlockAll(){
         //This unlocks all the text fields that are editable. Meaning the user can change their values now.
-        for(TextField t : editables){
+        for(TextArea t : editables){
             t.setEditable(true);
         }
     }
     private void lockAll(){
         //This locks all the text fields that are editable. Meaning the user cannot make changes in their values.
-        for(TextField t : editables){
+        for(TextArea t : editables){
             t.setEditable(false);
         }
     }
@@ -176,10 +184,7 @@ public class ProductGUI {
         lockAll();
 
         editButton.setDisable(false);
-        editButton.setVisible(true);
         saveButton.setDisable(true);
-        saveButton.setVisible(false);
-        cancelButton.setVisible(false);
         cancelButton.setDisable(true);
 
         //Step 1: Read all information in the text fields and make a new product from this.
@@ -205,10 +210,7 @@ public class ProductGUI {
         lockAll();
 
         editButton.setDisable(false);
-        editButton.setVisible(true);
         saveButton.setDisable(true);
-        saveButton.setVisible(false);
-        cancelButton.setVisible(false);
         cancelButton.setDisable(true);
 
         generateGUI();

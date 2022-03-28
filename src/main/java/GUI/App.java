@@ -37,8 +37,6 @@ public class App extends Application implements Initializable
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIapplication.fxml"));
 
-
-
         Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setTitle("PIM-1 GUI");
         stage.setScene(scene);
