@@ -46,22 +46,28 @@ public class ProductGUI {
         this.cancelButton = new Button("Cancel");
 
         generateGUI();
-
-        editButton.setOnMouseClicked(e -> startEditMode());
-        editButton.setPrefWidth(cDim.getX() / 3.0);
-        saveButton.setDisable(true);
-        saveButton.setPrefWidth(cDim.getX() / 3.0);
-        saveButton.setOnMouseClicked(e -> saveChanges());
-        cancelButton.setDisable(true);
-        cancelButton.setPrefWidth(cDim.getX() / 3.0);
-        cancelButton.setOnMouseClicked(e -> cancelEditMode());
-
+        setButtons();
     }
+
+
 
     public ProductGUI(){
         this(getBlankProduct());
         creatingNotEditing = true;
         startEditMode();
+    }
+    private void setButtons(){
+        editButton.setOnMouseClicked(e -> startEditMode());
+        editButton.setPrefWidth(cDim.getX() / 3.0);
+        saveButton.setDisable(true);
+        saveButton.setPrefWidth(cDim.getX() / 3.0);
+        saveButton.setOnMouseClicked(e -> saveChanges());
+        saveButton.setStyle("-fx-background-color:#59c26f");
+        saveButton.setFont(Font.font("40"));
+        cancelButton.setDisable(true);
+        cancelButton.setPrefWidth(cDim.getX() / 3.0);
+        cancelButton.setOnMouseClicked(e -> cancelEditMode());
+        cancelButton.setStyle("-fx-background-color:#d76868");
     }
 
     private static Product getBlankProduct() {
