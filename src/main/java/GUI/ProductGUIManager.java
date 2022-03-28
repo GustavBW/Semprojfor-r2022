@@ -17,7 +17,12 @@ public class ProductGUIManager {
     }
     
     public void onGUIChange(ProductGUI pGUI){
-        if (currentGUI != null && currentGUI.isInEditMode()){
+        //If the new product is the same as the one being shown we don't need to change anything
+        if (pGUI == currentGUI) {
+            return;
+        }
+        
+        if (currentGUI != null && currentGUI.isInEditMode()) {
             //https://stackoverflow.com/questions/8309981/how-to-create-and-show-common-dialog-error-warning-confirmation-in-javafx-2
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "You have unsaved changes!\nDo you want to save your changes?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
             alert.initModality(Modality.WINDOW_MODAL);
