@@ -1,17 +1,11 @@
 package GUI;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import productmanager.Product;
 import productmanager.ProductAttribute;
@@ -162,7 +156,7 @@ public class ProductGUI {
     }
 
     public boolean deleteProduct(){
-
+        //https://stackoverflow.com/questions/8309981/how-to-create-and-show-common-dialog-error-warning-confirmation-in-javafx-2
         //Here we create a popup dialog designed for alerting the user. We add a custom array of buttons to give the user more options
         Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete this entry? \n It will be gone forever. \n (a very long time)", ButtonType.YES, ButtonType.NO);
         //I am not certain what this does
@@ -174,6 +168,7 @@ public class ProductGUI {
         //Check the result from the user
         if (result.get() == ButtonType.YES) {
             App.productManager.remove(product.get(ProductAttribute.UUID));
+            App.prodGUIManager.clearGUI();
         } else {
             return false;
         }

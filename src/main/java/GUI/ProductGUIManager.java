@@ -46,4 +46,8 @@ public class ProductGUIManager {
         hostPane.getChildren().add(pGUI.getGUI()); //Add the new product
         currentGUI = pGUI; //Save the new gui for later reference
     }
+    
+    public void clearGUI(){
+        hostPane.getChildren().clear(); //Remove current product
+    }
 }
