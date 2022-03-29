@@ -110,13 +110,8 @@ public class JSONReader {
     private void setProductAttribute(String line, Product p){
 
         String propertyName = getPropertyName(line);
+        p.set(ProductAttribute.fromString(propertyName), getPropertyValue(line));
 
-        for(ProductAttribute pA : ProductAttribute.values()){
-            if(pA.alias.equalsIgnoreCase(propertyName)){
-                p.set(pA, getPropertyValue(line));
-                break;
-            }
-        }
     }
 
     public boolean write(ArrayList<Product> list, String filepath) throws IOException{

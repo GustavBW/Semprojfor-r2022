@@ -22,4 +22,16 @@ public enum ProductAttribute {
     ProductAttribute(String alias){
         this.alias = alias;
     }
+
+    public static ProductAttribute fromString(String s){
+        ProductAttribute output = null;
+
+        for(ProductAttribute pAttr : ProductAttribute.values()){
+            if(s.equalsIgnoreCase(pAttr.alias)){
+                return pAttr;
+            }
+        }
+
+        return null;
+    }
 }
