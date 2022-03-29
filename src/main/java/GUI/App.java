@@ -17,11 +17,11 @@ import productmanager.ProductManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class App extends Application implements Initializable
 {
-
     @FXML
     private HBox btnHbox;
     @FXML
@@ -55,7 +55,11 @@ public class App extends Application implements Initializable
     }
 
     private void addFuncButtons() {
-        btnHbox.getChildren().add(new CreateNewProductButton().getButton());
+        btnHbox.getChildren().addAll(List.of(
+                new ReloadGUIButton(this).getButton(),
+                new CreateNewProductButton().getButton()
+
+        ));
         //Add all the FuncButtons here
     }
 
@@ -66,50 +70,10 @@ public class App extends Application implements Initializable
         addFuncButtons();
     }
 
-    //Comment-out above code (and remove "Initializable" interface for functioning original below
-
-
-        /*Pane mainPane = new Pane();
-        Pane prodGUIPane = new Pane();
-        prodGUIManager = new ProductGUIManager(prodGUIPane);
-
-        mainPane.getChildren().add(prodGUIPane);
-        Scene scene = new Scene(mainPane, dim.getX(),dim.getY());
-
-        stage.setScene(scene);
-        stage.setTitle("PIM-1 GUI");
-        stage.show();
-        stage.requestFocus();
-        stage.setOnCloseRequest(e -> stop());
-
-        addProductButtons(mainPane);
-        addFuncButtons(mainPane);
+    public void reloadProductButtons(){
+        btnVbox.getChildren().clear();
+        addProductButtons();
     }
-
-    private void addFuncButtons(Pane node) {
-        HBox hbox = new HBox();
-
-        hbox.getChildren().add(new CreateNewProductButton().getButton());
-        //Add all the FuncButtons here
-
-
-        node.getChildren().add(hbox);
-    }
-
-    private void addProductButtons(Pane node) {
-        VBox vbox = new VBox();
-        ArrayList<Product> products = productManager.getAllProducts();
-
-        for(Product p : products){
-            ProductButton pB = new ProductButton(p, prodGUIManager);
-            vbox.getChildren().add(pB.getButton());
-        }
-
-        node.getChildren().add(vbox);
-    }
-
-         */
-
 
     public synchronized void stop(){
         System.exit(69);

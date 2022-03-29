@@ -49,13 +49,12 @@ public class ProductGUI {
         setButtons();
     }
 
-
-
     public ProductGUI(){
         this(getBlankProduct());
         creatingNotEditing = true;
         startEditMode();
     }
+
     private void setButtons(){
         editButton.setOnMouseClicked(e -> startEditMode());
         editButton.setPrefWidth(cDim.getX() / 3.0);
