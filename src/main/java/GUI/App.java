@@ -39,6 +39,7 @@ public class App extends Application implements Initializable
 
         Scene scene = new Scene(loader.load(), 1280, 720);
         stage.setTitle("PIM-1 GUI");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
@@ -63,7 +64,6 @@ public class App extends Application implements Initializable
         prodGUIManager = new ProductGUIManager(productPane);
         addProductButtons();
         addFuncButtons();
-
     }
 
     //Comment-out above code (and remove "Initializable" interface for functioning original below
