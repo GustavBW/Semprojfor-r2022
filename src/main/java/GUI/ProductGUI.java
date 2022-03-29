@@ -12,12 +12,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import productmanager.Product;
 import productmanager.ProductAttribute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductGUI {
 
@@ -32,6 +34,7 @@ public class ProductGUI {
     private final Button editButton;    //Button to enter edit mode
     private final Button saveButton;    //Button to save changes and exit edit mode
     private final Button cancelButton;  //Button to exit edit mode.
+    private final Button deleteButton;
     private static final Point2D cDim = new Point2D(App.dim.getX() * 0.85, App.dim.getY() * 0.95);
 
     public ProductGUI(Product product){
@@ -44,6 +47,7 @@ public class ProductGUI {
         this.editButton = new Button("Edit");
         this.saveButton = new Button("Save");
         this.cancelButton = new Button("Cancel");
+        this.deleteButton = new Button("Delete");
 
         generateGUI();
         setButtons();
@@ -57,14 +61,16 @@ public class ProductGUI {
 
     private void setButtons(){
         editButton.setOnMouseClicked(e -> startEditMode());
-        editButton.setPrefWidth(cDim.getX() / 3.0);
+        editButton.setPrefWidth(cDim.getX() / 4.0);
+        deleteButton.setOnMouseClicked(e -> deleteProduct());
+        deleteButton.setPrefWidth(cDim.getX() / 4.0);
         saveButton.setDisable(true);
-        saveButton.setPrefWidth(cDim.getX() / 3.0);
+        saveButton.setPrefWidth(cDim.getX() / 4.0);
         saveButton.setOnMouseClicked(e -> saveChanges());
         saveButton.setStyle("-fx-background-color:#59c26f");
         saveButton.setFont(Font.font("40"));
         cancelButton.setDisable(true);
-        cancelButton.setPrefWidth(cDim.getX() / 3.0);
+        cancelButton.setPrefWidth(cDim.getX() / 4.0);
         cancelButton.setOnMouseClicked(e -> cancelEditMode());
         cancelButton.setStyle("-fx-background-color:#d76868");
     }
@@ -106,7 +112,7 @@ public class ProductGUI {
 
         HBox topBox = new HBox(titleText);
         container.getChildren().add(topBox);
-        HBox subTopBox = new HBox(editButton, saveButton, cancelButton);
+        HBox subTopBox = new HBox(editButton, saveButton, cancelButton,deleteButton);
         container.getChildren().add(subTopBox);
 
         List<TextArea> output = new ArrayList<>();
@@ -155,6 +161,26 @@ public class ProductGUI {
         return asScrollPane;
     }
 
+    public boolean deleteProduct(){
+
+        //Here we create a popup dialog designed for alerting the user. We add a custom array of buttons to give the user more options
+        Alert alert = new Alert(Alert.AlertType.WARNING, "Are you sure you want to delete this entry? \n It will be gone forever. \n (a very long time)", ButtonType.YES, ButtonType.NO);
+        //I am not certain what this does
+        alert.initModality(Modality.WINDOW_MODAL);
+        alert.initOwner(App.getMainScene().getWindow());
+        //Shows the popup dialog and pauses the program until an answer is given
+        Optional<ButtonType> result = alert.showAndWait();
+
+        //Check the result from the user
+        if (result.get() == ButtonType.YES) {
+            App.productManager.remove(product.get(ProductAttribute.UUID));
+        } else {
+            return false;
+        }
+
+        return true;
+    }
+
     public boolean startEditMode(){
         System.out.println("Editing Product " + product.get(ProductAttribute.UUID));
         isInEditMode = true;
@@ -162,6 +188,7 @@ public class ProductGUI {
         unlockAll();
 
         editButton.setDisable(true);
+        deleteButton.setDisable(true);
         saveButton.setDisable(false);
         cancelButton.setDisable(false);
 
@@ -189,6 +216,7 @@ public class ProductGUI {
         lockAll();
 
         editButton.setDisable(false);
+        deleteButton.setDisable(false);
         saveButton.setDisable(true);
         cancelButton.setDisable(true);
 
@@ -215,6 +243,7 @@ public class ProductGUI {
         lockAll();
 
         editButton.setDisable(false);
+        deleteButton.setDisable(false);
         saveButton.setDisable(true);
         cancelButton.setDisable(true);
 

@@ -710,24 +710,4 @@
 	"size": "unavailable",
 	"clockSpeed": "3.0"
 },
-{
-	"id": "e.g. ea6954c2-64ec-4a65-b1a5-d614907e8b65",
-	"pId": "e.g. 25",
-	"averageUserReview": "e.g. 4.523",
-	"inStock": [
-		"e.g. København",
-		"Hørsholm",
-		"Vejle..."
-	],
-	"ean": "e.g. 1122334455667",
-	"price": "e.g. 1875.95",
-	"publishedDate": "yyyy-mm-dd",
-	"expirationDate": "yyyy-mm-dd",
-	"category": "e.g. 'Laptops'",
-	"name": "",
-	"description": "",
-	"weight": "in KG",
-	"size": "e.g. length by width by height",
-	"clockSpeed": "e.g. 4.5GHz"
-},
 ]

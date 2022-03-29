@@ -30,6 +30,8 @@ public class App extends Application implements Initializable
     private Pane productPane;
 
     public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
+    private static Scene mainScene;
+    private static Stage mainStage;
     public static Point2D dim = new Point2D(1280,720);
     public static ProductGUIManager prodGUIManager;
 
@@ -37,11 +39,12 @@ public class App extends Application implements Initializable
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIapplication.fxml"));
 
-        Scene scene = new Scene(loader.load(), 1280, 720);
-        stage.setTitle("PIM-1 GUI");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
+        Scene mainScene = new Scene(loader.load(), 1280, 720);
+        mainStage = stage;
+        mainStage.setTitle("PIM-1 GUI");
+        mainStage.setResizable(false);
+        mainStage.setScene(mainScene);
+        mainStage.show();
 
     }
 
@@ -83,5 +86,8 @@ public class App extends Application implements Initializable
         launch();
     }
 
+    public static Scene getMainScene(){
+        return mainScene == null ? mainStage.getScene() : mainScene;
+    }
 
 }
