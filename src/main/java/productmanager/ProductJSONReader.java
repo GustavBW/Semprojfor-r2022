@@ -118,8 +118,10 @@ public class ProductJSONReader {
             throw new NullPointerException("Invalid List to write to file");
         }
 
+        long timeA = System.nanoTime();
         boolean success = false;
         int productNumber = 0;
+        String propertyValue;
         StringBuilder builder = new StringBuilder();
 
         try{
@@ -155,6 +157,7 @@ public class ProductJSONReader {
 
     private int addProductToBuilder(int productNumber, StringBuilder builder, Product p, boolean isLast) {
 
+        String propertyValue;
         ArrayList<String> inStockArray = new ArrayList<>();
 
         for(ProductAttribute pAttr : ProductAttribute.values()){    //Go through all known attributes

@@ -13,7 +13,6 @@ public class ProductManager implements IProductManager, Runnable{
     private boolean backgroundThreadIsRunning = false;
     private final Thread backgroundThread;
     private boolean runBackgroundUpdates = true;
-    private long lastCall;
 
     private int updateInterval;    //Minutes
     private final String config = "resources/config.txt";
@@ -30,7 +29,6 @@ public class ProductManager implements IProductManager, Runnable{
         backgroundThread.setPriority(Thread.MIN_PRIORITY);
         backgroundThread.start();
 
-        lastCall = System.currentTimeMillis();
         updateInterval = readConfig();
     }
     
@@ -38,9 +36,6 @@ public class ProductManager implements IProductManager, Runnable{
         this("resources/products.json");
     }
 
-    public static void main(String[] args) {
-        new ProductManager();
-    }
 
     @Override
     public boolean create(Product p) {
@@ -236,7 +231,6 @@ public class ProductManager implements IProductManager, Runnable{
                 e.printStackTrace();
             }
 
-            lastCall = System.currentTimeMillis();
             backgroundUpdate();
         }
     }
