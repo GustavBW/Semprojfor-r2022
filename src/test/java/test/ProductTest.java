@@ -1,10 +1,10 @@
 package test;
 
-import org.junit.jupiter.api.*;
 import productmanager.ProductJSONReader;
 import productmanager.Product;
 import productmanager.ProductAttribute;
 
+import org.junit.jupiter.api.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

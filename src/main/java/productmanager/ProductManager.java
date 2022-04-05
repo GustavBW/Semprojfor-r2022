@@ -14,7 +14,7 @@ public class ProductManager implements IProductManager, Runnable{
     private final Thread backgroundThread;
     private boolean runBackgroundUpdates = true;
 
-    private int updateInterval;    //Minutes
+    private int updateInterval;    //Measured in minutes
     private final String config = "resources/config.txt";
 
     public ProductManager(String sourcePath){
@@ -32,10 +32,10 @@ public class ProductManager implements IProductManager, Runnable{
         updateInterval = readConfig();
     }
     
+    ///Default File Path
     public ProductManager(){
         this("resources/products.json");
     }
-
 
     @Override
     public boolean create(Product p) {

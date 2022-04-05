@@ -1,5 +1,6 @@
 package test;
 
+import org.junit.jupiter.api.Test;
 import productmanager.ProductJSONReader;
 import productmanager.Product;
 
@@ -10,15 +11,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JSONReaderTest {
-
     private static ProductJSONReader reader = new ProductJSONReader("resources/products.json");
 
-    public void runAllTests(){
-        read();
-        write();
-    }
-
-    @org.junit.jupiter.api.Test
+    @Test
     void read() {
 
         ArrayList<Product> products = null;
@@ -35,11 +30,11 @@ class JSONReaderTest {
 
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testRead() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void write() {
         try {
             assertTrue(reader.write(reader.read()));                                //Does it succeed?
@@ -49,7 +44,7 @@ class JSONReaderTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void testWrite() {
     }
 }

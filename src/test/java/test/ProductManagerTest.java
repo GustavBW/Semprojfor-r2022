@@ -1,14 +1,15 @@
 package test;
 
-import org.junit.jupiter.api.*;
 import productmanager.Product;
 import productmanager.ProductAttribute;
 import productmanager.ProductManager;
-import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ProductManagerTest {
     
