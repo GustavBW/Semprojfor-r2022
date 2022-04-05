@@ -1,5 +1,7 @@
 package productmanager;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,20 +14,18 @@ public class Product { //initialize class
         productAttributes = new HashMap<>(); //initialize hashmap
     }
 
-    public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
-        return productAttributes.get(pA); //returns hashmap of pA's
+    public @Nullable String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
+        return productAttributes.get(pA).isEmpty() ? null : productAttributes.get(pA); //returns hashmap of pA's
     }
 
     public double getAsNumeric(ProductAttribute pA){
+        /*if (get(pA).isEmpty()){
+            throw new NullPointerException("No value for " + pA.alias);
+        }*/
         String pAttr = get(pA).replaceAll("\"","");
         double result;
-        try{
-            result = Double.parseDouble(pAttr);
-        }catch (NumberFormatException e){
-            return 0.00D;
-        }catch (NullPointerException e){
-            return 0.00D;
-        }
+        result = Double.parseDouble(pAttr);
+        
         return result;
     }
 
@@ -34,7 +34,11 @@ public class Product { //initialize class
     } //returns an arraylist of the available shops
 
     public boolean set(ProductAttribute pA, String value){
-
+        if (value.isEmpty()){
+            productAttributes.put(pA, null);
+            return productAttributes.get(pA) == null;
+        }
+        
         if(value.endsWith("\"")){
             value = value.substring(0,value.length() - 1); //?
         }

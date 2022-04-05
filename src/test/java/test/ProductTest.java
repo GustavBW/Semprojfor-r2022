@@ -34,7 +34,7 @@ class ProductTest {
         }
 
         for (Product p : productTestList) { //running through test list
-            int i = 0; //int for counting unavailable attributes
+            int i = 0; //int for counting null attributes
             p.print();
 
             for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
@@ -47,12 +47,6 @@ class ProductTest {
             assertFalse(i>2);
         }
         assertFalse(productTestList.isEmpty());
-
-        for(Product p : productTestList) {
-            for (ProductAttribute pattr : ProductAttribute.values()) {   //Has all attributes been assigned correctly?
-                assertNotNull(p.get(pattr));
-            }
-        }
 
         String currentUUIDInspected;
         for(Product p : productTestList){
@@ -71,15 +65,16 @@ class ProductTest {
             e.printStackTrace();
         }
 
-        for (ProductAttribute pA : ProductAttribute.values()) {
+        Product product = productTestList.get(0);
+        assertThrows(NumberFormatException.class, () -> product.getAsNumeric(ProductAttribute.NAME));
+        assertThrows(NullPointerException.class, () -> product.getAsNumeric(ProductAttribute.SIZE));
+        
+        /*for (ProductAttribute pA : ProductAttribute.values()) {
             for(Product p : productTestList) {
-
-                assertNotEquals(p.getAsNumeric(pA), null);
-                assertTrue(p.getAsNumeric(pA) >= 0);
-
+                assertThrows(NumberFormatException.class, () -> p.getAsNumeric(pA));
+                //assertNull(p.getAsNumeric(pA));
             }
-
-        }
+        }*/
 
     }
 

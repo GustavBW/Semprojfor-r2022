@@ -102,7 +102,11 @@ public class ProductJSONReader {
         int valueEnd = findLastOccurence(",",line);
         int valueStart = countOccurences(line, '"') < 4 ? line.indexOf(":") - 1 : line.indexOf(":");
 
-        return line.substring(valueStart + 3, valueEnd - 1);
+        String result = line.substring(valueStart + 3, valueEnd - 1);
+        if (result.isEmpty())
+            return null;
+        else
+            return result;
     }
 
     private void setProductAttribute(String line, Product p){

@@ -15,8 +15,8 @@
 	"name": "Lenovo ThinkPad T410 35.8 cm (14.1\")",
 	"description": "Lenovo ThinkPad T410, 35.8 cm (14.1\"), 1280 x 800 pixels Lenovo ThinkPad T410. Display diagonal: 35.8 cm (14.1\"), Display resolution: 1280 x 800 pixels",
 	"weight": "1",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "ea6954c2-64ec-4a65-b1a5-d614907e8b65",
@@ -39,8 +39,8 @@
 	"name": "Lenovo ThinkPad Tablet Folio Case - Hebrew keyboard",
 	"description": "Lenovo ThinkPad Tablet Keyboard Folio Case - Hebrew, 27.2 cm (10.7\"), 35 \u00b0C Lenovo ThinkPad Tablet Keyboard Folio Case - Hebrew. Height (imperial): 27.2 cm (10.7\"), Maximum operating temperature: 35 \u00b0C",
 	"weight": "4",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "73f5e31e-bcaa-4939-a4fd-4cded7ab9eb8",
@@ -68,8 +68,8 @@
 	"name": "Lenovo IdeaPad S300",
 	"description": "Lenovo IdeaPad S300 Lenovo IdeaPad S300",
 	"weight": "2",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "45d6065e-eb97-48ce-afb3-310bd698f0fb",
@@ -93,8 +93,8 @@
 	"name": "HP ProBook 445 G7 Notebook 35.6 cm (14\") Full HD AMD Ryzen 5 8 GB DDR4-SDRAM 512 GB SSD Wi-Fi 5 (802.11ac) Windows 10 Home Silver",
 	"description": "HP ProBook 445 G7, AMD Ryzen 5, 2.3 GHz, 35.6 cm (14\"), 1920 x 1080 pixels, 8 GB, 512 GB HP ProBook 445 G7. Product type: Notebook, Form factor: Clamshell. Processor family: AMD Ryzen 5, Processor model: 4500U, Processor frequency: 2.3 GHz. Display diagonal: 35.6 cm (14\"), HD type: Full HD, Display resolution: 1920 x 1080 pixels. Internal memory: 8 GB, Internal memory type: DDR4-SDRAM. Total storage capacity: 512 GB, Storage media: SSD. On-board graphics adapter model: AMD Radeon Graphics. Operating system installed: Windows 10 Home. Product colour: Silver",
 	"weight": "4",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "afd16cbd-5469-47e0-ba93-4a045a732a71",
@@ -120,8 +120,8 @@
 	"name": "HP Pavilion g6-1165sa Notebook 39.6 cm (15.6\") Intel\u00ae Pentium\u00ae 4 GB DDR3-SDRAM 750 GB HDD Windows 7 Home Premium Red",
 	"description": "HP Pavilion g6-1165sa, Intel\u00ae Pentium\u00ae, 2 GHz, 39.6 cm (15.6\"), 1366 x 768 pixels, 4 GB, 750 GB HP Pavilion g6-1165sa. Product type: Notebook, Form factor: Clamshell. Processor family: Intel\u00ae Pentium\u00ae, Processor model: B940, Processor frequency: 2 GHz. Display diagonal: 39.6 cm (15.6\"), Display resolution: 1366 x 768 pixels. Internal memory: 4 GB, Internal memory type: DDR3-SDRAM. Total storage capacity: 750 GB, Storage media: HDD, Optical drive type: DVD Super Multi DL. On-board graphics adapter model: Intel\u00ae HD Graphics. Operating system installed: Windows 7 Home Premium. Product colour: Red",
 	"weight": "6",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "04a0a803-911e-48b7-8c64-0ebf8ad448cf",
@@ -141,8 +141,8 @@
 	"name": "Sony SVF1521B1E",
 	"description": "Sony SVF1521B1E Sony SVF1521B1E",
 	"weight": "4",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "48c7ec0d-d9f5-4c9d-b36a-901c11a2adb9",
@@ -163,8 +163,8 @@
 	"name": "Acer Aspire One D150-1Bw Netbook 25.6 cm (10.1\") Intel Atom\u00ae 1 GB DDR2-SDRAM Windows XP Home Edition White",
 	"description": "Acer Aspire One D150-1Bw, Intel Atom\u00ae, 1.66 GHz, 25.6 cm (10.1\"), 1024 x 600 pixels, 1 GB, Windows XP Home Edition Acer Aspire One D150-1Bw. Product type: Netbook. Processor family: Intel Atom\u00ae, Processor model: N280, Processor frequency: 1.66 GHz. Display diagonal: 25.6 cm (10.1\"), Display resolution: 1024 x 600 pixels. Internal memory: 1 GB, Internal memory type: DDR2-SDRAM. Operating system installed: Windows XP Home Edition. Product colour: White. Weight: 1.33 kg",
 	"weight": "8",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "941884b6-76d4-48a7-9d52-06fc2fb61b4b",
@@ -190,8 +190,8 @@
 	"name": "Acer Aspire One AOD255E-13248 Netbook 25.6 cm (10.1\") Intel Atom\u00ae 1 GB DDR3-SDRAM 250 GB Windows 7 Starter Black",
 	"description": "Acer Aspire One AOD255E-13248, Intel Atom\u00ae, 1.66 GHz, 25.6 cm (10.1\"), 1024 x 600 pixels, 1 GB, 250 GB Acer Aspire One AOD255E-13248. Product type: Netbook. Processor family: Intel Atom\u00ae, Processor model: N455, Processor frequency: 1.66 GHz. Display diagonal: 25.6 cm (10.1\"), Display resolution: 1024 x 600 pixels. Internal memory: 1 GB, Internal memory type: DDR3-SDRAM. Total storage capacity: 250 GB. Operating system installed: Windows 7 Starter. Product colour: Black. Weight: 1.25 kg",
 	"weight": "6",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "1cc20f06-d890-496a-9991-91b452d22cb5",
@@ -216,8 +216,8 @@
 	"name": "Lenovo IdeaCentre K415",
 	"description": "Lenovo IdeaCentre K415 Lenovo IdeaCentre K415",
 	"weight": "30",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "a6381ade-870f-476d-98b1-79477abc15ae",
@@ -242,8 +242,8 @@
 	"name": "Acer Veriton S670G DDR3-SDRAM Q8400 SFF Intel\u00ae Core\u21222 Quad 4 GB 320 GB Windows 7 Professional PC",
 	"description": "Acer Veriton S670G, 2.66 GHz, Intel\u00ae Core\u21222 Quad, 4 GB, 320 GB, DVD\u00b1RW, Windows 7 Professional Acer Veriton S670G. Processor frequency: 2.66 GHz, Processor family: Intel\u00ae Core\u21222 Quad, Processor model: Q8400. Internal memory: 4 GB, Internal memory type: DDR3-SDRAM. Total storage capacity: 320 GB, Card reader integrated, Optical drive type: DVD\u00b1RW. Discrete graphics adapter model: Intel\u00ae GMA 4500M. Operating system installed: Windows 7 Professional. Power supply: 300 W. Chassis type: SFF. Product type: PC",
 	"weight": "25",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "72b6873e-3427-443d-ad79-8d4f8c5fedde",
@@ -263,8 +263,8 @@
 	"name": "Acer Aspire XC-704 DDR3L-SDRAM J3060 Intel\u00ae Celeron\u00ae 4 GB 500 GB HDD FreeDOS PC Black",
 	"description": "Acer Aspire XC-704, 1.6 GHz, Intel\u00ae Celeron\u00ae, 4 GB, 500 GB, DVD Super Multi, FreeDOS Acer Aspire XC-704. Processor frequency: 1.6 GHz, Processor family: Intel\u00ae Celeron\u00ae, Processor model: J3060. Internal memory: 4 GB, Internal memory type: DDR3L-SDRAM, Memory clock speed: 1600 MHz. Total storage capacity: 500 GB, Storage media: HDD, Card reader integrated, Optical drive type: DVD Super Multi. On-board graphics adapter model: Intel\u00ae HD Graphics 400. Operating system installed: FreeDOS. Power supply: 65 W. Product type: PC. Product colour: Black",
 	"weight": "20",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "c67cb89a-c0c6-4234-a211-96b3cc543945",
@@ -283,8 +283,8 @@
 	"name": "Acer Aspire C-120 DDR3-SDRAM A10-7800 AMD A10 16 GB 1128 GB HDD+SSD Windows 8.1 PC Black",
 	"description": "Acer Aspire C-120, 3.5 GHz, AMD A10, 16 GB, 1128 GB, DVD Super Multi, Windows 8.1 Acer Aspire C-120. Processor frequency: 3.5 GHz, Processor family: AMD A10, Processor model: A10-7800. Internal memory: 16 GB, Internal memory type: DDR3-SDRAM. Total storage capacity: 1128 GB, Storage media: HDD+SSD, Optical drive type: DVD Super Multi. Discrete graphics adapter model: AMD Radeon R7 240. Wi-Fi. Operating system installed: Windows 8.1, Operating system architecture: 64-bit. Power supply: 220 W. Product type: PC. Product colour: Black",
 	"weight": "26",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "3240d5f6-8c92-410f-a6d3-c6b7a1b71678",
@@ -315,8 +315,8 @@
 	"name": "HP Pavilion g6-1165sa Notebook 39.6 cm (15.6\") Intel\u00ae Pentium\u00ae 4 GB DDR3-SDRAM 750 GB HDD Windows 7 Home Premium Red",
 	"description": "HP Pavilion g6-1165sa, Intel\u00ae Pentium\u00ae, 2 GHz, 39.6 cm (15.6\"), 1366 x 768 pixels, 4 GB, 750 GB HP Pavilion g6-1165sa. Product type: Notebook, Form factor: Clamshell. Processor family: Intel\u00ae Pentium\u00ae, Processor model: B940, Processor frequency: 2 GHz. Display diagonal: 39.6 cm (15.6\"), Display resolution: 1366 x 768 pixels. Internal memory: 4 GB, Internal memory type: DDR3-SDRAM. Total storage capacity: 750 GB, Storage media: HDD, Optical drive type: DVD Super Multi DL. On-board graphics adapter model: Intel\u00ae HD Graphics. Operating system installed: Windows 7 Home Premium. Product colour: Red",
 	"weight": "5.1",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "c191c7a6-1d0e-4b5b-a080-3db6ef558937",
@@ -333,8 +333,8 @@
 	"name": "HP 27wm 68.6 cm (27\") 1920 x 1080 pixels Full HD LED Black",
 	"description": "HP 27wm, 68.6 cm (27\"), 1920 x 1080 pixels, Full HD, LED, 7 ms, Black HP 27wm. Display diagonal: 68.6 cm (27\"), Display resolution: 1920 x 1080 pixels, HD type: Full HD, Display technology: LED, Response time: 7 ms, Native aspect ratio: 16:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. Built-in speaker(s). VESA mounting. Product colour: Black",
 	"weight": "3.9",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "5de4f3b1-2c7f-4a8c-83f9-6ed927d619aa",
@@ -363,8 +363,8 @@
 	"name": "Samsung LC27FG73FQMXUF computer monitor 68.6 cm (27\") 1920 x 1080 pixels Full HD QLED Black, Blue",
 	"description": "Samsung LC27FG73FQMXUF, 68.6 cm (27\"), 1920 x 1080 pixels, Full HD, QLED, 1 ms, Black, Blue Samsung LC27FG73FQMXUF. Display diagonal: 68.6 cm (27\"), Display resolution: 1920 x 1080 pixels, HD type: Full HD, Display technology: QLED, Response time: 1 ms, Native aspect ratio: 16:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. VESA mounting, Height adjustment. Product colour: Black, Blue",
 	"weight": "4.9",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "67d7b470-eebe-4da9-8b9e-72b522a7accf",
@@ -383,8 +383,8 @@
 	"name": "Samsung LU32H850UMU computer monitor 80 cm (31.5\") 3840 x 2160 pixels 4K Ultra HD LED Black, Silver",
 	"description": "Samsung LU32H850UMU, 80 cm (31.5\"), 3840 x 2160 pixels, 4K Ultra HD, LED, 4 ms, Black, Silver Samsung LU32H850UMU. Display diagonal: 80 cm (31.5\"), Display resolution: 3840 x 2160 pixels, HD type: 4K Ultra HD, Display technology: LED. Display: LED. Response time: 4 ms, Native aspect ratio: 16:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. Built-in USB hub, USB hub version: 3.2 Gen 1 (3.1 Gen 1). VESA mounting, Height adjustment. Product colour: Black, Silver",
 	"weight": "6.9",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "aeae0025-a7a7-4a65-b0c9-a1b92c113bbc",
@@ -408,8 +408,8 @@
 	"name": "Acer EI491CR P 124.5 cm (49\") 3840 x 1080 pixels LED Black",
 	"description": "Acer EI491CR P, 124.5 cm (49\"), 3840 x 1080 pixels, LED, 4 ms, Black Acer EI491CR P. Display diagonal: 124.5 cm (49\"), Display resolution: 3840 x 1080 pixels, Display technology: LED, Response time: 4 ms, Native aspect ratio: 32:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. Built-in speaker(s). VESA mounting. Product colour: Black",
 	"weight": "5",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "f3d5118f-be71-44c0-bff8-71e924ee66f5",
@@ -430,8 +430,8 @@
 	"name": "DELL UltraSharp U2414H 60.5 cm (23.8\") 1920 x 1080 pixels Full HD LED Black",
 	"description": "DELL UltraSharp U2414H, 60.5 cm (23.8\"), 1920 x 1080 pixels, Full HD, LED, 8 ms, Black DELL UltraSharp U2414H. Display diagonal: 60.5 cm (23.8\"), Display resolution: 1920 x 1080 pixels, HD type: Full HD, Display technology: LED. Display: LED. Response time: 8 ms, Native aspect ratio: 16:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. USB hub version: 3.2 Gen 1 (3.1 Gen 1). VESA mounting. Product colour: Black",
 	"weight": "4.6",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "c11d8cb8-e07f-4fae-94b2-4944b30f93c6",
@@ -453,8 +453,8 @@
 	"name": "MSI Optix MAG272 68.6 cm (27\") 1920 x 1080 pixels Full HD Black",
 	"description": "MSI Optix MAG272, 68.6 cm (27\"), 1920 x 1080 pixels, Full HD, 1 ms, Black MSI Optix MAG272. Display diagonal: 68.6 cm (27\"), Display resolution: 1920 x 1080 pixels, HD type: Full HD, Display surface: Matt, Response time: 1 ms, Native aspect ratio: 16:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. Built-in USB hub, USB hub version: 2.0. VESA mounting. Product colour: Black",
 	"weight": "4.8",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "a5dcdfe2-3d64-4976-ae8c-a1068aa2665e",
@@ -471,8 +471,8 @@
 	"name": "MSI MPG341CQR 86.4 cm (34\") 3440 x 1440 pixels UltraWide Quad HD LCD Black",
 	"description": "MSI MPG341CQR, 86.4 cm (34\"), 3440 x 1440 pixels, UltraWide Quad HD, LCD, 1 ms, Black MSI MPG341CQR. Display diagonal: 86.4 cm (34\"), Display resolution: 3440 x 1440 pixels, HD type: UltraWide Quad HD, Display technology: LCD, Display surface: Matt, Response time: 1 ms, Native aspect ratio: 21:9, Viewing angle, horizontal: 178\u00b0, Viewing angle, vertical: 178\u00b0. Built-in USB hub, USB hub version: 3.2 Gen 1 (3.1 Gen 1). VESA mounting, Height adjustment. Product colour: Black",
 	"weight": "8.2",
-	"size": "unavailable",
-	"clockSpeed": "unavailable"
+	"size": "",
+	"clockSpeed": ""
 },
 {
 	"id": "1ed4a221-0434-4d0d-91c8-1c4089b65f77",
@@ -495,9 +495,9 @@
 	"category": "Components/Storage/Harddrives",
 	"name": "Lenovo FRU75Y5085 internal hard drive 320 GB",
 	"description": "Lenovo FRU75Y5085, 320 GB, 5400 RPM Lenovo FRU75Y5085. HDD capacity: 320 GB, HDD speed: 5400 RPM",
-	"weight": "unavailable",
+	"weight": "",
 	"size": "320gb",
-	"clockSpeed": "unavailable"
+	"clockSpeed": ""
 },
 {
 	"id": "4201c327-3c0f-43f9-9b46-8fb0ab5df761",
@@ -515,9 +515,9 @@
 	"category": "Components/Storage/Harddrives",
 	"name": "HP 600GB SAS 15K SFF Hard Drive",
 	"description": "HP 600GB SAS 15K SFF Hard Drive, 2.5\", 600 GB, 15000 RPM HP 600GB SAS 15K SFF Hard Drive. HDD size: 2.5\", HDD capacity: 600 GB, HDD speed: 15000 RPM",
-	"weight": "unavailable",
+	"weight": "",
 	"size": "600gb",
-	"clockSpeed": "unavailable"
+	"clockSpeed": ""
 },
 {
 	"id": "589347fc-07fe-4e1d-9f6c-1f99b1322a85",
@@ -547,9 +547,9 @@
 	"category": "Components/Storage/SSDs",
 	"name": "Lenovo 45N8296-RFB internal solid state drive 128 GB",
 	"description": "Lenovo 45N8296-RFB, 128 GB Lenovo 45N8296-RFB. SSD capacity: 128 GB",
-	"weight": "unavailable",
+	"weight": "",
 	"size": "128gb",
-	"clockSpeed": "unavailable"
+	"clockSpeed": ""
 },
 {
 	"id": "06d980d7-8645-4fba-b688-3c51dcfbf69d",
@@ -566,9 +566,9 @@
 	"category": "Components/Storage/SSDs",
 	"name": "HP Z Turbo Drive M.2 256 GB PCI Express 3.0 NVMe",
 	"description": "HP Z Turbo Drive, 256 GB, M.2 HP Z Turbo Drive. SSD capacity: 256 GB, SSD form factor: M.2, Component for: Server/workstation",
-	"weight": "unavailable",
+	"weight": "",
 	"size": "256gb",
-	"clockSpeed": "unavailable"
+	"clockSpeed": ""
 },
 {
 	"id": "ce8b01ec-1a52-415a-86a1-557d3f8f9a1e",
@@ -593,9 +593,9 @@
 	"category": "Components/Storage/SSDs",
 	"name": "HP 2JB96AA internal solid state drive 2.5\" 512 GB Serial ATA III TLC",
 	"description": "HP 2JB96AA, 512 GB, 2.5\", 530 MB/s, 6 Gbit/s HP 2JB96AA. SSD capacity: 512 GB, SSD form factor: 2.5\", Read speed: 530 MB/s, Write speed: 515 MB/s, Data transfer rate: 6 Gbit/s, Component for: Notebook",
-	"weight": "unavailable",
+	"weight": "",
 	"size": "512gb",
-	"clockSpeed": "unavailable"
+	"clockSpeed": ""
 },
 {
 	"id": "14a3a69e-72c8-4480-93e8-4074f660cccd",
@@ -621,8 +621,8 @@
 	"category": "Components/Processors",
 	"name": "Lenovo Xeon E5-2440 processor",
 	"description": "Lenovo Xeon E5-2440 Lenovo Xeon E5-2440",
-	"weight": "unavailable",
-	"size": "unavailable",
+	"weight": "",
+	"size": "",
 	"clockSpeed": "3.4"
 },
 {
@@ -654,8 +654,8 @@
 	"category": "Components/Processors",
 	"name": "Intel Xeon X3320 processor 2.5 GHz 6 MB L2",
 	"description": "Intel Xeon X3320, Intel\u00ae Xeon\u00ae, LGA 775 (Socket T), 45 nm, Intel, X3320, 2.5 GHz Intel Xeon X3320. Processor family: Intel\u00ae Xeon\u00ae, Processor socket: LGA 775 (Socket T), Processor lithography: 45 nm. Market segment: Server, Number of Processing Die Transistors: 456 M, Processing Die size: 164 mm\u00b2. Package type: Retail box. Images Type Map: <div><img src=\"https://ark.intel.com/inc/images/diagrams/diagram-5.gif\" title=\"Block Diagram\"...",
-	"weight": "unavailable",
-	"size": "unavailable",
+	"weight": "",
+	"size": "",
 	"clockSpeed": "2.5"
 },
 {
@@ -687,8 +687,8 @@
 	"category": "Components/Processors",
 	"name": "Intel Core 2 Duo E6600 2.4GHz processor 4 MB L2 Box",
 	"description": "Intel Core 2 Duo E6600 2.4GHz, Intel\u00ae Core\u21222 Duo, LGA 775 (Socket T), 65 nm, Intel, 2.4 GHz, 4 MB Intel Core 2 Duo E6600 2.4GHz. Processor family: Intel\u00ae Core\u21222 Duo, Processor socket: LGA 775 (Socket T), Processor lithography: 65 nm",
-	"weight": "unavailable",
-	"size": "unavailable",
+	"weight": "",
+	"size": "",
 	"clockSpeed": "2.4"
 },
 {
@@ -706,8 +706,8 @@
 	"category": "Components/Processors",
 	"name": "DELL Intel Xeon E5620 processor",
 	"description": "DELL Intel Xeon E5620, Intel\u00ae Xeon\u00ae 5000 Sequence, u, u, u, u, u DELL Intel Xeon E5620. Processor family: Intel\u00ae Xeon\u00ae 5000 Sequence. Intel Identity Protection Technology version: u, Intel Secure Boot Technology version: u, Intel Secure Key Technology version: u",
-	"weight": "unavailable",
-	"size": "unavailable",
+	"weight": "",
+	"size": "",
 	"clockSpeed": "3.0"
 }
 ]
