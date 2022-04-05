@@ -182,11 +182,10 @@ public class ProductJSONReader {
     }
 
     private void addPropertyToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd) {
-        String propertyValue;
-        if(!((propertyValue = p.get(pAttr)) == null || propertyValue.isEmpty())) {
-            //Getting the correct formatting: "<attr name>": "<attr value>", (Comma if it's not the last line in the product)
-            builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\"").append(lineEnd);
-        }
+        String propertyValue = p.get(pAttr) == null ? "" : p.get(pAttr);
+
+        //Getting the correct formatting: "<attr name>": "<attr value>", (Comma if it's not the last line in the product)
+        builder.append("\n").append("\t").append("\"").append(pAttr.alias).append("\":").append(" \"").append(propertyValue).append("\"").append(lineEnd);
     }
 
     private void addArrayToBuilder(StringBuilder builder, Product p, ProductAttribute pAttr, String lineEnd,ArrayList<String> inStockArray) {

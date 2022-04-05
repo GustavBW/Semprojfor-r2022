@@ -4,6 +4,7 @@
 	"pId": "1",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -21,6 +22,7 @@
 	"pId": "2",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -38,6 +40,7 @@
 	"pId": "3",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -55,6 +58,7 @@
 	"pId": "4",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -72,6 +76,7 @@
 	"pId": "5",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -89,6 +94,7 @@
 	"pId": "test",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -106,6 +112,7 @@
 	"pId": "test",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -123,6 +130,7 @@
 	"pId": "test",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
@@ -140,6 +148,7 @@
 	"pId": "test",
 	"averageUserReview": "test",
 	"inStock": [
+		"test"
 	],
 	"ean": "test",
 	"price": "test",
