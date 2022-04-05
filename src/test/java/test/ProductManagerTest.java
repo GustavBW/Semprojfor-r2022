@@ -69,7 +69,7 @@ class ProductManagerTest {
     void read() {
         
         //trying to read a productId (UUID) using an empty String
-        assertNull(productManager.read(""));
+        assertNull(productManager.readProduct(""));
         
         //setting product UUID
         product.set(ProductAttribute.UUID, "25");

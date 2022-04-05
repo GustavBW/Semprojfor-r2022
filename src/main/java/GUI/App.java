@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -49,7 +48,7 @@ public class App extends Application implements Initializable
     }
 
     private void addProductButtons() {
-        ArrayList<Product> products = productManager.getAllProducts();
+        ArrayList<Product> products = productManager.readAllProducts();
 
         for (Product p : products) {
             ProductButton pB = new ProductButton(p, prodGUIManager);
