@@ -133,7 +133,8 @@ public class ProductJSONReader {
             for(Product p : list){                  //For each current product
                 builder.append("\n{");              //Open a new "object" to be written
 
-                addProductToBuilder(productNumber, builder, p, (productNumber == list.size()));
+                addProductToBuilder(productNumber, builder, p, (productNumber == list.size() - 1));
+                productNumber++;
             }
 
             builder.append("\n]");
