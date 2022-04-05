@@ -38,7 +38,7 @@ class ProductTest {
             p.print();
 
             for (ProductAttribute pA : ProductAttribute.values()) { //asserting pAs
-                if (p.get(pA).equalsIgnoreCase("unavailable")) { //if pA is "unavailable" add i+1
+                if (p.get(pA) == null) { //if pA is null add i+1
                     i++;
                     //System.out.println("i++ " + p.get(pA));
                 }

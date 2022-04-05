@@ -14,15 +14,14 @@ public class Product { //initialize class
     }
 
     public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
-        productAttributes.putIfAbsent(pA, "unavailable"); //replace nulls with string "unavailable" >function may get removed based on feedback
         return productAttributes.get(pA); //returns hashmap of pA's
     }
 
     public double getAsNumeric(ProductAttribute pA){
-        String pattr = get(pA).replaceAll("\"","");
+        String pAttr = get(pA).replaceAll("\"","");
         double result;
         try{
-            result = Double.parseDouble(pattr);
+            result = Double.parseDouble(pAttr);
         }catch (NumberFormatException e){
             return 0.00D;
         }catch (NullPointerException e){

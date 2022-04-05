@@ -112,7 +112,7 @@ public class ProductJSONReader {
 
     }
 
-    public boolean write(ArrayList<Product> list, String filepath) throws IOException{
+    public boolean write(ArrayList<Product> list, String filepath){
 
         if(list == null || list.isEmpty()){
             throw new NullPointerException("Invalid List to write to file");
@@ -146,7 +146,9 @@ public class ProductJSONReader {
 
             bw.flush();
             bw.close();
-        }catch (Exception e){e.printStackTrace();}
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return success;
     }

@@ -19,7 +19,6 @@ public class ProductManager implements IProductManager, Runnable{
     private final String config = "resources/config.txt";
 
     public ProductManager(String sourcePath){
-
         //When you create a new object of this class, the background thread is started automatically.
         //If you want to alter an attribute on a product, you MUST do this through the CRUD functions in this class.
 
@@ -34,6 +33,7 @@ public class ProductManager implements IProductManager, Runnable{
         lastCall = System.currentTimeMillis();
         updateInterval = readConfig();
     }
+    
     public ProductManager(){
         this("resources/products.json");
     }
