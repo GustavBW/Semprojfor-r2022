@@ -35,10 +35,6 @@ public class Product { //initialize class
         return new ArrayList<>(availableAt);
     } //returns an arraylist of the available shops
 
-    HashMap<ProductAttribute,String> getAttributeMap(){
-        return productAttributes;
-    }                               //makes productAttributes available for other classes
-
     public boolean set(ProductAttribute pA, String value){
 
         if(value.endsWith("\"")){
@@ -49,13 +45,6 @@ public class Product { //initialize class
         return productAttributes.get(pA).equalsIgnoreCase(value);
     }
 
-    public boolean setLocations(ProductAttribute pattr, ArrayList<String> values){
-        if(pattr != ProductAttribute.IN_STOCK){
-            return false;
-        }
-        return setLocations(values);
-    }
-    
     public boolean setLocations(ArrayList<String> values){
 
         availableAt = values;

@@ -300,13 +300,14 @@ public class ProductManager implements IProductManager, Runnable{
         return toReturn;
     }
 
-    public void print(){
+    /*public void print(){
         //Prints each products name and price.
 
         for(Product p : productArray){
             System.out.println(p);
         }
     }
+     */
 
     @Override
     public ArrayList<Product> getAllProducts() {
@@ -318,7 +319,7 @@ public class ProductManager implements IProductManager, Runnable{
         return productArray;
     }
 
-    public void printAllProducts(){
+    /*public void printAllProducts(){
 
         //Prints a detailed description of each product.
 
@@ -326,6 +327,7 @@ public class ProductManager implements IProductManager, Runnable{
             p.print();
         }
     }
+     */
 
     private ArrayList<Product> getFromSource(){
         try{
@@ -333,6 +335,6 @@ public class ProductManager implements IProductManager, Runnable{
         }catch (IOException e){
             e.printStackTrace();
         }
-        return new ArrayList<Product>();
+        return new ArrayList<>();
     }
 }

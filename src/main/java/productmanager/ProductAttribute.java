@@ -24,7 +24,6 @@ public enum ProductAttribute {
     }
 
     public static ProductAttribute fromString(String s){
-        ProductAttribute output = null;
 
         for(ProductAttribute pAttr : ProductAttribute.values()){
             if(s.equalsIgnoreCase(pAttr.alias)){

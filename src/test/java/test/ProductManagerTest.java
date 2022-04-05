@@ -48,7 +48,7 @@ class ProductManagerTest {
     void createAll() {
         
         //trying to createAll() using non-initialized, empty List
-        assertFalse(productManager.createAll(new ArrayList<Product>()));
+        assertFalse(productManager.createAll(new ArrayList<>()));
         
         ArrayList<Product> List = new ArrayList<>();
         
