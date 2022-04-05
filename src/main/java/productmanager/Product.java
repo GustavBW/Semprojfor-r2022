@@ -2,15 +2,14 @@ package productmanager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Product { //initialize class
 
     private final HashMap<ProductAttribute, String> productAttributes; //initialize hashmap to contain product attributes
-    private ArrayList<String> availableAt; //initialize array of strings to contain local stores with stock
 
     public Product(){ //product constructor w.o. attribute input
         productAttributes = new HashMap<>(); //initialize hashmap
-        availableAt = new ArrayList<>(); //initialize string array
     }
 
     public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
@@ -31,7 +30,7 @@ public class Product { //initialize class
     }
 
     public ArrayList<String> getLocations(){ //String array method returning the class attribute availableAt
-        return new ArrayList<>(availableAt);
+        return new ArrayList<>(List.of(this.get(ProductAttribute.IN_STOCK).split(",")));
     } //returns an arraylist of the available shops
 
     public boolean set(ProductAttribute pA, String value){
@@ -46,15 +45,13 @@ public class Product { //initialize class
 
     public boolean setLocations(ArrayList<String> values){
 
-        availableAt = values;
-
         StringBuilder sB = new StringBuilder();
-        for(String s : availableAt){
+        for(String s : values){
             sB.append(s).append(",");
         }
         productAttributes.put(ProductAttribute.IN_STOCK, sB.toString());
 
-        return availableAt.size() > 0; //checks if there is stock of the product in any shop
+        return values.size() > 0; //checks if there is stock of the product in any shop
     }
 
     @Override
@@ -69,7 +66,7 @@ public class Product { //initialize class
 
             if(pA == ProductAttribute.IN_STOCK){ //if product is in stock, prints the available locations
                 StringBuilder toPrint = new StringBuilder();
-                for(String s : availableAt){
+                for(String s : getLocations()){
                     toPrint.append(s).append("\t");
                 }
                 System.out.println("\t " + pA.alias + ": " + toPrint);
