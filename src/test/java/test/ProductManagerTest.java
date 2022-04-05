@@ -30,6 +30,9 @@ class ProductManagerTest {
     @BeforeEach
     void setup(){
         product = new Product();
+        for(ProductAttribute pa : ProductAttribute.values()){
+            product.set(pa, "test");
+        }
         productManager = new ProductManager("resources/cheese.txt");
         System.out.println("============ INITIALIZING ============");
     }
@@ -130,6 +133,13 @@ class ProductManagerTest {
         Product product2 = new Product();
         Product product3 = new Product();
         Product product4 = new Product();
+        
+        for (ProductAttribute pa : ProductAttribute.values()) {
+            product1.set(pa, "test");
+            product2.set(pa, "test");
+            product3.set(pa, "test");
+            product4.set(pa, "test");
+        }
         
         //trying to removeAll products in empty productArray
         assertFalse(productManager.removeAll(ids));
