@@ -1,8 +1,7 @@
 package test;
 
-import productmanager.JSONReader;
+import productmanager.ProductJSONReader;
 import productmanager.Product;
-import productmanager.ProductAttribute;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JSONReaderTest {
 
-    private static JSONReader reader = new JSONReader("resources/products.json");
+    private static ProductJSONReader reader = new ProductJSONReader("resources/products.json");
 
     public void runAllTests(){
         read();

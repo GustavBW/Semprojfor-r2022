@@ -1,19 +1,18 @@
 package test;
 
 import org.junit.jupiter.api.*;
-import productmanager.JSONReader;
+import productmanager.ProductJSONReader;
 import productmanager.Product;
 import productmanager.ProductAttribute;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductTest {
-    private static JSONReader reader = new JSONReader("resources/products.json");
+    private static ProductJSONReader reader = new ProductJSONReader("resources/products.json");
 
     @BeforeAll
     static void initialize(){

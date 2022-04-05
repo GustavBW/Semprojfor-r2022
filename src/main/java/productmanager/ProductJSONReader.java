@@ -3,15 +3,14 @@ package productmanager;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class JSONReader {
+public class ProductJSONReader {
 
     private final String filepath;
     private int currentLineNumber = 1;
 
 
-    public JSONReader(String filepath){
+    public ProductJSONReader(String filepath){
         this.filepath = filepath;
     }
 
