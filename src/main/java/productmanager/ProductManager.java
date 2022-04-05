@@ -20,7 +20,7 @@ public class ProductManager implements IProductManager, Runnable{
     public ProductManager(String sourcePath){
 
         //When you create a new object of this class, the background thread is started automatically.
-        //If you want to alter an attribute on a product, you MUST do this through the C.U.D. functions in this class.
+        //If you want to alter an attribute on a product, you MUST do this through the CRUD functions in this class.
 
         jsonReader = new ProductJSONReader(sourcePath);
         productArray = getFromSource();
@@ -35,23 +35,6 @@ public class ProductManager implements IProductManager, Runnable{
     }
     public ProductManager(){
         this("resources/products.json");
-    }
-
-    public static void main(String[] args) {
-
-        //This is only used for testing right now.
-
-        ProductManager manager = new ProductManager();
-        try {
-            manager.productArray = manager.jsonReader.read();
-            manager.jsonReader.write(manager.productArray);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-
-        manager.printAllProducts();
-        // write your code here
     }
 
     @Override
@@ -225,7 +208,9 @@ public class ProductManager implements IProductManager, Runnable{
             backgroundThreadIsRunning = true;
         }
 
-        //Right here is where the XXXX.updateIndex() call to the module from Group 2.2 goes
+        //Right here is where the XXXX.updateIndex() call to the module from Group 2.2 goes (see below):
+
+        //ProductIndexInfrastructure.getInstance().getProductIndex().indexProducts(updatedProductArray);
 
         return backgroundThread.isAlive();
     }
