@@ -12,6 +12,7 @@ public class ProductManager implements IProductManager, Runnable{
     private ArrayList<Product> updatedProductArray;
     private boolean backgroundThreadIsRunning = false;
     private final Thread backgroundThread;
+    private boolean runBackgroundUpdates = true;
     private long lastCall;
 
     private int updateInterval;    //Minutes
@@ -35,6 +36,10 @@ public class ProductManager implements IProductManager, Runnable{
     }
     public ProductManager(){
         this("resources/products.json");
+    }
+
+    public static void main(String[] args) {
+        new ProductManager();
     }
 
     @Override
@@ -195,6 +200,7 @@ public class ProductManager implements IProductManager, Runnable{
     @Override
     public void setUpdateInterval(int time) {
         checkForUpdates();
+        System.out.println("Set ProductManager update interval to: " + time + " min.");
 
         updateInterval = time;
     }
@@ -222,13 +228,17 @@ public class ProductManager implements IProductManager, Runnable{
         //It busy-waits (Thread.sleep would work as well) for updateInterval (minutes)
         //Then reads the json file again and prepares a new ArrayList<Product> for use.
 
-        while(System.currentTimeMillis() < lastCall + (updateInterval * 60000L)){
-            System.out.print("");
-        }
+        while(runBackgroundUpdates) {
 
-        lastCall = System.currentTimeMillis();
-        reparse();
-        backgroundUpdate();
+            try {
+                backgroundThread.wait(updateInterval * 60000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            lastCall = System.currentTimeMillis();
+            backgroundUpdate();
+        }
     }
 
     @Override
@@ -290,7 +300,9 @@ public class ProductManager implements IProductManager, Runnable{
 
         try{
             BufferedReader br = new BufferedReader(new FileReader(config));
-            toReturn = Integer.parseInt(br.readLine());
+            String line = br.readLine();
+            int index = line.indexOf("=") +1;
+            toReturn = Integer.parseInt(line.substring(index));
 
             br.close();
         }catch (IOException e){
@@ -306,8 +318,7 @@ public class ProductManager implements IProductManager, Runnable{
         for(Product p : productArray){
             System.out.println(p);
         }
-    }
-     */
+    }*/
 
     @Override
     public ArrayList<Product> getAllProducts() {
@@ -326,8 +337,7 @@ public class ProductManager implements IProductManager, Runnable{
         for(Product p : productArray){
             p.print();
         }
-    }
-     */
+    }*/
 
     private ArrayList<Product> getFromSource(){
         try{
@@ -336,5 +346,17 @@ public class ProductManager implements IProductManager, Runnable{
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    protected void finalize(){
+
+        runBackgroundUpdates = false;
+        backgroundThread.interrupt();
+        try {
+            backgroundThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 }
