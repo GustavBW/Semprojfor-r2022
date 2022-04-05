@@ -200,13 +200,19 @@ public class ProductManager implements IProductManager, Runnable{
         updateInterval = time;
     }
 
-    private boolean backgroundUpdate(){
+    private synchronized boolean backgroundUpdate(){
 
         //This is a background function to be called once every index update interval.
         //For direct control of index reparses, use reparse()
 
         if(!backgroundThreadIsRunning) {
             backgroundThreadIsRunning = true;
+        }
+
+        try {
+            Thread.sleep(updateInterval * 60000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         //Right here is where the XXXX.updateIndex() call to the module from Group 2.2 goes (see below):
@@ -224,13 +230,6 @@ public class ProductManager implements IProductManager, Runnable{
         //Then reads the json file again and prepares a new ArrayList<Product> for use.
 
         while(runBackgroundUpdates) {
-
-            try {
-                backgroundThread.wait(updateInterval * 60000L);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
             backgroundUpdate();
         }
     }
