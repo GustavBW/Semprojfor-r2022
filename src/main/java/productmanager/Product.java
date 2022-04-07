@@ -15,7 +15,7 @@ public class Product { //initialize class
     }
 
     public @Nullable String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
-        return productAttributes.get(pA) == null ? null : productAttributes.get(pA); //returns hashmap of pA's
+        return productAttributes.get(pA).isEmpty() ? null : productAttributes.get(pA); //returns hashmap of pA's
     }
 
     public double getAsNumeric(ProductAttribute pA){
@@ -34,7 +34,7 @@ public class Product { //initialize class
     } //returns an arraylist of the available shops
 
     public boolean set(ProductAttribute pA, String value){
-        if (value == null){
+        if (value.isEmpty()){
             productAttributes.put(pA, null);
             return productAttributes.get(pA) == null;
         }
