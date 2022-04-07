@@ -119,8 +119,14 @@ public class ProductGUI {
             HBox subContainer = new HBox();
             subContainer.setPrefWidth(cDim.getX());
             subContainer.setPrefHeight((cDim.getY() - (topBox.getPrefHeight() + subTopBox.getPrefHeight())) * (1.00 / (ProductAttribute.values().length + 2)));
-
-            TextArea attrText = new TextArea(product.get(pattr));
+            
+            String attribute;
+            TextArea attrText;
+            if ((attribute = product.get(pattr)) != null) {
+                attrText = new TextArea(attribute);
+            } else {
+                attrText = new TextArea();
+            }
             attrText.setPrefWidth(subContainer.getPrefWidth() * 0.8);
             attrText.setPrefHeight(subContainer.getPrefHeight());
             attrText.setWrapText(true);
