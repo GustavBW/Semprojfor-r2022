@@ -5,9 +5,12 @@ import productmanager.ProductAttribute;
 import productmanager.ProductManager;
 
 import org.junit.jupiter.api.*;
+
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -169,6 +172,32 @@ class ProductManagerTest {
         assertTrue(productManager.removeAll(ids));
         System.out.println("========== removeAll() TEST DONE ============");
     }
+
+    @Order(7)
+    @Test
+    void readProducts() {
+
+    }
+
+    @Order(8)
+    @Test
+    void readAllProducts() {
+    assertNotNull(productManager.readAllProducts());
+    assertInstanceOf(ArrayList.class, productManager.readAllProducts());
+    //check if what is in the arraylist is correct
+    }
+
+    @Order(9)
+    @Test
+    void setUpdateIntervalTest() {
+        productManager.setUpdateInterval(9);
+        assertEquals(productManager.getUpdateInterval(), 9);
+
+        productManager.setUpdateInterval(10);
+        assertNotEquals(9, productManager.getUpdateInterval());
+    }
+
+
     
     @AfterEach
     void teardown(){
