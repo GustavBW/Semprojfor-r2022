@@ -30,6 +30,14 @@ public class ProductManager implements IProductManager, Runnable{
         backgroundThread.start();
 
         updateInterval = readConfig();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                finalizePM();
+            }catch(Throwable e){
+                e.printStackTrace();
+            }
+        }));
     }
     
     ///Default File Path
@@ -341,10 +349,11 @@ public class ProductManager implements IProductManager, Runnable{
         return new ArrayList<>();
     }
 
-    protected void finalize(){
+    private void finalizePM(){
 
         runBackgroundUpdates = false;
         backgroundThread.interrupt();
+
         try {
             backgroundThread.join();
         } catch (InterruptedException e) {
