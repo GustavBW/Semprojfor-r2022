@@ -40,7 +40,7 @@ public class ProductManager implements IProductManager, Runnable{
         }));
     }
     
-    ///Default File Path
+    ///Default File Path: "resources/products.json"
     public ProductManager(){
         this("resources/products.json");
     }
