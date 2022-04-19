@@ -14,6 +14,10 @@ public class ProductManager implements IProductManager, Runnable{
     private final Thread backgroundThread;
     private boolean runBackgroundUpdates = true;
 
+    public int getUpdateInterval() {
+        return updateInterval;
+    }
+
     private int updateInterval;    //Measured in minutes
     private final String config = "resources/config.txt";
 
