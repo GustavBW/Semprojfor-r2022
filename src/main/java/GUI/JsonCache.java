@@ -2,7 +2,6 @@ package GUI;
 
 import productmanager.Product;
 import productmanager.ProductJSONReader;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,11 +23,11 @@ public class JsonCache {
 
     private final ProductJSONReader reader;
     private List<Product> quickAccess;
-    private boolean cacheFileFound = false,removeCacheOnExit = false;
+    private boolean removeCacheOnExit = false;
     private Thread shutdownHook,dumpHook;
 
     public static JsonCache getInstance(){
-        System.out.println("CACHE: INSTANCE REQUESTED");
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[2].getLineNumber() + " : INSTANCE REQUESTED");
         if(instance == null){
             try {
                 instance = new JsonCache();
@@ -40,20 +39,20 @@ public class JsonCache {
     }
 
     private JsonCache(boolean removeCacheOnExit) throws IOException{
-        System.out.println("CACHE: CREATING INSTANCE");
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : CREATING INSTANCE");
 
         cacheFile = new File(root + "/guiCache.json");
-        cacheFileFound = cacheFile.createNewFile();
+        boolean cacheFileFound = cacheFile.createNewFile();
         reader = new ProductJSONReader(cacheFile.getCanonicalPath());
         quickAccess = new ArrayList<>();
 
         if(!cacheFileFound) {
-            System.out.println("CACHE: FILE FOUND. READING CONTENTS");
+            System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : FILE FOUND. READING CONTENTS");
             quickAccess = reader.read();
-            System.out.println("CACHE: FILE CONTAINED " + quickAccess.size() + " ELEMENTS");
+            System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : FILE CONTAINED " + quickAccess.size() + " ELEMENTS");
         }
 
-        System.out.println("CACHE: CREATION SUCCESS");
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : CREATION SUCCESS");
 
         if(removeCacheOnExit){
             addShutdownHook(getDestroyHook());
@@ -66,7 +65,7 @@ public class JsonCache {
     }
 
     private void updateCache() throws IOException{
-        System.out.println("CACHE: UPDATING TO CONTAIN " + quickAccess.size() + " ELEMENTS");
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : UPDATING TO CONTAIN " + quickAccess.size() + " ELEMENTS");
         reader.write(quickAccess);
     }
 
@@ -74,17 +73,21 @@ public class JsonCache {
         quickAccess = list;
     }
 
-    public void add(List<Product> list) throws IOException{
+    public void add(List<Product> list){
         quickAccess.addAll(list);
     }
     public void add(String path) throws IOException{
-        this.add(reader.read(path));
+        if(reader.validate(path)) {
+            this.add(reader.read(path));
+        }else{
+            System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : FILEPATH " + path + " RETURNES INVALID FILE");
+        }
     }
     public void add(Product p) throws IOException{
         quickAccess.add(p);
     }
 
-    public void remove(List<Product> list) throws IOException{
+    public void remove(List<Product> list){
         quickAccess.removeAll(list);
     }
     public void remove(Product p) throws IOException{
@@ -112,6 +115,7 @@ public class JsonCache {
     public boolean destroysOnExit(){
         return removeCacheOnExit;
     }
+
     private void addShutdownHook(Thread hook){
         Runtime.getRuntime().addShutdownHook(hook);
     }
@@ -134,7 +138,7 @@ public class JsonCache {
         if(dumpHook == null){
             dumpHook = new Thread(() -> {
                 try {
-                    System.out.println("CACHE: DUMPING ON EXIT");
+                    System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : DUMPING ON EXIT");
                     dump();
                 }catch(Throwable e){
                     e.printStackTrace();
@@ -145,7 +149,7 @@ public class JsonCache {
     }
 
     private void destroy(){
-        System.out.println("CACHE: DESTROYED ON EXIT: " + cacheFile.delete());
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : DESTROYED ON EXIT: " + cacheFile.delete());
     }
 
 }

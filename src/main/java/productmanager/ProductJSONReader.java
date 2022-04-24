@@ -19,20 +19,36 @@ public class ProductJSONReader {
         return read(filepath);
     }
 
-    public ArrayList<Product> read(String filepath2) throws IOException{
+    public boolean validate(String filepath){
+        boolean valid = true;
+        List<Product> result = null;
+        try{
+            result = read(filepath);
+        }catch (Exception e){
+            valid = false;
+        }
+
+        if(result != null){
+            valid = result.isEmpty();
+        }
+
+        return valid;
+    }
+
+    public ArrayList<Product> read(String filepath2) throws IOException, StringIndexOutOfBoundsException{
         ArrayList<Product> output = new ArrayList<>();
         currentLineNumber = 1;
         int amountOfProducts = 1;
 
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(filepath2));
+        //try{
+        BufferedReader br = new BufferedReader(new FileReader(filepath2));
 
-            readLines(output, amountOfProducts, br);
+        readLines(output, amountOfProducts, br);
 
-        }catch (StringIndexOutOfBoundsException e){
-            System.out.println("String index out of bounds at line " + currentLineNumber);
-            e.printStackTrace();
-        }
+        //}catch (StringIndexOutOfBoundsException e){
+        //    System.out.println("String index out of bounds at line " + currentLineNumber);
+        //    e.printStackTrace();
+        //}
         return output;
     }
 

@@ -28,7 +28,7 @@ public class App extends Application implements Initializable
     @FXML
     private Pane productPane;
 
-    //public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
+    public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
     private static Scene mainScene;
     private static Stage mainStage;
     public static Point2D dim = new Point2D(1280,720);
@@ -72,7 +72,7 @@ public class App extends Application implements Initializable
         prodGUIManager = new ProductGUIManager(productPane);
         addProductButtons();
         addFuncButtons();
-        cacheInstance.setDestroyOnExit(true);
+        cacheInstance.setDestroyOnExit(false);
     }
 
     public void reloadProductButtons(){
