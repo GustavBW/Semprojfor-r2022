@@ -76,16 +76,19 @@ public class JsonCache {
 
     public void add(List<Product> list) throws IOException{
         quickAccess.addAll(list);
-        updateCache();
     }
     public void add(String path) throws IOException{
         this.add(reader.read(path));
-        updateCache();
+    }
+    public void add(Product p) throws IOException{
+        quickAccess.add(p);
     }
 
     public void remove(List<Product> list) throws IOException{
         quickAccess.removeAll(list);
-        updateCache();
+    }
+    public void remove(Product p) throws IOException{
+        quickAccess.remove(p);
     }
 
     public List<Product> get(){

@@ -28,19 +28,19 @@ public class App extends Application implements Initializable
     @FXML
     private Pane productPane;
 
-    public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
+    //public static ProductManager productManager = new ProductManager("resources/productsForApp.json");
     private static Scene mainScene;
     private static Stage mainStage;
     public static Point2D dim = new Point2D(1280,720);
     public static ProductGUIManager prodGUIManager;
-    public static JsonCache cacheInstance;
+    private static final JsonCache cacheInstance = JsonCache.getInstance();
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIapplication.fxml"));
 
-        Scene mainScene = new Scene(loader.load(), 1280, 720);
-        cacheInstance.overwrite(productManager.readAllProducts());
+        mainScene = new Scene(loader.load(), 1280, 720);
+
         mainStage = stage;
         mainStage.setTitle("PIM-1 GUI");
         mainStage.setResizable(false);
@@ -50,7 +50,7 @@ public class App extends Application implements Initializable
     }
 
     private void addProductButtons() {
-        ArrayList<Product> products = productManager.readAllProducts();
+        List<Product> products = cacheInstance.get();
 
         for (Product p : products) {
             ProductButton pB = new ProductButton(p, prodGUIManager);
@@ -72,8 +72,7 @@ public class App extends Application implements Initializable
         prodGUIManager = new ProductGUIManager(productPane);
         addProductButtons();
         addFuncButtons();
-        cacheInstance = JsonCache.getInstance();
-        cacheInstance.setDestroyOnExit(false);
+        cacheInstance.setDestroyOnExit(true);
     }
 
     public void reloadProductButtons(){
@@ -86,6 +85,9 @@ public class App extends Application implements Initializable
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public static JsonCache getCache(){
+        return cacheInstance;
     }
 
     public synchronized void stop(){

@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import productmanager.Product;
 import productmanager.ProductAttribute;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -173,7 +174,12 @@ public class ProductGUI {
 
         //Check the result from the user
         if (result.get() == ButtonType.YES) {
-            App.productManager.remove(product.get(ProductAttribute.UUID));
+            //App.productManager.remove(product.get(ProductAttribute.UUID));
+            try {
+                App.getCache().remove(product);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             App.prodGUIManager.clearGUI();
         } else {
             return false;
@@ -225,10 +231,22 @@ public class ProductGUI {
         Product modProd = getModProduct();
         //Step 2: Update the product to equal this new one. (Their UUID's will always be the same, but this is just to make sure the right product is overridden)
         if(creatingNotEditing){
-            App.productManager.create(modProd);
+            try {
+                App.getCache().add(modProd);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //App.productManager.create(modProd);
             creatingNotEditing = false;
         }else {
-            App.productManager.update(product.get(ProductAttribute.UUID), modProd);
+            try {
+                App.getCache().remove(product);
+                App.getCache().add(modProd);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //App.productManager.update(product.get(ProductAttribute.UUID), modProd);
         }
         //Step 3: Change what product this GUI is using.
         product = modProd;
