@@ -3,6 +3,7 @@ package productmanager;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductJSONReader {
 
@@ -116,7 +117,7 @@ public class ProductJSONReader {
 
     }
 
-    public boolean write(ArrayList<Product> list, String filepath){
+    public boolean write(List<Product> list, String filepath){
 
         if(list == null || list.isEmpty()){
             throw new NullPointerException("Invalid List to write to file");
@@ -208,7 +209,7 @@ public class ProductJSONReader {
         builder.append("\n\t]").append(lineEnd);    //Finally closing the array using
     }
 
-    public boolean write(ArrayList<Product> list) throws IOException{
+    public boolean write(List<Product> list) throws IOException{
         return write(list, filepath);
     }
 

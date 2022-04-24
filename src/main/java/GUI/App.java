@@ -33,12 +33,14 @@ public class App extends Application implements Initializable
     private static Stage mainStage;
     public static Point2D dim = new Point2D(1280,720);
     public static ProductGUIManager prodGUIManager;
+    public static JsonCache cacheInstance;
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIapplication.fxml"));
 
         Scene mainScene = new Scene(loader.load(), 1280, 720);
+        cacheInstance.overwrite(productManager.readAllProducts());
         mainStage = stage;
         mainStage.setTitle("PIM-1 GUI");
         mainStage.setResizable(false);
@@ -70,6 +72,8 @@ public class App extends Application implements Initializable
         prodGUIManager = new ProductGUIManager(productPane);
         addProductButtons();
         addFuncButtons();
+        cacheInstance = JsonCache.getInstance();
+        cacheInstance.setDestroyOnExit(false);
     }
 
     public void reloadProductButtons(){
