@@ -61,8 +61,8 @@ public class App extends Application implements Initializable
     private void addFuncButtons() {
         btnHbox.getChildren().addAll(List.of(
                 new ReloadGUIButton(this).getButton(),
-                new CreateNewProductButton().getButton()
-
+                new CreateNewProductButton().getButton(),
+                new LoadFileButton().getButton()
         ));
         //Add all the FuncButtons here
     }
@@ -79,6 +79,13 @@ public class App extends Application implements Initializable
     public void reloadProductButtons(){
         btnVbox.getChildren().clear();
         addProductButtons();
+    }
+    public static void loadFileFrom(String path){
+        try {
+            cacheInstance.add(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized void stop(){
