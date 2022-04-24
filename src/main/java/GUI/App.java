@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -62,7 +63,18 @@ public class App extends Application implements Initializable
         btnHbox.getChildren().addAll(List.of(
                 new ReloadGUIButton(this).getButton(),
                 new CreateNewProductButton().getButton(),
-                new LoadFileButton().getButton()
+                new LoadFileButton().getButton(),
+                new FuncButton("Write"){
+                    @Override
+                    public void onClicked(){
+                        new FileChooser(){
+                            @Override
+                            public void forwardResult(String s){
+                                App.getCache().dumpTo(s);
+                            }
+                        }.open();
+                    }
+                }.getButton()
         ));
         //Add all the FuncButtons here
     }

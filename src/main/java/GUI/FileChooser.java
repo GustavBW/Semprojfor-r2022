@@ -12,6 +12,7 @@ public class FileChooser {
         chooser.setDialogTitle("CHOOSE FILE TO LOAD");
     }
     private String selectedFile;
+
     public void open(){
         int returnValue = chooser.showOpenDialog(null);
         chooser.requestFocus();
@@ -19,7 +20,10 @@ public class FileChooser {
             File selectedFile = chooser.getSelectedFile();
             String filePath = selectedFile.getAbsolutePath();
             System.out.println(filePath);
-            App.loadFileFrom(filePath);
+            forwardResult(filePath);
         }
+    }
+    public void forwardResult(String filepath){
+        App.loadFileFrom(filepath);
     }
 }

@@ -22,6 +22,7 @@ public class ProductJSONReader {
     public boolean validate(String filepath){
         boolean valid = true;
         List<Product> result = null;
+
         try{
             result = read(filepath);
         }catch (Exception e){
@@ -29,7 +30,7 @@ public class ProductJSONReader {
         }
 
         if(result != null){
-            valid = result.isEmpty();
+            valid = !result.isEmpty();
         }
 
         return valid;

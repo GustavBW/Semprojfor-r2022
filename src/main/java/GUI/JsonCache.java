@@ -74,17 +74,18 @@ public class JsonCache {
     }
 
     public void add(List<Product> list){
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : ADDING " + list.size() + " ELEMENTS");
         quickAccess.addAll(list);
     }
     public void add(String path) throws IOException{
         if(reader.validate(path)) {
-            this.add(reader.read(path));
+            add(reader.read(path));
         }else{
             System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : FILEPATH " + path + " RETURNES INVALID FILE");
         }
     }
     public void add(Product p) throws IOException{
-        quickAccess.add(p);
+        add(List.of(p));
     }
 
     public void remove(List<Product> list){
@@ -100,6 +101,11 @@ public class JsonCache {
 
     public void dump() throws IOException{
         updateCache();
+    }
+
+    public void dumpTo(String path){
+        System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : DUMPING CACHE TO " + path);
+        reader.write(quickAccess,path);
     }
     public void setDestroyOnExit(boolean state){
         if(state && !removeCacheOnExit){
