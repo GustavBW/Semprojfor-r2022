@@ -61,10 +61,42 @@ public class App extends Application implements Initializable
 
     private void addFuncButtons() {
         btnHbox.getChildren().addAll(List.of(
-                new ReloadGUIButton(this).getButton(),
-                new CreateNewProductButton().getButton(),
-                new LoadFileButton().getButton(),
-                new FuncButton("Write"){
+                new FuncButton("Reload"){
+                    @Override
+                    public void onClicked() {
+                        App.this.reloadProductButtons();
+                        System.out.println("Reloaded Product Buttons");
+                    }
+                }.getButton(),
+                new FuncButton("Create"){
+                    @Override
+                    public void onClicked(){
+                        ProductGUI newProductGUI = new ProductGUI();
+                        App.prodGUIManager.onGUIChange(newProductGUI);
+                    }
+                }.getButton(),
+                new FuncButton("Open"){
+                    @Override
+                    public void onClicked(){
+                        new FileChooser(){
+                            @Override
+                            public void forwardResult(String s){
+                                App.loadFileFrom(s);
+                            }
+                        }.open();
+                    }
+                }.getButton(),
+                new FuncButton("Save"){
+                    @Override
+                    public void onClicked(){
+                        try {
+                            App.getCache().dump();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.getButton(),
+                new FuncButton("Save As"){
                     @Override
                     public void onClicked(){
                         new FileChooser(){
