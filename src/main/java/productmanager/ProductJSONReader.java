@@ -23,6 +23,11 @@ public class ProductJSONReader {
         boolean valid = true;
         List<Product> result = null;
 
+        String filetype = filepath.substring(filepath.lastIndexOf('.'));
+        if(!filetype.equalsIgnoreCase(".json")){
+            return false;
+        }
+
         try{
             result = read(filepath);
         }catch (Exception e){

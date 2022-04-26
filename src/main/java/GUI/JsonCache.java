@@ -66,6 +66,7 @@ public class JsonCache {
 
     private void updateCache() throws IOException{
         System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : UPDATING TO CONTAIN " + quickAccess.size() + " ELEMENTS");
+        if(quickAccess.isEmpty()){return;}
         reader.write(quickAccess);
     }
 
