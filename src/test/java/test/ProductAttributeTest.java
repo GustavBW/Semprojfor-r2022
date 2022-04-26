@@ -37,4 +37,26 @@ class ProductAttributeTest {
             assertEquals(pArr[i], ProductAttribute.valueOf(sArr[i]));
         }
     }
+    
+    @Test
+    void fromString(){
+        //First I make a list of all the values we want ProductAttribute to turn into enum-values of the same name
+        String[] sArr = {"id", "pId", "averageUserReview", "inStock", "ean", "price", "publishedDate", "expirationDate", "category", "name", "description", "weight", "size", "clockSpeed"};
+
+        //Then I make a list of all the enum-values ProductAttribute has
+        ProductAttribute[] pArr = ProductAttribute.values();
+
+        //After that I check each value to see if .fromString() turns it into the correct enum-value
+        for (int i = 0; i < pArr.length; i++) {
+            assertEquals(pArr[i], ProductAttribute.fromString(sArr[i]));
+            
+            //To check that case is ignored
+            assertEquals(pArr[i], ProductAttribute.fromString(sArr[i].toUpperCase()));
+            assertEquals(pArr[i], ProductAttribute.fromString(sArr[i].toLowerCase()));
+        }
+        
+        //Last I check if .fromString() returns null if you give it a wrong string
+        assertNull(ProductAttribute.fromString(""));
+        assertNull(ProductAttribute.fromString("DANCER"));
+    }
 }
