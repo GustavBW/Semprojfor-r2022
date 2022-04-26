@@ -9,10 +9,10 @@ class ProductAttributeTest {
 
     @Test
     void values() {
-        //Først laver jeg en liste over alle de værdier vi gerne vil have ProductAttribe skal have
+        //First I make a list of all the values we want ProductAttribute to have
         String[] sArr = {"UUID", "ID", "AVERAGE_USER_REVIEW", "IN_STOCK", "EAN", "PRICE", "PUBLISHED_DATE", "EXPIRATION_DATE", "CATEGORY", "NAME", "DESCRIPTION", "WEIGHT", "SIZE", "CLOCKSPEED"};
 
-        //Derefter laver jeg en liste over alle de værdier ProductAttribe rent faktisk har og laver dem om til en string
+        //Then I make a list of all the values ProductAttribute actually has and turn them into strings
         ProductAttribute[] pArr = ProductAttribute.values();
         String[] sArr2 = new String[sArr.length];
 
@@ -20,19 +20,19 @@ class ProductAttributeTest {
             sArr2[i] = pArr[i].toString();
         }
 
-        //Til sidst tjekker vi om de to string arrays indeholder det samme
+        //Last I check if the two string arrays are equal
         assertArrayEquals(sArr, sArr2);
     }
 
     @Test
     void valueOf() {
-        //Først laver jeg en liste over alle de værdier vi gerne vil have ProductAttribe skal kunne lave om til enum-værdien af samme navn
+        //First I make a list of all the values we want ProductAttribute to turn into enum-values of the same name
         String[] sArr = {"UUID", "ID", "AVERAGE_USER_REVIEW", "IN_STOCK", "EAN", "PRICE", "PUBLISHED_DATE", "EXPIRATION_DATE", "CATEGORY", "NAME", "DESCRIPTION", "WEIGHT", "SIZE", "CLOCKSPEED"};
 
-        //Derefter laver jeg en liste over enum-værdierne
+        //Then I make a list of all the enum-values ProductAttribute has
         ProductAttribute[] pArr = ProductAttribute.values();
 
-        //Til sidst tjekker jeg hver værdi for at se om .valueOf() laver det om til den rigtige enum-værdi
+        //Last I check each value to see if .valueOf() turns it into the correct enum-value
         for (int i = 0; i < pArr.length; i++) {
             assertEquals(pArr[i], ProductAttribute.valueOf(sArr[i]));
         }
