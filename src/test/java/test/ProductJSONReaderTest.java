@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JSONReaderTest {
+class ProductJSONReaderTest {
     private static ProductJSONReader reader = new ProductJSONReader("resources/products.json");
 
     @Test
