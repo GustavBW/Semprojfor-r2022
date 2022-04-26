@@ -47,4 +47,10 @@ class JSONReaderTest {
     @Test
     void testWrite() {
     }
+    
+    @Test
+    void validate() {
+        assertTrue(reader.validate("resources/products.json"));
+        assertFalse(reader.validate("resources/prodadsucts.json"));
+    }
 }
