@@ -19,7 +19,7 @@ class ProductManagerTest {
     @BeforeAll
     static void initialize(){
         try {
-            FileWriter fw = new FileWriter("resources/cheese.txt");
+            FileWriter fw = new FileWriter("resources/cheese.json");
             fw.write("");
             fw.close();
         } catch (IOException e) {
@@ -34,7 +34,7 @@ class ProductManagerTest {
         for(ProductAttribute pa : ProductAttribute.values()){
             product.set(pa, "test");
         }
-        productManager = new ProductManager("resources/cheese.txt");
+        productManager = new ProductManager("resources/cheese.json");
         System.out.println("============ INITIALIZING ============");
     }
     

@@ -52,5 +52,8 @@ class ProductJSONReaderTest {
     void validate() {
         assertTrue(reader.validate("resources/products.json"));
         assertFalse(reader.validate("resources/prodadsucts.json"));
+        assertFalse(reader.validate("resources/empty.json"));
+        assertTrue(reader.validate("resources/cheese.json"));
+        assertFalse(reader.validate("resources/config.txt"));
     }
 }
