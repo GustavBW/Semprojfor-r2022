@@ -173,6 +173,7 @@ class ProductManagerTest {
     @Order(7)
     @Test
     void readProducts() {
+
     }
 
     @Order(8)
@@ -204,6 +205,17 @@ class ProductManagerTest {
     @Test
     @Order(10)
     void readProduct(){
+        //reading a product not found in the productArray
+        assertNull(productManager.readProduct("1"));
+
+        //creating product, setting the UUID and add it to the productArray
+        Product product1 = new Product();
+        product1.set(ProductAttribute.UUID, "1");
+        productManager.productArray.add(product1);
+
+        //reading product now added to the productArray
+        assertNotNull(productManager.readProduct("1"));
+        System.out.println("========== readProduct() TEST DONE ============");
     }
     
     @AfterEach
