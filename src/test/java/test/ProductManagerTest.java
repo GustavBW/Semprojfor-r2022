@@ -169,6 +169,18 @@ class ProductManagerTest {
         assertTrue(productManager.removeAll(ids));
         System.out.println("========== removeAll() TEST DONE ============");
     }
+
+    @Test
+    void readProducts() {
+    }
+
+    @Test
+    void setUpdateInterval() {
+    }
+
+    @Test
+    void readAllProducts() {
+    }
     
     @AfterEach
     void teardown(){
