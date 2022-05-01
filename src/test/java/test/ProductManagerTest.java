@@ -170,16 +170,25 @@ class ProductManagerTest {
         System.out.println("========== removeAll() TEST DONE ============");
     }
 
+    @Order(7)
     @Test
     void readProducts() {
     }
 
+    @Order(8)
     @Test
     void setUpdateInterval() {
+        productManager.setUpdateInterval(9);
+        assertEquals(productManager.getUpdateInterval(), 9);
+        assertNotEquals(10, productManager.getUpdateInterval());
+
     }
 
+    @Order(9)
     @Test
     void readAllProducts() {
+        assertNotNull(productManager.readAllProducts());
+        assertInstanceOf(ArrayList.class, productManager.readAllProducts());
     }
     
     @AfterEach
