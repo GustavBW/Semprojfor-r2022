@@ -178,17 +178,32 @@ class ProductManagerTest {
     @Order(8)
     @Test
     void setUpdateInterval() {
+        //Setting new UpdateInterval
         productManager.setUpdateInterval(9);
+
+        //Asserting the correct interval change
         assertEquals(productManager.getUpdateInterval(), 9);
+
+        //Asserting a false interval change
         assertNotEquals(10, productManager.getUpdateInterval());
+        System.out.println("========== setUpdateInterval() TEST DONE ============");
 
     }
 
     @Order(9)
     @Test
     void readAllProducts() {
+        //Ensuring that the returned product arraylist isn't null
         assertNotNull(productManager.readAllProducts());
+
+        //Ensuring that the returned arraylist is indeed an instance of the appropriate class
         assertInstanceOf(ArrayList.class, productManager.readAllProducts());
+        System.out.println("========== readAllProducts() TEST DONE ============");
+    }
+
+    @Test
+    @Order(10)
+    void readProduct(){
     }
     
     @AfterEach
