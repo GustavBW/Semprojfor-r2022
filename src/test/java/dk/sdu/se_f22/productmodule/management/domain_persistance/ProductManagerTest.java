@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BaseProductManagerTest {
+class ProductManagerTest {
     
     private BaseProduct baseProduct;
     private ProductManager productManager;

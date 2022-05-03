@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BaseProductJSONReaderTest {
+class ProductJSONReaderTest {
     private static ProductJSONReader reader = new ProductJSONReader("src/test/resources/dk/sdu/se_f22/productmodule/management/domain_persistance/products.json");
 
     @Test

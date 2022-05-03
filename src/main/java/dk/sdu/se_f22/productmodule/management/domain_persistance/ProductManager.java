@@ -1,6 +1,6 @@
 package dk.sdu.se_f22.productmodule.management.domain_persistance;
 
-import SharedLibrary.Product;
+import dk.sdu.se_f22.sharedlibrary.models.Product;
 
 import java.io.*;
 import java.util.ArrayList;

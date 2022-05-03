@@ -3,7 +3,7 @@ import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.Suite;
 
 @Suite
-@SelectClasses({BaseProductManagerTest.class, BaseProductAttributeTest.class, BaseProductJSONReaderTest.class, BaseProductTest.class})
+@SelectClasses({ProductManagerTest.class, ProductAttributeTest.class, ProductJSONReaderTest.class, BaseProductTest.class})
 public class TestSuite {
 
 }
