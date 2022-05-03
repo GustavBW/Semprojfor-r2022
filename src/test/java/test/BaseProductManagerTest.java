@@ -1,6 +1,6 @@
 package test;
 
-import productmanager.Product;
+import productmanager.BaseProduct;
 import productmanager.ProductAttribute;
 import productmanager.ProductManager;
 
@@ -13,9 +13,9 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductManagerTest {
+class BaseProductManagerTest {
     
-    private Product product;
+    private BaseProduct baseProduct;
     private ProductManager productManager;
     
     @BeforeAll
@@ -32,9 +32,9 @@ class ProductManagerTest {
     
     @BeforeEach
     void setup(){
-        product = new Product();
+        baseProduct = new BaseProduct();
         for(ProductAttribute pa : ProductAttribute.values()){
-            product.set(pa, "test");
+            baseProduct.set(pa, "test");
         }
         productManager = new ProductManager("resources/cheese.json");
         System.out.println("============ INITIALIZING ============");
@@ -44,8 +44,8 @@ class ProductManagerTest {
     @Test
     void create() {
         
-        //creating product
-        assertTrue(productManager.create(product));
+        //creating baseProduct
+        assertTrue(productManager.create(baseProduct));
         System.out.println("========== create() TEST DONE ============");
     }
     
@@ -56,12 +56,12 @@ class ProductManagerTest {
         //trying to createAll() using non-initialized, empty List
         assertFalse(productManager.createAll(new ArrayList<>()));
         
-        ArrayList<Product> List = new ArrayList<>();
+        ArrayList<BaseProduct> List = new ArrayList<>();
         
         assertFalse(productManager.createAll(List));
         
         //trying to createAll() after adding products to the List
-        List.add(product);
+        List.add(baseProduct);
         assertTrue(productManager.createAll(List));
         
         System.out.println("========== createAll() TEST DONE ============");
@@ -74,26 +74,26 @@ class ProductManagerTest {
         //trying to read a productId (UUID) using an empty String
         assertNull(productManager.readProduct(""));
         
-        //setting product UUID
-        product.set(ProductAttribute.UUID, "25");
+        //setting baseProduct UUID
+        baseProduct.set(ProductAttribute.UUID, "25");
         
-        //using read on a set product UUID
-        assertEquals(product.get(ProductAttribute.UUID), "25");
+        //using read on a set baseProduct UUID
+        assertEquals(baseProduct.get(ProductAttribute.UUID), "25");
         System.out.println("========== read() TEST DONE ============");
     }
     
     @Order(4)
     @Test
     void update() {
-        //testing with nothing in the productArray
+        //testing with nothing in the baseProductArray
         assertFalse(productManager.update("46", ProductAttribute.UUID, "50"));
         
-        //adding product to productArray
-        productManager.create(product);
-        productManager.productArray.add(product);
+        //adding baseProduct to baseProductArray
+        productManager.create(baseProduct);
+        productManager.baseProductArray.add(baseProduct);
         
-        //setting product UUID
-        product.set(ProductAttribute.UUID, "30");
+        //setting baseProduct UUID
+        baseProduct.set(ProductAttribute.UUID, "30");
         
         //testing if desired update occurred
         assertTrue(productManager.update("30", ProductAttribute.UUID, "50"));
@@ -104,20 +104,20 @@ class ProductManagerTest {
     @Test
     void remove() {
         
-        //trying to remove product not in productArray
+        //trying to remove baseProduct not in baseProductArray
         assertFalse(productManager.remove("30"));
         
-        //adding product to productArray
-        productManager.create(product);
-        productManager.productArray.add(product);
+        //adding baseProduct to baseProductArray
+        productManager.create(baseProduct);
+        productManager.baseProductArray.add(baseProduct);
         
-        //setting product UUID
-        product.set(ProductAttribute.UUID, "30");
+        //setting baseProduct UUID
+        baseProduct.set(ProductAttribute.UUID, "30");
         
-        //trying to remove product in productArray, using faulty UUID
+        //trying to remove baseProduct in baseProductArray, using faulty UUID
         assertFalse(productManager.remove("45"));
         
-        //trying to remove product in productArray, using actual UUID
+        //trying to remove baseProduct in baseProductArray, using actual UUID
         assertTrue(productManager.remove("30"));
         System.out.println("========== remove() TEST DONE ============");
     }
@@ -125,44 +125,44 @@ class ProductManagerTest {
     @Order(6)
     @Test
     void removeAll() {
-        //Initializing String array of possible product UUIDs
+        //Initializing String array of possible baseProduct UUIDs
         String[] ids = {"35", "42", "1", "364"};
         
         //Initializing second String array of UUIDs, for test with 1 not matching
         String[] ids1 = {"35", "42", "1", "363"};
         
-        //creating additional product objects
-        Product product1 = new Product();
-        Product product2 = new Product();
-        Product product3 = new Product();
-        Product product4 = new Product();
+        //creating additional baseProduct objects
+        BaseProduct baseProduct1 = new BaseProduct();
+        BaseProduct baseProduct2 = new BaseProduct();
+        BaseProduct baseProduct3 = new BaseProduct();
+        BaseProduct baseProduct4 = new BaseProduct();
         
         for (ProductAttribute pa : ProductAttribute.values()) {
-            product1.set(pa, "test");
-            product2.set(pa, "test");
-            product3.set(pa, "test");
-            product4.set(pa, "test");
+            baseProduct1.set(pa, "test");
+            baseProduct2.set(pa, "test");
+            baseProduct3.set(pa, "test");
+            baseProduct4.set(pa, "test");
         }
         
-        //trying to removeAll products in empty productArray
+        //trying to removeAll products in empty baseProductArray
         assertFalse(productManager.removeAll(ids));
         
-        //adding products to productArray
-        productManager.create(product1);
-        productManager.create(product2);
-        productManager.create(product3);
-        productManager.create(product4);
+        //adding products to baseProductArray
+        productManager.create(baseProduct1);
+        productManager.create(baseProduct2);
+        productManager.create(baseProduct3);
+        productManager.create(baseProduct4);
         
-        productManager.productArray.add(product1);
-        productManager.productArray.add(product2);
-        productManager.productArray.add(product3);
-        productManager.productArray.add(product4);
+        productManager.baseProductArray.add(baseProduct1);
+        productManager.baseProductArray.add(baseProduct2);
+        productManager.baseProductArray.add(baseProduct3);
+        productManager.baseProductArray.add(baseProduct4);
         
-        //setting product UUIDs
-        product1.set(ProductAttribute.UUID, "35");
-        product2.set(ProductAttribute.UUID, "42");
-        product3.set(ProductAttribute.UUID, "1");
-        product4.set(ProductAttribute.UUID, "364");
+        //setting baseProduct UUIDs
+        baseProduct1.set(ProductAttribute.UUID, "35");
+        baseProduct2.set(ProductAttribute.UUID, "42");
+        baseProduct3.set(ProductAttribute.UUID, "1");
+        baseProduct4.set(ProductAttribute.UUID, "364");
         
         //testing removeAll with an array containing 1 non-matching UUID
         assertFalse(productManager.removeAll(ids1));
@@ -176,13 +176,13 @@ class ProductManagerTest {
     @Test
     void readProducts() {
         String[] ids = {"35", "42", "1", "364"};
-        Product[] products = productManager.readProducts(ids);
-        Product[] productTest = new Product[4];
+        BaseProduct[] baseProducts = productManager.readProducts(ids);
+        BaseProduct[] baseProductTest = new BaseProduct[4];
 
-        assertNotNull(products);
-        assertEquals(4, products.length);
-        //assertArrayEquals(productTest, products);
-        assertNotNull(Arrays.asList(products));
+        assertNotNull(baseProducts);
+        assertEquals(4, baseProducts.length);
+        //assertArrayEquals(baseProductTest, baseProducts);
+        assertNotNull(Arrays.asList(baseProducts));
     }
 
     @Order(8)
@@ -203,7 +203,7 @@ class ProductManagerTest {
     @Order(9)
     @Test
     void readAllProducts() {
-        //Ensuring that the returned product arraylist isn't null
+        //Ensuring that the returned baseProduct arraylist isn't null
         assertNotNull(productManager.readAllProducts());
 
         //Ensuring that the returned arraylist is indeed an instance of the appropriate class
@@ -214,15 +214,15 @@ class ProductManagerTest {
     @Test
     @Order(10)
     void readProduct(){
-        //reading a product not found in the productArray
+        //reading a baseProduct not found in the baseProductArray
         assertNull(productManager.readProduct("1"));
 
-        //creating product, setting the UUID and add it to the productArray
-        Product product1 = new Product();
-        product1.set(ProductAttribute.UUID, "1");
-        productManager.productArray.add(product1);
+        //creating baseProduct, setting the UUID and add it to the baseProductArray
+        BaseProduct baseProduct1 = new BaseProduct();
+        baseProduct1.set(ProductAttribute.UUID, "1");
+        productManager.baseProductArray.add(baseProduct1);
 
-        //reading product now added to the productArray
+        //reading baseProduct now added to the baseProductArray
         assertNotNull(productManager.readProduct("1"));
         System.out.println("========== readProduct() TEST DONE ============");
     }

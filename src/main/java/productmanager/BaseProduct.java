@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Product { //initialize class
+public class BaseProduct { //initialize class
 
     private final HashMap<ProductAttribute, String> productAttributes; //initialize hashmap to contain product attributes
 
-    public Product(){ //product constructor w.o. attribute input
+    public BaseProduct(){ //product constructor w.o. attribute input
         productAttributes = new HashMap<>(); //initialize hashmap
     }
 
@@ -57,11 +57,11 @@ public class Product { //initialize class
 
     @Override
     public String toString(){ //overrides toString method, returning product name and price
-        return "Product: " + productAttributes.get(ProductAttribute.NAME) + " price: " + productAttributes.get(ProductAttribute.PRICE);
+        return "BaseProduct: " + productAttributes.get(ProductAttribute.NAME) + " price: " + productAttributes.get(ProductAttribute.PRICE);
     }
 
     public void print(){
-        System.out.println("Product : " + productAttributes.get(ProductAttribute.NAME)); //returns product name
+        System.out.println("BaseProduct : " + productAttributes.get(ProductAttribute.NAME)); //returns product name
 
         for(ProductAttribute pA : ProductAttribute.values()){ //runs through all product attributes
 

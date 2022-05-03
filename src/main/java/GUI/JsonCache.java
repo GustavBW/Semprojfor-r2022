@@ -1,6 +1,6 @@
 package GUI;
 
-import productmanager.Product;
+import productmanager.BaseProduct;
 import productmanager.ProductJSONReader;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +22,7 @@ public class JsonCache {
     }
 
     private final ProductJSONReader reader;
-    private List<Product> quickAccess;
+    private List<BaseProduct> quickAccess;
     private boolean removeCacheOnExit = false;
     private Thread shutdownHook,dumpHook;
 
@@ -70,11 +70,11 @@ public class JsonCache {
         reader.write(quickAccess);
     }
 
-    public void overwrite(List<Product> list){
+    public void overwrite(List<BaseProduct> list){
         quickAccess = list;
     }
 
-    public void add(List<Product> list){
+    public void add(List<BaseProduct> list){
         System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : ADDING " + list.size() + " ELEMENTS");
         quickAccess.addAll(list);
     }
@@ -85,18 +85,18 @@ public class JsonCache {
             System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : FILEPATH " + path + " RETURNES INVALID FILE");
         }
     }
-    public void add(Product p) throws IOException{
+    public void add(BaseProduct p) throws IOException{
         add(List.of(p));
     }
 
-    public void remove(List<Product> list){
+    public void remove(List<BaseProduct> list){
         quickAccess.removeAll(list);
     }
-    public void remove(Product p) throws IOException{
+    public void remove(BaseProduct p) throws IOException{
         quickAccess.remove(p);
     }
 
-    public List<Product> get(){
+    public List<BaseProduct> get(){
         return new ArrayList<>(quickAccess);
     }
 

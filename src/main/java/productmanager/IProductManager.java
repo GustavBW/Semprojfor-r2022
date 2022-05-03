@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public interface IProductManager {
 
-    boolean create(Product p);
-    boolean createAll(ArrayList<Product> p);
-    Product readProduct(String productId);
-    Product[] readProducts(String[] productIds);
+    boolean create(BaseProduct p);
+    boolean createAll(ArrayList<BaseProduct> p);
+    BaseProduct readProduct(String productId);
+    BaseProduct[] readProducts(String[] productIds);
     boolean update(String productId, ProductAttribute a, String s);
-    boolean update(String productId, Product p);
+    boolean update(String productId, BaseProduct p);
     boolean remove(String productId);
     void setUpdateInterval(int time);
     void reparse();
 
-    ArrayList<Product> readAllProducts();
+    ArrayList<BaseProduct> readAllProducts();
 
 }

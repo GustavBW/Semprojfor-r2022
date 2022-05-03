@@ -1,7 +1,6 @@
 package GUI;
 
-import javafx.scene.control.Button;
-import productmanager.Product;
+import productmanager.BaseProduct;
 import productmanager.ProductAttribute;
 
 /*
@@ -12,18 +11,18 @@ Should these pB's just call the same methods as found in the pGUI class?
 public class ProductButton extends FuncButton {
 
     private final ProductGUIManager prodGUIManager;
-    private final Product product;
+    private final BaseProduct baseProduct;
     private final ProductGUI prodGUI;
 
-    public ProductButton(Product p, ProductGUIManager pGUIM) {
+    public ProductButton(BaseProduct p, ProductGUIManager pGUIM) {
         super(p.get(ProductAttribute.NAME));
         this.prodGUIManager = pGUIM;
-        this.product = p;
+        this.baseProduct = p;
 
         button.setPrefWidth(App.dim.getX() * 0.3);
         button.setPrefHeight(App.dim.getY() * 0.1);
 
-        prodGUI = new ProductGUI(product);
+        prodGUI = new ProductGUI(baseProduct);
     }
 
     @Override

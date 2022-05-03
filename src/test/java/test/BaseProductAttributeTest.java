@@ -5,7 +5,7 @@ import productmanager.ProductAttribute;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductAttributeTest {
+class BaseProductAttributeTest {
 
     @Test
     void values() {

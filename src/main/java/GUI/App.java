@@ -6,17 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import productmanager.Product;
+import productmanager.BaseProduct;
 import productmanager.ProductManager;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -51,9 +49,9 @@ public class App extends Application implements Initializable
     }
 
     private void addProductButtons() {
-        List<Product> products = cacheInstance.get();
+        List<BaseProduct> baseProducts = cacheInstance.get();
 
-        for (Product p : products) {
+        for (BaseProduct p : baseProducts) {
             ProductButton pB = new ProductButton(p, prodGUIManager);
             btnVbox.getChildren().add(pB.getButton());
         }
@@ -65,7 +63,7 @@ public class App extends Application implements Initializable
                     @Override
                     public void onClicked() {
                         App.this.reloadProductButtons();
-                        System.out.println("Reloaded Product Buttons");
+                        System.out.println("Reloaded BaseProduct Buttons");
                     }
                 }.getButton(),
                 new FuncButton("Create"){

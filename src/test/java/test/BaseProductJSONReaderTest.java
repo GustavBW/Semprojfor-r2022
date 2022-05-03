@@ -1,8 +1,8 @@
 package test;
 
 import org.junit.jupiter.api.Test;
+import productmanager.BaseProduct;
 import productmanager.ProductJSONReader;
-import productmanager.Product;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,16 +10,16 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductJSONReaderTest {
+class BaseProductJSONReaderTest {
     private static ProductJSONReader reader = new ProductJSONReader("resources/products.json");
 
     @Test
     void read() {
 
-        ArrayList<Product> products = null;
+        ArrayList<BaseProduct> baseProducts = null;
         try {
             assertFalse(reader.read().isEmpty());          //Is there any Products in the array?
-            assertNotNull(products = reader.read());       //Does the array exist?
+            assertNotNull(baseProducts = reader.read());       //Does the array exist?
             assertTrue(reader.read().size() > 1);  //Is there more than 1 product object?
 
             assertThrows(FileNotFoundException.class, () -> reader.read("")); //Does it fail when there's an invalid filepath given?

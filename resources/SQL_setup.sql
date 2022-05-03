@@ -1,4 +1,4 @@
-CREATE TABLE products(
+CREATE TABLE baseProducts(
     id VARCHAR(36) PRIMARY KEY,
     pID INTEGER NOT NULL,
     average_user_review FLOAT NOT NULL,
@@ -16,6 +16,6 @@ CREATE TABLE products(
 );
 
 CREATE TABLE brands_and_products(
-	product_id VARCHAR(36) REFERENCES products(id), 
+	product_id VARCHAR(36) REFERENCES baseProducts(id),
 	brand_id SERIAL REFERENCES brands(id)
 );

@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Modality;
-import productmanager.Product;
+import productmanager.BaseProduct;
 import productmanager.ProductAttribute;
 
 import java.io.IOException;
@@ -18,10 +18,10 @@ import java.util.Optional;
 
 public class ProductGUI {
 
-    private Product product;    //The Product displayed through this GUI
+    private BaseProduct baseProduct;    //The BaseProduct displayed through this GUI
     private boolean isInEditMode = false; //Boolean tracking if the GUI is in edit mode
-    private boolean creatingNotEditing = false; //Boolean tracking whether to update an existing product or make a make a new one for Saving (.saveChanges())
-    private final List<TextArea> editables; //Attributes of the Product that the user can edit.
+    private boolean creatingNotEditing = false; //Boolean tracking whether to update an existing baseProduct or make a make a new one for Saving (.saveChanges())
+    private final List<TextArea> editables; //Attributes of the BaseProduct that the user can edit.
     private final List<HBox> subContainers; //Pairs of an attribute name (Text obj) and the attribute value (Text obj)
     private final HashMap<TextArea, ProductAttribute> textPattrMap; //A way to get what ProductAttribute a text field displayes
     private final HashMap<ProductAttribute, TextArea> pattrTextMap; //A way to get a text field using a ProductAttribute
@@ -32,8 +32,8 @@ public class ProductGUI {
     private final Button deleteButton;
     private static final Point2D cDim = new Point2D(App.dim.getX() * 0.85, App.dim.getY() * 0.95);
 
-    public ProductGUI(Product product){
-        this.product = product;
+    public ProductGUI(BaseProduct baseProduct){
+        this.baseProduct = baseProduct;
         this.textPattrMap = new HashMap<>();
         this.pattrTextMap = new HashMap<>();
         this.subContainers = new ArrayList<>();
@@ -70,25 +70,25 @@ public class ProductGUI {
         cancelButton.setStyle("-fx-background-color:#d76868");
     }
 
-    private static Product getBlankProduct() {
-        Product blankProduct = new Product();
+    private static BaseProduct getBlankProduct() {
+        BaseProduct blankBaseProduct = new BaseProduct();
 
-        blankProduct.set(ProductAttribute.UUID, "e.g. ea6954c2-64ec-4a65-b1a5-d614907e8b65");
-        blankProduct.set(ProductAttribute.ID, "e.g. 25");
-        blankProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "e.g. 4.523");
-        blankProduct.set(ProductAttribute.IN_STOCK, "e.g. København,Hørsholm,Vejle...");
-        blankProduct.set(ProductAttribute.EAN, "e.g. 1122334455667");
-        blankProduct.set(ProductAttribute.PRICE, "e.g. 1875.95");
-        blankProduct.set(ProductAttribute.PUBLISHED_DATE, "yyyy-mm-dd");
-        blankProduct.set(ProductAttribute.EXPIRATION_DATE, "yyyy-mm-dd");
-        blankProduct.set(ProductAttribute.CATEGORY, "e.g. 'Laptops'");
-        blankProduct.set(ProductAttribute.NAME, "");
-        blankProduct.set(ProductAttribute.DESCRIPTION, "");
-        blankProduct.set(ProductAttribute.WEIGHT, "in KG");
-        blankProduct.set(ProductAttribute.SIZE, "e.g. length by width by height");
-        blankProduct.set(ProductAttribute.CLOCKSPEED, "e.g. 4.5GHz");
+        blankBaseProduct.set(ProductAttribute.UUID, "e.g. ea6954c2-64ec-4a65-b1a5-d614907e8b65");
+        blankBaseProduct.set(ProductAttribute.ID, "e.g. 25");
+        blankBaseProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "e.g. 4.523");
+        blankBaseProduct.set(ProductAttribute.IN_STOCK, "e.g. København,Hørsholm,Vejle...");
+        blankBaseProduct.set(ProductAttribute.EAN, "e.g. 1122334455667");
+        blankBaseProduct.set(ProductAttribute.PRICE, "e.g. 1875.95");
+        blankBaseProduct.set(ProductAttribute.PUBLISHED_DATE, "yyyy-mm-dd");
+        blankBaseProduct.set(ProductAttribute.EXPIRATION_DATE, "yyyy-mm-dd");
+        blankBaseProduct.set(ProductAttribute.CATEGORY, "e.g. 'Laptops'");
+        blankBaseProduct.set(ProductAttribute.NAME, "");
+        blankBaseProduct.set(ProductAttribute.DESCRIPTION, "");
+        blankBaseProduct.set(ProductAttribute.WEIGHT, "in KG");
+        blankBaseProduct.set(ProductAttribute.SIZE, "e.g. length by width by height");
+        blankBaseProduct.set(ProductAttribute.CLOCKSPEED, "e.g. 4.5GHz");
 
-        return blankProduct;
+        return blankBaseProduct;
     }
 
     private List<TextArea> generateGUI(){
@@ -97,7 +97,7 @@ public class ProductGUI {
         subContainers.clear();
 
         //Title text
-        TextArea titleText = new TextArea(product.get(ProductAttribute.NAME));
+        TextArea titleText = new TextArea(baseProduct.get(ProductAttribute.NAME));
         titleText.setEditable(false);
         titleText.setWrapText(true);
 
@@ -112,9 +112,9 @@ public class ProductGUI {
 
         List<TextArea> output = new ArrayList<>();
         //This makes the IN_STOCK display correctly for GUI purposes. It shouldn't change anything anywhere else. But for good measure this change is reverted later
-        //product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll(",","\n"));
+        //baseProduct.set(ProductAttribute.IN_STOCK, baseProduct.get(ProductAttribute.IN_STOCK).replaceAll(",","\n"));
 
-        //Generates a table of Hboxes in VBoxes of all product attributes, however, ignore the first since that is the UUID which must not be changed
+        //Generates a table of Hboxes in VBoxes of all baseProduct attributes, however, ignore the first since that is the UUID which must not be changed
         for(ProductAttribute pattr : ProductAttribute.values()){
 
             HBox subContainer = new HBox();
@@ -123,7 +123,7 @@ public class ProductGUI {
             
             String attribute;
             TextArea attrText;
-            if ((attribute = product.get(pattr)) != null) {
+            if ((attribute = baseProduct.get(pattr)) != null) {
                 attrText = new TextArea(attribute);
             } else {
                 attrText = new TextArea();
@@ -151,7 +151,7 @@ public class ProductGUI {
 
         }
 
-        product.set(ProductAttribute.IN_STOCK, product.get(ProductAttribute.IN_STOCK).replaceAll("\n",","));
+        baseProduct.set(ProductAttribute.IN_STOCK, baseProduct.get(ProductAttribute.IN_STOCK).replaceAll("\n",","));
         container.getChildren().addAll(subContainers);
         editables.addAll(output);
         return output;
@@ -174,9 +174,9 @@ public class ProductGUI {
 
         //Check the result from the user
         if (result.get() == ButtonType.YES) {
-            //App.productManager.remove(product.get(ProductAttribute.UUID));
+            //App.productManager.remove(baseProduct.get(ProductAttribute.UUID));
             try {
-                App.getCache().remove(product);
+                App.getCache().remove(baseProduct);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -189,7 +189,7 @@ public class ProductGUI {
     }
 
     public boolean startEditMode(){
-        System.out.println("Editing Product " + product.get(ProductAttribute.UUID));
+        System.out.println("Editing BaseProduct " + baseProduct.get(ProductAttribute.UUID));
         isInEditMode = true;
 
         unlockAll();
@@ -216,7 +216,7 @@ public class ProductGUI {
     }
 
     public boolean saveChanges(){
-        System.out.println("Saved Changes to Product " + product.get(ProductAttribute.UUID));
+        System.out.println("Saved Changes to BaseProduct " + baseProduct.get(ProductAttribute.UUID));
         isInEditMode = false;
 
         //Step 0: Lock all fields so no changes can be made. Also disable the Save and Cancel Buttons.
@@ -227,9 +227,9 @@ public class ProductGUI {
         saveButton.setDisable(true);
         cancelButton.setDisable(true);
 
-        //Step 1: Read all information in the text fields and make a new product from this.
-        Product modProd = getModProduct();
-        //Step 2: Update the product to equal this new one. (Their UUID's will always be the same, but this is just to make sure the right product is overridden)
+        //Step 1: Read all information in the text fields and make a new baseProduct from this.
+        BaseProduct modProd = getModProduct();
+        //Step 2: Update the baseProduct to equal this new one. (Their UUID's will always be the same, but this is just to make sure the right baseProduct is overridden)
         if(creatingNotEditing){
             try {
                 App.getCache().add(modProd);
@@ -240,23 +240,23 @@ public class ProductGUI {
             creatingNotEditing = false;
         }else {
             try {
-                App.getCache().remove(product);
+                App.getCache().remove(baseProduct);
                 App.getCache().add(modProd);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            //App.productManager.update(product.get(ProductAttribute.UUID), modProd);
+            //App.productManager.update(baseProduct.get(ProductAttribute.UUID), modProd);
         }
-        //Step 3: Change what product this GUI is using.
-        product = modProd;
-        //Step 4: Remake the GUI using the new changed product.
+        //Step 3: Change what baseProduct this GUI is using.
+        baseProduct = modProd;
+        //Step 4: Remake the GUI using the new changed baseProduct.
         generateGUI();
 
         return isInEditMode;
     }
     public boolean cancelEditMode(){
-        System.out.println("Cancelled Editing Product " + product.get(ProductAttribute.UUID));
+        System.out.println("Cancelled Editing BaseProduct " + baseProduct.get(ProductAttribute.UUID));
         isInEditMode = false;
 
         lockAll();
@@ -271,8 +271,8 @@ public class ProductGUI {
         return !isInEditMode;
     }
 
-    private Product getModProduct(){
-        Product output = new Product();
+    private BaseProduct getModProduct(){
+        BaseProduct output = new BaseProduct();
 
         //Using the HashMap to pull out all the information stored in the text fields.
         for(ProductAttribute pattr : ProductAttribute.values()){
@@ -283,8 +283,8 @@ public class ProductGUI {
 
         return output;
     }
-    public Product getProduct(){
-        return product;
+    public BaseProduct getProduct(){
+        return baseProduct;
     }
     public boolean isInEditMode(){return isInEditMode;}
 
