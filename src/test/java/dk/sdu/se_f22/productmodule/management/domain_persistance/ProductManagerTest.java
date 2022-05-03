@@ -1,11 +1,13 @@
 package dk.sdu.se_f22.productmodule.management.domain_persistance;
 
+import dk.sdu.se_f22.sharedlibrary.models.Product;
 import org.junit.jupiter.api.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +36,35 @@ class ProductManagerTest {
         }
         productManager = new ProductManager("src/test/resources/dk/sdu/se_f22/productmodule/management/domain_persistance/cheese.json");
         System.out.println("============ INITIALIZING ============");
+    }
+    
+    @Order(0)
+    @Test
+    void toBaseProduct() {
+        baseProduct.set(ProductAttribute.UUID, UUID.randomUUID().toString());
+        baseProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "2.8");
+        baseProduct.set(ProductAttribute.EAN, "32131231");
+        baseProduct.set(ProductAttribute.PRICE, "2.99");
+        baseProduct.set(ProductAttribute.PUBLISHED_DATE, "2021-06-02T05:05:06.622164");
+        baseProduct.set(ProductAttribute.EXPIRATION_DATE, "2025-01-25T07:40:33.169509");
+        baseProduct.set(ProductAttribute.CLOCKSPEED, "2.4");
+        baseProduct.set(ProductAttribute.WEIGHT, "3.1");
+        Product product = new Product(baseProduct);
+        BaseProduct returnedBaseProduct = productManager.toBaseProduct(product);
+        
+        assertEquals(baseProduct.get(ProductAttribute.UUID), returnedBaseProduct.get(ProductAttribute.UUID));
+        assertEquals(baseProduct.get(ProductAttribute.AVERAGE_USER_REVIEW), returnedBaseProduct.get(ProductAttribute.AVERAGE_USER_REVIEW));
+        assertEquals(baseProduct.getLocations(), returnedBaseProduct.getLocations());
+        assertEquals(baseProduct.get(ProductAttribute.EAN), returnedBaseProduct.get(ProductAttribute.EAN));
+        assertEquals(baseProduct.get(ProductAttribute.PRICE), returnedBaseProduct.get(ProductAttribute.PRICE));
+        assertEquals(baseProduct.get(ProductAttribute.PUBLISHED_DATE), returnedBaseProduct.get(ProductAttribute.PUBLISHED_DATE));
+        assertEquals(baseProduct.get(ProductAttribute.EXPIRATION_DATE), returnedBaseProduct.get(ProductAttribute.EXPIRATION_DATE));
+        assertEquals(baseProduct.get(ProductAttribute.CATEGORY), returnedBaseProduct.get(ProductAttribute.CATEGORY));
+        assertEquals(baseProduct.get(ProductAttribute.NAME), returnedBaseProduct.get(ProductAttribute.NAME));
+        assertEquals(baseProduct.get(ProductAttribute.DESCRIPTION), returnedBaseProduct.get(ProductAttribute.DESCRIPTION));
+        assertEquals(baseProduct.get(ProductAttribute.CLOCKSPEED), returnedBaseProduct.get(ProductAttribute.CLOCKSPEED));
+        assertEquals(baseProduct.get(ProductAttribute.WEIGHT), returnedBaseProduct.get(ProductAttribute.WEIGHT));
+        assertEquals(baseProduct.get(ProductAttribute.SIZE), returnedBaseProduct.get(ProductAttribute.SIZE));
     }
     
     @Order(1)

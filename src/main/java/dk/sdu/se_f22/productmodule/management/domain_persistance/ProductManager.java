@@ -256,14 +256,20 @@ public class ProductManager implements IProductManager, Runnable{
         }
     }
     
-    private BaseProduct toBaseProduct(Product product) {
+    BaseProduct toBaseProduct(Product product) {
         BaseProduct toReturn = new BaseProduct();
         toReturn.set(ProductAttribute.UUID, product.getUuid().toString());
-        toReturn.set(ProductAttribute.NAME, product.getName());
-        toReturn.set(ProductAttribute.PRICE, Double.toString(product.getPrice()));
-        toReturn.set(ProductAttribute.DESCRIPTION, product.getDescription());
-        toReturn.set(ProductAttribute.CATEGORY, product.getCategory());
         toReturn.set(ProductAttribute.AVERAGE_USER_REVIEW, Double.toString(product.getAverageUserReview()));
+        toReturn.set(ProductAttribute.EAN, Long.toString(product.getEan()));
+        toReturn.set(ProductAttribute.PRICE, Double.toString(product.getPrice()));
+        toReturn.set(ProductAttribute.PUBLISHED_DATE, product.getPublishedDate().toString().substring(0, product.getPublishedDate().toString().indexOf("Z")));
+        toReturn.set(ProductAttribute.EXPIRATION_DATE, product.getExpirationDate().toString().substring(0, product.getExpirationDate().toString().indexOf("Z")));
+        toReturn.set(ProductAttribute.CATEGORY, product.getCategory());
+        toReturn.set(ProductAttribute.NAME, product.getName());
+        toReturn.set(ProductAttribute.DESCRIPTION, product.getDescription());
+        toReturn.set(ProductAttribute.WEIGHT, Double.toString(product.getWeight()));
+        toReturn.set(ProductAttribute.SIZE, product.getSize());
+        toReturn.set(ProductAttribute.CLOCKSPEED, Double.toString(product.getClockspeed()));
         toReturn.setLocations(product.getInStock());
         return toReturn;
     }
