@@ -65,8 +65,10 @@ class ProductTest {
         }
 
         Product product = productTestList.get(0);
+        System.out.println(product.toString());
         assertThrows(NumberFormatException.class, () -> product.getAsNumeric(ProductAttribute.NAME));
         assertThrows(NullPointerException.class, () -> product.getAsNumeric(ProductAttribute.SIZE));
+        assertEquals(1787.5d, product.getAsNumeric(ProductAttribute.PRICE));
     }
 
     @Test

@@ -31,9 +31,9 @@ public class Product { //initialize class
     } //returns an arraylist of the available shops
 
     public boolean set(ProductAttribute pA, String value){
-        if(value.endsWith("\"")){
+        /*if(value.endsWith("\"")){
             value = value.substring(0,value.length() - 1); //?
-        }
+        }*/
         
         if (value.isEmpty()){
             productAttributes.put(pA, null);

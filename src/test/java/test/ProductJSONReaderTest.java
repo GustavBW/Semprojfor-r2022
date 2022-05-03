@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JSONReaderTest {
+class ProductJSONReaderTest {
     private static ProductJSONReader reader = new ProductJSONReader("resources/products.json");
 
     @Test
@@ -46,5 +46,14 @@ class JSONReaderTest {
 
     @Test
     void testWrite() {
+    }
+    
+    @Test
+    void validate() {
+        assertTrue(reader.validate("resources/products.json"));
+        assertFalse(reader.validate("resources/prodadsucts.json"));
+        assertFalse(reader.validate("resources/empty.json"));
+        assertTrue(reader.validate("resources/cheese.json"));
+        assertFalse(reader.validate("resources/config.txt"));
     }
 }

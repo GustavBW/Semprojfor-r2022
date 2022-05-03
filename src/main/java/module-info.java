@@ -6,7 +6,8 @@ module GUI {
     requires com.dlsc.formsfx;
     requires javafx.graphics;
     requires org.jetbrains.annotations;
-    
+    requires java.desktop;
+
     opens GUI to javafx.fxml;
     exports GUI;
 }

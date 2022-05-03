@@ -20,8 +20,8 @@ public class ProductButton extends FuncButton {
         this.prodGUIManager = pGUIM;
         this.product = p;
 
-        button.setPrefWidth(App.dim.getX() * 0.14);
-        button.setPrefHeight(App.dim.getY() * 0.085);
+        button.setPrefWidth(App.dim.getX() * 0.3);
+        button.setPrefHeight(App.dim.getY() * 0.1);
 
         prodGUI = new ProductGUI(product);
     }

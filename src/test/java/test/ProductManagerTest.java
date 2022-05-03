@@ -22,7 +22,7 @@ class ProductManagerTest {
     @BeforeAll
     static void initialize(){
         try {
-            FileWriter fw = new FileWriter("resources/cheese.txt");
+            FileWriter fw = new FileWriter("resources/cheese.json");
             fw.write("");
             fw.close();
         } catch (IOException e) {
@@ -37,7 +37,7 @@ class ProductManagerTest {
         for(ProductAttribute pa : ProductAttribute.values()){
             product.set(pa, "test");
         }
-        productManager = new ProductManager("resources/cheese.txt");
+        productManager = new ProductManager("resources/cheese.json");
         System.out.println("============ INITIALIZING ============");
     }
     
@@ -181,23 +181,45 @@ class ProductManagerTest {
 
     @Order(8)
     @Test
-    void readAllProducts() {
-    assertNotNull(productManager.readAllProducts());
-    assertInstanceOf(ArrayList.class, productManager.readAllProducts());
-    //check if what is in the arraylist is correct
+    void setUpdateInterval() {
+        //Setting new UpdateInterval
+        productManager.setUpdateInterval(9);
+
+        //Asserting the correct interval change
+        assertEquals(productManager.getUpdateInterval(), 9);
+
+        //Asserting a false interval change
+        assertNotEquals(10, productManager.getUpdateInterval());
+        System.out.println("========== setUpdateInterval() TEST DONE ============");
+
     }
 
     @Order(9)
     @Test
-    void setUpdateIntervalTest() {
-        productManager.setUpdateInterval(9);
-        assertEquals(productManager.getUpdateInterval(), 9);
+    void readAllProducts() {
+        //Ensuring that the returned product arraylist isn't null
+        assertNotNull(productManager.readAllProducts());
 
-        productManager.setUpdateInterval(10);
-        assertNotEquals(9, productManager.getUpdateInterval());
+        //Ensuring that the returned arraylist is indeed an instance of the appropriate class
+        assertInstanceOf(ArrayList.class, productManager.readAllProducts());
+        System.out.println("========== readAllProducts() TEST DONE ============");
     }
 
+    @Test
+    @Order(10)
+    void readProduct(){
+        //reading a product not found in the productArray
+        assertNull(productManager.readProduct("1"));
 
+        //creating product, setting the UUID and add it to the productArray
+        Product product1 = new Product();
+        product1.set(ProductAttribute.UUID, "1");
+        productManager.productArray.add(product1);
+
+        //reading product now added to the productArray
+        assertNotNull(productManager.readProduct("1"));
+        System.out.println("========== readProduct() TEST DONE ============");
+    }
     
     @AfterEach
     void teardown(){

@@ -3,6 +3,7 @@ package productmanager;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductJSONReader {
 
@@ -18,20 +19,42 @@ public class ProductJSONReader {
         return read(filepath);
     }
 
-    public ArrayList<Product> read(String filepath2) throws IOException{
+    public boolean validate(String filepath){
+        boolean valid = true;
+        List<Product> result = null;
+
+        String filetype = filepath.substring(filepath.lastIndexOf('.'));
+        if(!filetype.equalsIgnoreCase(".json")){
+            return false;
+        }
+
+        try{
+            result = read(filepath);
+        }catch (Exception e){
+            valid = false;
+        }
+
+        if(result != null){
+            valid = !result.isEmpty();
+        }
+
+        return valid;
+    }
+
+    public ArrayList<Product> read(String filepath2) throws IOException, StringIndexOutOfBoundsException{
         ArrayList<Product> output = new ArrayList<>();
         currentLineNumber = 1;
         int amountOfProducts = 1;
 
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(filepath2));
+        //try{
+        BufferedReader br = new BufferedReader(new FileReader(filepath2));
 
-            readLines(output, amountOfProducts, br);
+        readLines(output, amountOfProducts, br);
 
-        }catch (StringIndexOutOfBoundsException e){
-            System.out.println("String index out of bounds at line " + currentLineNumber);
-            e.printStackTrace();
-        }
+        //}catch (StringIndexOutOfBoundsException e){
+        //    System.out.println("String index out of bounds at line " + currentLineNumber);
+        //    e.printStackTrace();
+        //}
         return output;
     }
 
@@ -103,10 +126,11 @@ public class ProductJSONReader {
         int valueStart = countOccurences(line, '"') < 4 ? line.indexOf(":") - 1 : line.indexOf(":");
 
         String result = line.substring(valueStart + 3, valueEnd - 1);
-        if (result.isEmpty())
-            return null;
-        else
-            return result;
+        if(result.endsWith("\"")){
+            result = result.substring(0, result.length() - 1); //?
+        }
+        
+        return result;
     }
 
     private void setProductAttribute(String line, Product p){
@@ -116,7 +140,7 @@ public class ProductJSONReader {
 
     }
 
-    public boolean write(ArrayList<Product> list, String filepath){
+    public boolean write(List<Product> list, String filepath){
 
         if(list == null || list.isEmpty()){
             throw new NullPointerException("Invalid List to write to file");
@@ -208,7 +232,7 @@ public class ProductJSONReader {
         builder.append("\n\t]").append(lineEnd);    //Finally closing the array using
     }
 
-    public boolean write(ArrayList<Product> list) throws IOException{
+    public boolean write(List<Product> list) throws IOException{
         return write(list, filepath);
     }
 

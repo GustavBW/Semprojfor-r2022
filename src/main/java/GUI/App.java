@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -33,12 +34,14 @@ public class App extends Application implements Initializable
     private static Stage mainStage;
     public static Point2D dim = new Point2D(1280,720);
     public static ProductGUIManager prodGUIManager;
+    private static final JsonCache cacheInstance = JsonCache.getInstance();
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GUIapplication.fxml"));
 
-        Scene mainScene = new Scene(loader.load(), 1280, 720);
+        mainScene = new Scene(loader.load(), 1280, 720);
+
         mainStage = stage;
         mainStage.setTitle("PIM-1 GUI");
         mainStage.setResizable(false);
@@ -48,7 +51,7 @@ public class App extends Application implements Initializable
     }
 
     private void addProductButtons() {
-        ArrayList<Product> products = productManager.readAllProducts();
+        List<Product> products = cacheInstance.get();
 
         for (Product p : products) {
             ProductButton pB = new ProductButton(p, prodGUIManager);
@@ -58,9 +61,52 @@ public class App extends Application implements Initializable
 
     private void addFuncButtons() {
         btnHbox.getChildren().addAll(List.of(
-                new ReloadGUIButton(this).getButton(),
-                new CreateNewProductButton().getButton()
-
+                new FuncButton("Reload"){
+                    @Override
+                    public void onClicked() {
+                        App.this.reloadProductButtons();
+                        System.out.println("Reloaded Product Buttons");
+                    }
+                }.getButton(),
+                new FuncButton("Create"){
+                    @Override
+                    public void onClicked(){
+                        ProductGUI newProductGUI = new ProductGUI();
+                        App.prodGUIManager.onGUIChange(newProductGUI);
+                    }
+                }.getButton(),
+                new FuncButton("Open"){
+                    @Override
+                    public void onClicked(){
+                        new FileChooser(){
+                            @Override
+                            public void forwardResult(String s){
+                                App.loadFileFrom(s);
+                            }
+                        }.open();
+                    }
+                }.getButton(),
+                new FuncButton("Save"){
+                    @Override
+                    public void onClicked(){
+                        try {
+                            App.getCache().dump();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.getButton(),
+                new FuncButton("Save As"){
+                    @Override
+                    public void onClicked(){
+                        new FileChooser(){
+                            @Override
+                            public void forwardResult(String s){
+                                App.getCache().dumpTo(s);
+                            }
+                        }.open();
+                    }
+                }.getButton()
         ));
         //Add all the FuncButtons here
     }
@@ -70,11 +116,22 @@ public class App extends Application implements Initializable
         prodGUIManager = new ProductGUIManager(productPane);
         addProductButtons();
         addFuncButtons();
+        cacheInstance.setDestroyOnExit(false);
     }
 
     public void reloadProductButtons(){
         btnVbox.getChildren().clear();
         addProductButtons();
+    }
+    public static void loadFileFrom(String path){
+        try {
+            cacheInstance.add(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static JsonCache getCache(){
+        return cacheInstance;
     }
 
     public synchronized void stop(){
