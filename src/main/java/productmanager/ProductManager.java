@@ -49,10 +49,6 @@ public class ProductManager implements IProductManager, Runnable{
         this("resources/products.json");
     }
 
-    public int getUpdateInterval() {
-        return updateInterval;
-    }
-
     @Override
     public boolean create(Product p) {
 
