@@ -34,14 +34,8 @@ public class ProductManager implements IProductManager, Runnable{
         backgroundThread.start();
 
         updateInterval = readConfig();
-
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                finalizePM();
-            }catch(Throwable e){
-                e.printStackTrace();
-            }
-        }));
+    
+        Runtime.getRuntime().addShutdownHook(new Thread(this::finalizePM));
     }
     
     ///Default File Path: "resources/products.json"
