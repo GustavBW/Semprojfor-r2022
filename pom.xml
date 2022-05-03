@@ -100,7 +100,7 @@
                 <version>${javafx.maven.plugin.version}</version>
                 <configuration>
                     <launcher>launcher</launcher>
-                    <mainClass>GUI.App</mainClass>
+                    <mainClass>dk.sdu.se_f22.productmodule.management.GUI.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>

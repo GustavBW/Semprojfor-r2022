@@ -8,6 +8,6 @@ module GUI {
     requires org.jetbrains.annotations;
     requires java.desktop;
 
-    opens GUI to javafx.fxml;
-    exports GUI;
+    opens dk.sdu.se_f22.productmodule.management.GUI to javafx.fxml;
+    exports dk.sdu.se_f22.productmodule.management.GUI;
 }
