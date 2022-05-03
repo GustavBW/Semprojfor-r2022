@@ -276,7 +276,7 @@ public class ProductManager implements IProductManager, Runnable{
         //This call rewrites the source file with the current productArray
         //This !.isEmpty and != null redundancy might not be necessary, but it's here just in case.
 
-        if(!productArray.isEmpty() || productArray != null) {
+        if(productArray != null && !productArray.isEmpty()) {
 
             try {
                 jsonReader.write(productArray);
