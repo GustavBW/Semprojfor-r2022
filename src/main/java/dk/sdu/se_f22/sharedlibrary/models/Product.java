@@ -62,7 +62,7 @@ public class Product {
      * @throws NumberFormatException if any of the attributes, that are numeric, is unparseable
      */
     public Product(BaseProduct baseProduct) throws DateTimeParseException, NumberFormatException  {
-        String stringId = baseProduct.get(ProductAttribute.ID);
+        String stringId = baseProduct.get(ProductAttribute.UUID);
         this.uuid = UUID.fromString(stringId);
         
         this.averageUserReview = Double.parseDouble(baseProduct.get(ProductAttribute.AVERAGE_USER_REVIEW));
