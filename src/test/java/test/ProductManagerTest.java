@@ -9,6 +9,7 @@ import org.junit.jupiter.api.*;
 import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -176,7 +177,13 @@ class ProductManagerTest {
     @Order(7)
     @Test
     void readProducts() {
+        String[] ids = {"35", "42", "1", "364"};
+        Product[] products = productManager.readProducts(ids);
+        Product[] productTest = new Product[4];
 
+        assertNotNull(products);
+        assertEquals(4, products.length);
+        assertArrayEquals(productTest, products);
     }
 
     @Order(8)
