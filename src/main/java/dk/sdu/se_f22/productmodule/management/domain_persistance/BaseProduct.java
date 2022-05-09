@@ -1,7 +1,5 @@
 package dk.sdu.se_f22.productmodule.management.domain_persistance;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +20,7 @@ public class BaseProduct { //initialize class
         productAttributes = new HashMap<>(); //initialize hashmap
     }
 
-    public @Nullable String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
+    public String get(ProductAttribute pA){ //String method running through pA's to assign values to productAttributes
         return productAttributes.get(pA); //returns hashmap of pA's
     }
 

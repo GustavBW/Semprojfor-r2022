@@ -3,8 +3,11 @@ package dk.sdu.se_f22.productmodule.management.domain_persistance;
 import dk.sdu.se_f22.sharedlibrary.models.Product;
 
 import java.io.*;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class ProductManager implements IProductManager, Runnable{
 
@@ -69,7 +72,7 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public BaseProduct readProduct(String productId) {
+    public BaseProduct readProduct(String productId) { //Still need to change return type, but won't compile doing so.
 
         //This function returns a single product based on the UUID
         //Since the read() function doesn't alter any attribute values on the product
@@ -79,14 +82,30 @@ public class ProductManager implements IProductManager, Runnable{
 
         BaseProduct toReturn = null;
 
-        for(BaseProduct p : baseProductArray){
+        for(BaseProduct p : baseProductArray){ //Runs through product UUID's until the requested one is found.
             if(p.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
                 toReturn = p;
                 break;
             }
         }
 
-        return toReturn;
+        UUID uuid = UUID.fromString(toReturn.get(ProductAttribute.UUID)); //converting BaseP pA's to P pA's
+        double averageUserReview = toReturn.getAsNumeric(ProductAttribute.AVERAGE_USER_REVIEW);
+        List<String> inStock = toReturn.getLocations();
+        int ean = Integer.parseInt(toReturn.get(ProductAttribute.EAN));
+        double price = toReturn.getAsNumeric(ProductAttribute.PRICE);
+        Instant publishedDate = Instant.parse(toReturn.get(ProductAttribute.PUBLISHED_DATE));
+        Instant expirationDate = Instant.parse(toReturn.get(ProductAttribute.EXPIRATION_DATE));
+        String category = toReturn.get(ProductAttribute.CATEGORY);
+        String name = toReturn.get(ProductAttribute.NAME);
+        String description = toReturn.get(ProductAttribute.DESCRIPTION);
+        String size = toReturn.get(ProductAttribute.SIZE);
+        double clockspeed = toReturn.getAsNumeric(ProductAttribute.CLOCKSPEED);
+        double weight = toReturn.getAsNumeric(ProductAttribute.WEIGHT);
+
+        Product p = new Product(uuid,averageUserReview,inStock,ean,price,publishedDate,expirationDate,category,name,description,size,clockspeed,weight);
+
+        return toReturn; //Once set to return type Product then change return to p.
     }
 
     @Override
