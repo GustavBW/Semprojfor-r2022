@@ -95,7 +95,7 @@ public class ProductManager implements IProductManager, Runnable{
                 break;
             }
         }
-        
+
         Product p = new Product(toReturn);
 
         return toReturn; //Once set to return type Product then change return to p.
