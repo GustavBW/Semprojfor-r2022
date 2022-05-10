@@ -49,15 +49,22 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public boolean create(BaseProduct p) {
+    public boolean create(Product p) {
 
         //Adds new product to the baseProductArray.
         //Returns whether this was possible or not.
 
         checkForUpdates();
-        boolean success = baseProductArray.add(p);
+        boolean success = baseProductArray.add(toBaseProduct(p));
         updateSource();
 
+        return success;
+    }
+    @Override
+    public boolean create(BaseProduct p){
+        checkForUpdates();
+        boolean success = baseProductArray.add(p);
+        updateSource();
         return success;
     }
 
@@ -89,6 +96,8 @@ public class ProductManager implements IProductManager, Runnable{
             }
         }
 
+        //Somebody needs to get some more sleep. Product got a baseProduct constructor.
+        /*
         UUID uuid = UUID.fromString(toReturn.get(ProductAttribute.UUID)); //converting BaseP pA's to P pA's
         double averageUserReview = toReturn.getAsNumeric(ProductAttribute.AVERAGE_USER_REVIEW);
         List<String> inStock = toReturn.getLocations();
@@ -104,8 +113,14 @@ public class ProductManager implements IProductManager, Runnable{
         double weight = toReturn.getAsNumeric(ProductAttribute.WEIGHT);
 
         Product p = new Product(uuid,averageUserReview,inStock,ean,price,publishedDate,expirationDate,category,name,description,size,clockspeed,weight);
+        */
+
 
         return toReturn; //Once set to return type Product then change return to p.
+    }
+    @Override
+    public Product read(String productID){
+        return new Product(readProduct(productID));
     }
 
     @Override
