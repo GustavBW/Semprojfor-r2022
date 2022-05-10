@@ -95,26 +95,8 @@ public class ProductManager implements IProductManager, Runnable{
                 break;
             }
         }
-
-        //Somebody needs to get some more sleep. Product got a baseProduct constructor.
-        /*
-        UUID uuid = UUID.fromString(toReturn.get(ProductAttribute.UUID)); //converting BaseP pA's to P pA's
-        double averageUserReview = toReturn.getAsNumeric(ProductAttribute.AVERAGE_USER_REVIEW);
-        List<String> inStock = toReturn.getLocations();
-        int ean = Integer.parseInt(toReturn.get(ProductAttribute.EAN));
-        double price = toReturn.getAsNumeric(ProductAttribute.PRICE);
-        Instant publishedDate = Instant.parse(toReturn.get(ProductAttribute.PUBLISHED_DATE));
-        Instant expirationDate = Instant.parse(toReturn.get(ProductAttribute.EXPIRATION_DATE));
-        String category = toReturn.get(ProductAttribute.CATEGORY);
-        String name = toReturn.get(ProductAttribute.NAME);
-        String description = toReturn.get(ProductAttribute.DESCRIPTION);
-        String size = toReturn.get(ProductAttribute.SIZE);
-        double clockspeed = toReturn.getAsNumeric(ProductAttribute.CLOCKSPEED);
-        double weight = toReturn.getAsNumeric(ProductAttribute.WEIGHT);
-
-        Product p = new Product(uuid,averageUserReview,inStock,ean,price,publishedDate,expirationDate,category,name,description,size,clockspeed,weight);
-        */
-
+        
+        Product p = new Product(toReturn);
 
         return toReturn; //Once set to return type Product then change return to p.
     }
