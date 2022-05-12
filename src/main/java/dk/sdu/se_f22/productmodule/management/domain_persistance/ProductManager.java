@@ -113,19 +113,20 @@ public class ProductManager implements IProductManager, Runnable{
 
         checkForUpdates();
 
-        BaseProduct[] returnArray = new BaseProduct[productIds.length];
+        Product[] returnArray = new Product[productIds.length];
 
         for(int i = 0; i < productIds.length; i++){
-            for(BaseProduct p : baseProductArray){
+            for(BaseProduct bP : baseProductArray){
 
-                if(p.get(ProductAttribute.ID).equalsIgnoreCase(productIds[i])){
+                if(bP.get(ProductAttribute.ID).equalsIgnoreCase(productIds[i])){
+                    Product p = new Product(bP);
                     returnArray[i] = p;
                     break;
                 }
             }
         }
 
-        return returnArray;
+        return null; // return returnArray;
     }
 
     @Override
