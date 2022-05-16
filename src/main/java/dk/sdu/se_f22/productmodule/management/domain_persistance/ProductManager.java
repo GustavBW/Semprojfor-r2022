@@ -68,6 +68,8 @@ public class ProductManager implements IProductManager, Runnable{
         return success;
     }
 
+
+    //Convert ProductManager.createAll(List<Product>) to ProductHit?? All products are being converted to BaseProducts and added to baseProductArray??
     @Override
     public boolean createAll(ArrayList<BaseProduct> pList){
         checkForUpdates();
@@ -77,6 +79,7 @@ public class ProductManager implements IProductManager, Runnable{
         updateSource();
         return success;
     }
+
 
     @Override
     public BaseProduct readProduct(String productId) { //Still need to change return type, but won't compile doing so.
@@ -151,7 +154,7 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public boolean update(String productId, BaseProduct p) {
+    public boolean update(String productId, Product p) {
 
         //This function updates the attributes of a product based on its UUID
         //By replacing it entirely with a new one. Make sure this new product has all it's attributes set correctly.
@@ -163,7 +166,7 @@ public class ProductManager implements IProductManager, Runnable{
 
         for(BaseProduct pT : baseProductArray){
             if(pT.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
-                pT = p;
+                pT = toBaseProduct(p);
                 success = true;
                 break;
             }
