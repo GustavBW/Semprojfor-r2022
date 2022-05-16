@@ -82,7 +82,27 @@ public class ProductManager implements IProductManager, Runnable{
 
 
     @Override
-    public BaseProduct readProduct(String productId) { //Still need to change return type, but won't compile doing so.
+    public BaseProduct readProduct(String productId) {
+
+        //This function returns a single product based on the UUID
+        //Since the read() function doesn't alter any attribute values on the product
+        //There's no reason to update the source.
+
+        checkForUpdates();
+
+        BaseProduct toReturn = null;
+
+        for(BaseProduct p : baseProductArray){ //Runs through product UUID's until the requested one is found.
+            if(p.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
+                toReturn = p;
+                break;
+            }
+        }
+
+        return toReturn;
+    }
+
+    public Product readProductNew(String productId) { //a copy with return type Product
 
         //This function returns a single product based on the UUID
         //Since the read() function doesn't alter any attribute values on the product
@@ -100,9 +120,9 @@ public class ProductManager implements IProductManager, Runnable{
         }
 
         Product p = new Product(toReturn);
-
-        return toReturn; //Once set to return type Product then change return to p.
+        return p;
     }
+
     @Override
     public Product read(String productID){
         return new Product(readProduct(productID));
@@ -110,6 +130,28 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public BaseProduct[] readProducts(String[] productIds) {
+
+        //This function returns an array of products based on an array of UUID's
+        //The size of the return array should equal the size of the input ID array
+
+        checkForUpdates();
+
+        BaseProduct[] returnArray = new BaseProduct[productIds.length];
+
+        for(int i = 0; i < productIds.length; i++){
+            for(BaseProduct bP : baseProductArray){
+
+                if(bP.get(ProductAttribute.ID).equalsIgnoreCase(productIds[i])){
+                    returnArray[i] = bP;
+                    break;
+                }
+            }
+        }
+
+        return returnArray;
+    }
+
+    public Product[] readProductsNew(String[] productIds) { //a copy with return type Product
 
         //This function returns an array of products based on an array of UUID's
         //The size of the return array should equal the size of the input ID array
@@ -129,7 +171,7 @@ public class ProductManager implements IProductManager, Runnable{
             }
         }
 
-        return null; // return returnArray;
+        return returnArray;
     }
 
     @Override
