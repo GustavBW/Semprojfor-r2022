@@ -128,9 +128,9 @@ class ProductManagerTest {
         assertEquals(productManager.readProduct("1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d").getUuid(), UUID.fromString("1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d"));
         
         //setting baseProduct UUID
-        baseProduct.set(ProductAttribute.UUID, "25");
+        productManager.update("1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d", ProductAttribute.UUID, "1cf3d1fd-7787-4b64-8ef9-0b6f132a9f7e");
         
-        //assertEquals(productManager.readBaseProduct("test").get(ProductAttribute.UUID), "25");
+        assertEquals(productManager.readBaseProduct("1cf3d1fd-7787-4b64-8ef9-0b6f132a9f7e").get(ProductAttribute.UUID), "1cf3d1fd-7787-4b64-8ef9-0b6f132a9f7e");
         
         System.out.println("========== read() TEST DONE ============");
     }
