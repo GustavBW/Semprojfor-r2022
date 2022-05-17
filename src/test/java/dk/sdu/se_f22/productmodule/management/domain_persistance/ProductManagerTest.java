@@ -36,7 +36,7 @@ class ProductManagerTest {
             baseProduct.set(pa, "test");
         }
     
-        baseProduct.set(ProductAttribute.UUID, UUID.randomUUID().toString());
+        baseProduct.set(ProductAttribute.UUID, "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d");
         baseProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "2.8");
         baseProduct.set(ProductAttribute.EAN, "32131231");
         baseProduct.set(ProductAttribute.PRICE, "2.99");
@@ -75,7 +75,7 @@ class ProductManagerTest {
     void create() {
         
         //creating baseProduct
-        assertTrue(productManager.create(baseProduct));
+        assertTrue(productManager.create(product));
         System.out.println("========== create() TEST DONE ============");
     }
     
@@ -102,13 +102,16 @@ class ProductManagerTest {
     void read() {
         
         //trying to read a productId (UUID) using an empty String
-        assertNull(productManager.readBaseProduct(""));
+        assertNull(productManager.readProduct(""));
+    
+        //using read on a set product UUID
+        assertEquals(productManager.readProduct("1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d").getUuid(), UUID.fromString("1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d"));
         
         //setting baseProduct UUID
         baseProduct.set(ProductAttribute.UUID, "25");
         
-        //using read on a set baseProduct UUID
-        assertEquals(baseProduct.get(ProductAttribute.UUID), "25");
+        //assertEquals(productManager.readBaseProduct("test").get(ProductAttribute.UUID), "25");
+        
         System.out.println("========== read() TEST DONE ============");
     }
     
