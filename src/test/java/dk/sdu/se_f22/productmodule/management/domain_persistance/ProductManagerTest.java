@@ -143,7 +143,6 @@ class ProductManagerTest {
         
         //adding baseProduct to baseProductArray
         productManager.create(baseProduct);
-        productManager.baseProductArray.add(baseProduct);
         
         //setting baseProduct UUID
         baseProduct.set(ProductAttribute.UUID, "30");
@@ -152,6 +151,7 @@ class ProductManagerTest {
         assertTrue(productManager.update("30", ProductAttribute.UUID, "50"));
         System.out.println("========== update() TEST DONE ============");
     }
+
     
     @Order(5)
     @Test
@@ -205,7 +205,7 @@ class ProductManagerTest {
         productManager.create(baseProduct2);
         productManager.create(baseProduct3);
         productManager.create(baseProduct4);
-        
+
         productManager.baseProductArray.add(baseProduct1);
         productManager.baseProductArray.add(baseProduct2);
         productManager.baseProductArray.add(baseProduct3);
@@ -227,7 +227,7 @@ class ProductManagerTest {
 
     @Order(7)
     @Test
-    void readProducts() {
+    void readBaseProducts() {
         String[] ids = {"35", "42", "1", "364"};
         BaseProduct[] baseProducts = productManager.readBaseProducts(ids);
         BaseProduct[] baseProductTest = new BaseProduct[4];
@@ -264,22 +264,6 @@ class ProductManagerTest {
         System.out.println("========== readAllProducts() TEST DONE ============");
     }
 
-    @Test
-    @Order(10)
-    void readProduct(){
-        //reading a baseProduct not found in the baseProductArray
-        assertNull(productManager.readBaseProduct("1"));
-
-        //creating baseProduct, setting the UUID and add it to the baseProductArray
-        BaseProduct baseProduct1 = new BaseProduct();
-        baseProduct1.set(ProductAttribute.UUID, "1");
-        productManager.baseProductArray.add(baseProduct1);
-
-        //reading baseProduct now added to the baseProductArray
-        assertNotNull(productManager.readBaseProduct("1"));
-        System.out.println("========== readProduct() TEST DONE ============");
-    }
-    
     @AfterEach
     void teardown(){
         System.out.println("============ TEARDOWN ============");

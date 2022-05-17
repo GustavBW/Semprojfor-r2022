@@ -16,6 +16,7 @@ public interface IProductManager {
     Product[] readProducts(String[] productIds);
     boolean update(String productId, ProductAttribute a, String s);
     boolean update(String productId, Product p);
+    boolean updateBaseProduct(String productId, BaseProduct p);
     boolean remove(String productId);
     boolean removeAll(String[] productIds);
     void setUpdateInterval(int time);

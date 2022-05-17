@@ -212,6 +212,28 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
+    public boolean updateBaseProduct(String productId, BaseProduct p) {
+
+        checkForUpdates();
+
+        boolean success = false;
+
+        for(BaseProduct pT : baseProductArray){
+            if(pT.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
+                pT = p;
+                success = true;
+                break;
+            }
+        }
+
+        updateSource();
+
+        return success;
+    }
+
+
+
+    @Override
     public boolean remove(String productId) {
 
         //Removes a product from the array, and consequently from the source file as well.
@@ -393,7 +415,7 @@ public class ProductManager implements IProductManager, Runnable{
         }
     }*/
 
-    public ArrayList<BaseProduct> readAllProducts() {
+    protected ArrayList<BaseProduct> readAllProducts() {
 
         //This function returns the entire product array. Using this function may result in errors,
         //rather use readAll()
