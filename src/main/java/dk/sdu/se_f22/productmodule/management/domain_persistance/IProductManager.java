@@ -9,6 +9,7 @@ public interface IProductManager {
     boolean create(BaseProduct p);
     boolean create(Product p);
     boolean createAll(ArrayList<Product> p);
+    boolean createAllBaseProduct(ArrayList<BaseProduct> p);
     BaseProduct readBaseProduct(String productId);
     Product readProduct(String productId);
     BaseProduct[] readBaseProducts(String[] productIds);

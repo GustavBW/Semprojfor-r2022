@@ -85,11 +85,11 @@ class ProductManagerTest {
         
         ArrayList<BaseProduct> List = new ArrayList<>();
         
-        assertFalse(productManager.createAllBase(List));
+        assertFalse(productManager.createAllBaseProduct(List));
         
         //trying to createAll() after adding products to the List
         List.add(baseProduct);
-        assertTrue(productManager.createAllBase(List));
+        assertTrue(productManager.createAllBaseProduct(List));
         
         System.out.println("========== createAll() TEST DONE ============");
     }
