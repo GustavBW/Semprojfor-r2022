@@ -13,7 +13,7 @@ public class ProductManager implements IProductManager, Runnable{
 
     private final ProductJSONReader jsonReader;
 
-    public ArrayList<BaseProduct> baseProductArray;
+    protected ArrayList<BaseProduct> baseProductArray;
     private ArrayList<BaseProduct> updatedBaseProductArray;
     private boolean backgroundThreadIsRunning = false;
     private final Thread backgroundThread;
@@ -80,11 +80,16 @@ public class ProductManager implements IProductManager, Runnable{
     public boolean createAll(ArrayList<Product> pList){
         checkForUpdates();
 
+        if(pList == null || pList.isEmpty()){
+            return false;
+        }
         boolean success = true;
 
         for (Product p: pList) {
-            success = success && create(p);
 
+            if(!create(p)){
+                success = false;
+            }
         }
         updateSource();
         return success;
@@ -107,13 +112,17 @@ public class ProductManager implements IProductManager, Runnable{
                 break;
             }
         }
-
         return toReturn;
     }
 
     @Override
     public Product readProduct(String productID){
-        return new Product(readBaseProduct(productID));
+        BaseProduct tempBaseProduct = readBaseProduct(productID);
+        if (tempBaseProduct == null) {
+            return null;
+        } else {
+            return new Product(tempBaseProduct);
+        }
     }
 
     @Override
