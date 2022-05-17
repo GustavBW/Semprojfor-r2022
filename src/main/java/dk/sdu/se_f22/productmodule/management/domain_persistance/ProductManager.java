@@ -132,7 +132,7 @@ public class ProductManager implements IProductManager, Runnable{
         for(int i = 0; i < productIds.length; i++){
             for(BaseProduct bP : baseProductArray){
 
-                if(bP.get(ProductAttribute.ID).equalsIgnoreCase(productIds[i])){
+                if(bP.get(ProductAttribute.UUID).equalsIgnoreCase(productIds[i])){
                     returnArray[i] = bP;
                     break;
                 }
@@ -148,20 +148,15 @@ public class ProductManager implements IProductManager, Runnable{
         //This function returns an array of products based on an array of UUID's
         //The size of the return array should equal the size of the input ID array
 
-        checkForUpdates();
-
+        int i = 0;
         Product[] returnArray = new Product[productIds.length];
+        for (BaseProduct bP : readBaseProducts(productIds)) { //running through array from rBP to convert
 
-        for(int i = 0; i < productIds.length; i++){
-            for(BaseProduct bP : baseProductArray){
-
-                if(bP.get(ProductAttribute.ID).equalsIgnoreCase(productIds[i])){
-                    Product p = new Product(bP);
-                    returnArray[i] = p;
-                    break;
+            if (bP.get(ProductAttribute.UUID)!=null) { //checking bP has a UUID
+                Product p = new Product(bP); //if so converting bP to p
+                returnArray[i]=p; i++; //adding to array, moving to next index
                 }
             }
-        }
 
         return returnArray;
     }
