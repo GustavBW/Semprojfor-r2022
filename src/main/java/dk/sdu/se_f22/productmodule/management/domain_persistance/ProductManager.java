@@ -13,7 +13,7 @@ public class ProductManager implements IProductManager, Runnable{
 
     private final ProductJSONReader jsonReader;
 
-    public ArrayList<BaseProduct> baseProductArray;
+    protected ArrayList<BaseProduct> baseProductArray;
     private ArrayList<BaseProduct> updatedBaseProductArray;
     private boolean backgroundThreadIsRunning = false;
     private final Thread backgroundThread;
@@ -113,7 +113,12 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public Product readProduct(String productID){
-        return new Product(readBaseProduct(productID));
+        BaseProduct tempBaseProduct = readBaseProduct(productID);
+        if (tempBaseProduct == null) {
+            return null;
+        } else {
+            return new Product(tempBaseProduct);
+        }
     }
 
     @Override
