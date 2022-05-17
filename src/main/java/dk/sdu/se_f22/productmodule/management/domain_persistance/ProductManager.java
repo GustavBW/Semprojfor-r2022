@@ -65,15 +65,31 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     //Convert ProductManager.createAll(List<Product>) to ProductHit?? All products are being converted to BaseProducts and added to baseProductArray??
-    @Override
-    public boolean createAll(ArrayList<BaseProduct> pList){
+    public boolean createAllBase(ArrayList<BaseProduct> pList){
         checkForUpdates();
+
 
         boolean success = baseProductArray.addAll(pList);
 
         updateSource();
         return success;
     }
+
+    @Override
+    public boolean createAll(ArrayList<Product> pList){
+        checkForUpdates();
+
+        boolean success = true;
+
+        for (Product p: pList) {
+            success = success && create(p);
+
+        }
+        updateSource();
+        return success;
+    }
+
+
 
 
     @Override
@@ -308,7 +324,6 @@ public class ProductManager implements IProductManager, Runnable{
         //Reads a new baseProductArray from the jsonReader.
         //The current array is swapped out with the new one next time any CRUD operation is called.
         //This is done as such, to prevent the backgroundThread and external calls to reparse() to cause issues.
-
         try {
             updatedBaseProductArray = jsonReader.read();
         }catch (IOException e){

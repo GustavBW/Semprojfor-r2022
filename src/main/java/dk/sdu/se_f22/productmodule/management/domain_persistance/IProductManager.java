@@ -8,7 +8,7 @@ public interface IProductManager {
     
     boolean create(BaseProduct p);
     boolean create(Product p);
-    boolean createAll(ArrayList<BaseProduct> p);
+    boolean createAll(ArrayList<Product> p);
     BaseProduct readBaseProduct(String productId);
     Product readProduct(String productId);
     Product read(String productId);
@@ -21,5 +21,4 @@ public interface IProductManager {
     void setUpdateInterval(int time);
     void reparse();
     ArrayList<BaseProduct> readAllProducts();
-
 }
