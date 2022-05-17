@@ -11,7 +11,6 @@ public interface IProductManager {
     boolean createAll(ArrayList<Product> p);
     BaseProduct readBaseProduct(String productId);
     Product readProduct(String productId);
-    Product read(String productId);
     BaseProduct[] readBaseProducts(String[] productIds);
     Product[] readProducts(String[] productIds);
     boolean update(String productId, ProductAttribute a, String s);

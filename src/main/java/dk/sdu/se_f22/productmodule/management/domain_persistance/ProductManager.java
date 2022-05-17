@@ -114,29 +114,7 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public Product readProduct(String productId) { //a copy with return type Product
-
-        //This function returns a single product based on the UUID
-        //Since the read() function doesn't alter any attribute values on the product
-        //There's no reason to update the source.
-
-        checkForUpdates();
-
-        BaseProduct toReturn = null;
-
-        for(BaseProduct p : baseProductArray){ //Runs through product UUID's until the requested one is found.
-            if(p.get(ProductAttribute.UUID).equalsIgnoreCase(productId)){
-                toReturn = p;
-                break;
-            }
-        }
-
-        Product p = new Product(toReturn);
-        return p;
-    }
-
-    @Override
-    public Product read(String productID){
+    public Product readProduct(String productID){
         return new Product(readBaseProduct(productID));
     }
 
