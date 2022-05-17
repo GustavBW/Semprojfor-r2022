@@ -159,9 +159,10 @@ public class ProductManager implements IProductManager, Runnable{
         for (String pId : productIds) { //running through array from rBP to convert
 
             if (pId!=null) { //checking bP has a UUID
-                returnArray[i]=readProduct(pId); i++; //converting to P, adding to array, moving to next index
-                }
+                returnArray[i]=readProduct(pId); //converting to P, adding to array, moving to next index
             }
+            i++;
+        }
 
         return returnArray;
     }
