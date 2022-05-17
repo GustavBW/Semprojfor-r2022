@@ -4,6 +4,6 @@ import org.junit.platform.suite.api.Suite;
 
 @Suite
 @SelectClasses({ProductManagerTest.class, ProductAttributeTest.class, ProductJSONReaderTest.class, BaseProductTest.class})
-public class TestSuite {
+public class PIM1TestSuite {
 
 }
