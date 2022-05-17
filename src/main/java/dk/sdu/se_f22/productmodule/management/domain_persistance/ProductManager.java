@@ -50,24 +50,19 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public boolean create(Product p) {
-
-        //Adds new product to the baseProductArray.
-        //Returns whether this was possible or not.
-
-        checkForUpdates();
-        boolean success = baseProductArray.add(toBaseProduct(p));
-        updateSource();
-
-        return success;
+        return create(toBaseProduct(p));
     }
     @Override
     public boolean create(BaseProduct p){
+    
+        //Adds new product to the baseProductArray.
+        //Returns whether this was possible or not.
+        
         checkForUpdates();
         boolean success = baseProductArray.add(p);
         updateSource();
         return success;
     }
-
 
     //Convert ProductManager.createAll(List<Product>) to ProductHit?? All products are being converted to BaseProducts and added to baseProductArray??
     @Override
