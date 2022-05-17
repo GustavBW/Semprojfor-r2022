@@ -75,6 +75,9 @@ class ProductManagerTest {
     void create() {
         
         //creating baseProduct
+        assertTrue(productManager.create(baseProduct));
+
+        //creating Product
         assertTrue(productManager.create(product));
         System.out.println("========== create() TEST DONE ============");
     }
@@ -84,18 +87,35 @@ class ProductManagerTest {
     void createAll() {
         
         //trying to createAll() using non-initialized, empty List
-        assertFalse(productManager.createAll(new ArrayList<Product>()));
+        assertFalse(productManager.createAll(new ArrayList<>()));
         
-        ArrayList<BaseProduct> List = new ArrayList<>();
+        ArrayList<Product> List = new ArrayList<>();
         
-        assertFalse(productManager.createAllBaseProduct(List));
+        assertFalse(productManager.createAll(List));
         
         //trying to createAll() after adding products to the List
-        List.add(baseProduct);
-        assertTrue(productManager.createAllBaseProduct(List));
+        List.add(product);
+        assertTrue(productManager.createAll(List));
         
         System.out.println("========== createAll() TEST DONE ============");
     }
+    
+    @Test
+    void createAllBaseProducts(){
+        //trying to createAll() using non-initialized, empty List
+        assertFalse(productManager.createAllBaseProduct(new ArrayList<>()));
+
+        ArrayList<BaseProduct> List = new ArrayList<>();
+
+        assertFalse(productManager.createAllBaseProduct(List));
+
+        //trying to createAll() after adding products to the List
+        List.add(baseProduct);
+        assertTrue(productManager.createAllBaseProduct(List));
+
+        System.out.println("========== createAll() TEST DONE ============");
+    }
+    
     
     @Order(3)
     @Test

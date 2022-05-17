@@ -80,11 +80,16 @@ public class ProductManager implements IProductManager, Runnable{
     public boolean createAll(ArrayList<Product> pList){
         checkForUpdates();
 
+        if(pList == null || pList.isEmpty()){
+            return false;
+        }
         boolean success = true;
 
         for (Product p: pList) {
-            success = success && create(p);
 
+            if(!create(p)){
+                success = false;
+            }
         }
         updateSource();
         return success;
@@ -107,7 +112,6 @@ public class ProductManager implements IProductManager, Runnable{
                 break;
             }
         }
-
         return toReturn;
     }
 
