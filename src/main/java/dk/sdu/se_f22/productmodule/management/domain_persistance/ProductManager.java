@@ -102,6 +102,7 @@ public class ProductManager implements IProductManager, Runnable{
         return toReturn;
     }
 
+    @Override
     public Product readProductNew(String productId) { //a copy with return type Product
 
         //This function returns a single product based on the UUID
@@ -151,6 +152,7 @@ public class ProductManager implements IProductManager, Runnable{
         return returnArray;
     }
 
+    @Override
     public Product[] readProductsNew(String[] productIds) { //a copy with return type Product
 
         //This function returns an array of products based on an array of UUID's
