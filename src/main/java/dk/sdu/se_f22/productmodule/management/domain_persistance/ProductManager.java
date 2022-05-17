@@ -65,7 +65,8 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     //Convert ProductManager.createAll(List<Product>) to ProductHit?? All products are being converted to BaseProducts and added to baseProductArray??
-    public boolean createAllBase(ArrayList<BaseProduct> pList){
+    @Override
+    public boolean createAllBaseProduct(ArrayList<BaseProduct> pList){
         checkForUpdates();
 
 
