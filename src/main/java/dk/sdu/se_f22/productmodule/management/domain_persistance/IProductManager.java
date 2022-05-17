@@ -20,5 +20,4 @@ public interface IProductManager {
     boolean removeAll(String[] productIds);
     void setUpdateInterval(int time);
     void reparse();
-    ArrayList<BaseProduct> readAllProducts();
 }
