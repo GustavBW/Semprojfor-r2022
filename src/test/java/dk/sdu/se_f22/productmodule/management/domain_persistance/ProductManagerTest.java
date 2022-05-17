@@ -99,7 +99,8 @@ class ProductManagerTest {
         
         System.out.println("========== createAll() TEST DONE ============");
     }
-    
+
+    @Order(3)
     @Test
     void createAllBaseProducts(){
         //trying to createAll() using non-initialized, empty List
@@ -117,7 +118,7 @@ class ProductManagerTest {
     }
     
     
-    @Order(3)
+    @Order(4)
     @Test
     void read() {
         
@@ -135,7 +136,7 @@ class ProductManagerTest {
         System.out.println("========== read() TEST DONE ============");
     }
     
-    @Order(4)
+    @Order(5)
     @Test
     void update() {
         //testing with nothing in the baseProductArray
@@ -153,7 +154,7 @@ class ProductManagerTest {
     }
 
     
-    @Order(5)
+    @Order(6)
     @Test
     void remove() {
         
@@ -175,7 +176,7 @@ class ProductManagerTest {
         System.out.println("========== remove() TEST DONE ============");
     }
     
-    @Order(6)
+    @Order(7)
     @Test
     void removeAll() {
         //Initializing String array of possible baseProduct UUIDs
@@ -225,7 +226,7 @@ class ProductManagerTest {
         System.out.println("========== removeAll() TEST DONE ============");
     }
 
-    @Order(7)
+    @Order(8)
     @Test
     void readBaseProducts() {
         String[] ids = {"35", "42", "1", "364"};
@@ -238,7 +239,7 @@ class ProductManagerTest {
         assertNotNull(Arrays.asList(baseProducts));
     }
 
-    @Order(8)
+    @Order(9)
     @Test
     void setUpdateInterval() {
         //Setting new UpdateInterval
@@ -253,7 +254,7 @@ class ProductManagerTest {
 
     }
 
-    @Order(9)
+    @Order(10)
     @Test
     void readAllProducts() {
         //Ensuring that the returned baseProduct arraylist isn't null
