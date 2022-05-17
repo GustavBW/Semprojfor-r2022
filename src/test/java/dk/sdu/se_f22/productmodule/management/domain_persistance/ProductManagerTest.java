@@ -5,9 +5,7 @@ import org.junit.jupiter.api.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -241,6 +239,45 @@ class ProductManagerTest {
 
     @Order(9)
     @Test
+    void readProducts(){
+        String[] ids = {
+                "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d",
+                "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f8d",
+                "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f6d",
+                "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f9d",
+                "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f5d"
+        };
+
+        for(String id : ids){
+            //Filling in with test data
+            baseProduct.set(ProductAttribute.UUID,id);
+            productManager.create(new Product(baseProduct));
+        }
+        Product[] list = productManager.readProducts(ids);
+        List<Product> list2 = new ArrayList<>(Arrays.stream(list).toList());
+        assertEquals(ids.length, list.length);
+
+        for(Product p : list2){
+            assertNotNull(p);
+            assertTrue(isPartOf(ids,p));
+        }
+
+        for(int i = 0; i < list.length; i++){
+            assertTrue(ids[i].equalsIgnoreCase(list[i].getUuid().toString()));
+        }
+        System.out.println("========== readProducts() TEST DONE ============");
+    }
+    private boolean isPartOf(String[] ids, Product p){
+        for(String id : ids){
+            if(id.equalsIgnoreCase(p.getUuid().toString())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Order(10)
+    @Test
     void setUpdateInterval() {
         //Setting new UpdateInterval
         productManager.setUpdateInterval(9);
@@ -254,7 +291,7 @@ class ProductManagerTest {
 
     }
 
-    @Order(10)
+    @Order(11)
     @Test
     void readAllProducts() {
         //Ensuring that the returned baseProduct arraylist isn't null
