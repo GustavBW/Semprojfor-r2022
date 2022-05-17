@@ -394,7 +394,6 @@ public class ProductManager implements IProductManager, Runnable{
         }
     }*/
 
-    @Override
     public ArrayList<BaseProduct> readAllProducts() {
 
         //This function returns the entire product array. Using this function may result in errors,
