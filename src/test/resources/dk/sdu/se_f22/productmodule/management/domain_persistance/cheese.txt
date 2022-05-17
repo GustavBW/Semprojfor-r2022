@@ -1,164 +1,92 @@
 [
 {
-	"id": "test",
-	"pId": "1",
-	"averageUserReview": "test",
+	"id": "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f7d",
+	"pId": "",
+	"averageUserReview": "2.8",
 	"inStock": [
 		"test"
 	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
+	"ean": "32131231",
+	"price": "2.99",
+	"publishedDate": "2021-06-02T05:05:06.622164",
+	"expirationDate": "2025-01-25T07:40:33.169509",
 	"category": "test",
 	"name": "test",
 	"description": "test",
-	"weight": "test",
+	"weight": "3.1",
 	"size": "test",
-	"clockSpeed": "test"
+	"clockSpeed": "2.4"
 },
 {
-	"id": "50",
-	"pId": "2",
-	"averageUserReview": "test",
+	"id": "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f8d",
+	"pId": "",
+	"averageUserReview": "2.8",
 	"inStock": [
 		"test"
 	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
+	"ean": "32131231",
+	"price": "2.99",
+	"publishedDate": "2021-06-02T05:05:06.622164",
+	"expirationDate": "2025-01-25T07:40:33.169509",
 	"category": "test",
 	"name": "test",
 	"description": "test",
-	"weight": "test",
+	"weight": "3.1",
 	"size": "test",
-	"clockSpeed": "test"
+	"clockSpeed": "2.4"
 },
 {
-	"id": "30",
-	"pId": "3",
-	"averageUserReview": "test",
+	"id": "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f6d",
+	"pId": "",
+	"averageUserReview": "2.8",
 	"inStock": [
 		"test"
 	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
+	"ean": "32131231",
+	"price": "2.99",
+	"publishedDate": "2021-06-02T05:05:06.622164",
+	"expirationDate": "2025-01-25T07:40:33.169509",
 	"category": "test",
 	"name": "test",
 	"description": "test",
-	"weight": "test",
+	"weight": "3.1",
 	"size": "test",
-	"clockSpeed": "test"
+	"clockSpeed": "2.4"
 },
 {
-	"id": "30",
-	"pId": "4",
-	"averageUserReview": "test",
+	"id": "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f9d",
+	"pId": "",
+	"averageUserReview": "2.8",
 	"inStock": [
 		"test"
 	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
+	"ean": "32131231",
+	"price": "2.99",
+	"publishedDate": "2021-06-02T05:05:06.622164",
+	"expirationDate": "2025-01-25T07:40:33.169509",
 	"category": "test",
 	"name": "test",
 	"description": "test",
-	"weight": "test",
+	"weight": "3.1",
 	"size": "test",
-	"clockSpeed": "test"
+	"clockSpeed": "2.4"
 },
 {
-	"id": "test",
-	"pId": "5",
-	"averageUserReview": "test",
+	"id": "1cf3d1fd-7787-4b64-8ef9-0b6f131a9f5d",
+	"pId": "",
+	"averageUserReview": "2.8",
 	"inStock": [
 		"test"
 	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
+	"ean": "32131231",
+	"price": "2.99",
+	"publishedDate": "2021-06-02T05:05:06.622164",
+	"expirationDate": "2025-01-25T07:40:33.169509",
 	"category": "test",
 	"name": "test",
 	"description": "test",
-	"weight": "test",
+	"weight": "3.1",
 	"size": "test",
-	"clockSpeed": "test"
-},
-{
-	"id": "test",
-	"pId": "test",
-	"averageUserReview": "test",
-	"inStock": [
-		"test"
-	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
-	"category": "test",
-	"name": "test",
-	"description": "test",
-	"weight": "test",
-	"size": "test",
-	"clockSpeed": "test"
-},
-{
-	"id": "test",
-	"pId": "test",
-	"averageUserReview": "test",
-	"inStock": [
-		"test"
-	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
-	"category": "test",
-	"name": "test",
-	"description": "test",
-	"weight": "test",
-	"size": "test",
-	"clockSpeed": "test"
-},
-{
-	"id": "test",
-	"pId": "test",
-	"averageUserReview": "test",
-	"inStock": [
-		"test"
-	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
-	"category": "test",
-	"name": "test",
-	"description": "test",
-	"weight": "test",
-	"size": "test",
-	"clockSpeed": "test"
-},
-{
-	"id": "test",
-	"pId": "test",
-	"averageUserReview": "test",
-	"inStock": [
-		"test"
-	],
-	"ean": "test",
-	"price": "test",
-	"publishedDate": "test",
-	"expirationDate": "test",
-	"category": "test",
-	"name": "test",
-	"description": "test",
-	"weight": "test",
-	"size": "test",
-	"clockSpeed": "test"
+	"clockSpeed": "2.4"
 }
 ]
