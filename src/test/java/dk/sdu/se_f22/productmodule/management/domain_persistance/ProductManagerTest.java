@@ -99,7 +99,7 @@ class ProductManagerTest {
     void read() {
         
         //trying to read a productId (UUID) using an empty String
-        assertNull(productManager.readProduct(""));
+        assertNull(productManager.readBaseProduct(""));
         
         //setting baseProduct UUID
         baseProduct.set(ProductAttribute.UUID, "25");
@@ -203,7 +203,7 @@ class ProductManagerTest {
     @Test
     void readProducts() {
         String[] ids = {"35", "42", "1", "364"};
-        BaseProduct[] baseProducts = productManager.readProducts(ids);
+        BaseProduct[] baseProducts = productManager.readBaseProducts(ids);
         BaseProduct[] baseProductTest = new BaseProduct[4];
 
         assertNotNull(baseProducts);
@@ -242,7 +242,7 @@ class ProductManagerTest {
     @Order(10)
     void readProduct(){
         //reading a baseProduct not found in the baseProductArray
-        assertNull(productManager.readProduct("1"));
+        assertNull(productManager.readBaseProduct("1"));
 
         //creating baseProduct, setting the UUID and add it to the baseProductArray
         BaseProduct baseProduct1 = new BaseProduct();
@@ -250,7 +250,7 @@ class ProductManagerTest {
         productManager.baseProductArray.add(baseProduct1);
 
         //reading baseProduct now added to the baseProductArray
-        assertNotNull(productManager.readProduct("1"));
+        assertNotNull(productManager.readBaseProduct("1"));
         System.out.println("========== readProduct() TEST DONE ============");
     }
     

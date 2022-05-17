@@ -82,7 +82,7 @@ public class ProductManager implements IProductManager, Runnable{
 
 
     @Override
-    public BaseProduct readProduct(String productId) {
+    public BaseProduct readBaseProduct(String productId) {
 
         //This function returns a single product based on the UUID
         //Since the read() function doesn't alter any attribute values on the product
@@ -103,7 +103,7 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public Product readProductNew(String productId) { //a copy with return type Product
+    public Product readProduct(String productId) { //a copy with return type Product
 
         //This function returns a single product based on the UUID
         //Since the read() function doesn't alter any attribute values on the product
@@ -126,11 +126,11 @@ public class ProductManager implements IProductManager, Runnable{
 
     @Override
     public Product read(String productID){
-        return new Product(readProduct(productID));
+        return new Product(readBaseProduct(productID));
     }
 
     @Override
-    public BaseProduct[] readProducts(String[] productIds) {
+    public BaseProduct[] readBaseProducts(String[] productIds) {
 
         //This function returns an array of products based on an array of UUID's
         //The size of the return array should equal the size of the input ID array
@@ -153,7 +153,7 @@ public class ProductManager implements IProductManager, Runnable{
     }
 
     @Override
-    public Product[] readProductsNew(String[] productIds) { //a copy with return type Product
+    public Product[] readProducts(String[] productIds) { //a copy with return type Product
 
         //This function returns an array of products based on an array of UUID's
         //The size of the return array should equal the size of the input ID array
@@ -242,6 +242,7 @@ public class ProductManager implements IProductManager, Runnable{
         return toReturn;
     }
 
+    @Override
     public boolean removeAll(String[] productIds){
 
         //This function removes all products from the baseProductArray that matches any of the given productIds
