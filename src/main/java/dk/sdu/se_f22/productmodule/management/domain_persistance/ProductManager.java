@@ -90,9 +90,6 @@ public class ProductManager implements IProductManager, Runnable{
         return success;
     }
 
-
-
-
     @Override
     public BaseProduct readBaseProduct(String productId) {
 

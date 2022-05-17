@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductManagerTest {
     
     private BaseProduct baseProduct;
+    private Product product;
     private ProductManager productManager;
     
     @BeforeAll
@@ -34,13 +35,7 @@ class ProductManagerTest {
         for(ProductAttribute pa : ProductAttribute.values()){
             baseProduct.set(pa, "test");
         }
-        productManager = new ProductManager("src/test/resources/dk/sdu/se_f22/productmodule/management/domain_persistance/cheese.json");
-        System.out.println("============ INITIALIZING ============");
-    }
     
-    @Order(0)
-    @Test
-    void toBaseProduct() {
         baseProduct.set(ProductAttribute.UUID, UUID.randomUUID().toString());
         baseProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "2.8");
         baseProduct.set(ProductAttribute.EAN, "32131231");
@@ -49,7 +44,15 @@ class ProductManagerTest {
         baseProduct.set(ProductAttribute.EXPIRATION_DATE, "2025-01-25T07:40:33.169509");
         baseProduct.set(ProductAttribute.CLOCKSPEED, "2.4");
         baseProduct.set(ProductAttribute.WEIGHT, "3.1");
-        Product product = new Product(baseProduct);
+        product = new Product(baseProduct);
+        
+        productManager = new ProductManager("src/test/resources/dk/sdu/se_f22/productmodule/management/domain_persistance/cheese.json");
+        System.out.println("============ INITIALIZING ============");
+    }
+    
+    @Order(0)
+    @Test
+    void toBaseProduct() {
         BaseProduct returnedBaseProduct = productManager.toBaseProduct(product);
         
         assertEquals(baseProduct.get(ProductAttribute.UUID), returnedBaseProduct.get(ProductAttribute.UUID));
