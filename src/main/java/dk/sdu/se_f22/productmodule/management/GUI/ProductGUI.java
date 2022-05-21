@@ -74,7 +74,6 @@ public class ProductGUI {
         BaseProduct blankBaseProduct = new BaseProduct();
 
         blankBaseProduct.set(ProductAttribute.UUID, "e.g. ea6954c2-64ec-4a65-b1a5-d614907e8b65");
-        blankBaseProduct.set(ProductAttribute.ID, "e.g. 25");
         blankBaseProduct.set(ProductAttribute.AVERAGE_USER_REVIEW, "e.g. 4.523");
         blankBaseProduct.set(ProductAttribute.IN_STOCK, "e.g. København,Hørsholm,Vejle...");
         blankBaseProduct.set(ProductAttribute.EAN, "e.g. 1122334455667");
