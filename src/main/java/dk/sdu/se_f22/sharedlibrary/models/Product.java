@@ -8,10 +8,13 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.UUID;
 
-/** The class proposed by group 4.4 to use as the return type of search hits.
+/** The class is used as the common representation of a product. <br>
+ * Is therefore the type used for products in {@link dk.sdu.se_f22.sharedlibrary.SearchHits}
  * <br>
- * It includes a constructor {@link Product#Product(BaseProduct)}, which simply takes a {@link BaseProduct} as its input,
- * and then parses it into the correct attribute values.
+ * It includes among others a constructor {@link Product#Product(BaseProduct)}, which simply takes a {@link BaseProduct} as its input,
+ * and then parses the attribute values from the {@link BaseProduct} supplied.<br>
+ * This class has a getter for each specific product attribute (i.e. {@link Product#getPrice()}).<br><br>
+ * <i>Formerly known as <b>ProductHit</b></i>
  */
 public class Product {
     UUID uuid;
@@ -54,12 +57,11 @@ public class Product {
         this.description = description;
     }
     
-    /** This parses the hard to use BaseProduct into a much more user friendly Product.<br>
-     * It is proposed by group 4.4 that this representation of a BaseProduct is used as the return type in searchHits.
+    /** This parses a {@link BaseProduct} into a Product.<br>
      *
-     * @param baseProduct a baseProduct
-     * @throws DateTimeParseException if The dates are in a non parseable format
-     * @throws NumberFormatException if any of the attributes, that are numeric, is unparseable
+     * @param baseProduct a product
+     * @throws DateTimeParseException if The dates supplied are in a non parseable format
+     * @throws NumberFormatException if any of the attributes, that are numeric, are unparseable
      */
     public Product(BaseProduct baseProduct) throws DateTimeParseException, NumberFormatException  {
         String stringId = baseProduct.get(ProductAttribute.UUID);
@@ -75,32 +77,19 @@ public class Product {
         this.name = baseProduct.get(ProductAttribute.NAME);
         this.description = baseProduct.get(ProductAttribute.DESCRIPTION);
         
-        if (!baseProduct.get(ProductAttribute.SIZE).equals("unavailable")){
+        if (baseProduct.get(ProductAttribute.SIZE) != null) {
             this.size = baseProduct.get(ProductAttribute.SIZE);
         }
         
-        if (!baseProduct.get(ProductAttribute.CLOCKSPEED).equals("unavailable")){
+        if (baseProduct.get(ProductAttribute.CLOCKSPEED) != null) {
             this.clockspeed = Double.parseDouble(baseProduct.get(ProductAttribute.CLOCKSPEED));
         }
         
-        if (!baseProduct.get(ProductAttribute.WEIGHT).equals("unavailable")){
+        if (baseProduct.get(ProductAttribute.WEIGHT) != null) {
             this.weight = Double.parseDouble(baseProduct.get(ProductAttribute.WEIGHT));
         }
     }
     
-    /**@param attributeName The name of the attribute to retrieve
-     * @return The value of the attribute referenced
-     * @throws IllegalArgumentException if the attribute input does not correspond to any of the attributes, whose value is a double
-     */
-    public double getDoubleValue(String attributeName){
-        return switch (attributeName) {
-            case ("price") -> this.getPrice();
-            case ("averageUserReview") -> this.getAverageUserReview();
-            case ("clockspeed") -> this.getClockspeed();
-            case ("weight") -> this.getWeight();
-            default -> throw new IllegalArgumentException(attributeName + "does not exist as a double attribute: ");
-        };
-    }
     
     public UUID getUuid() {
         return uuid;
@@ -154,10 +143,22 @@ public class Product {
         return weight;
     }
     
-    public long getLongValue(String productAttribute) {
-        if(productAttribute.equals("ean")){
-            return this.getEan();
-        }
-        throw new IllegalArgumentException(productAttribute + "does not exist as a double attribute: ");
+    @Override
+    public String toString() {
+        return "Product{" +
+                "uuid=" + uuid +
+                ", averageUserReview=" + averageUserReview +
+                ", price=" + price +
+                ", clockspeed=" + clockspeed +
+                ", weight=" + weight +
+                ", ean=" + ean +
+                ", size='" + size + '\'' +
+                ", category='" + category + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", publishedDate=" + publishedDate +
+                ", expirationDate=" + expirationDate +
+                ", inStock=" + inStock +
+                '}';
     }
 }
