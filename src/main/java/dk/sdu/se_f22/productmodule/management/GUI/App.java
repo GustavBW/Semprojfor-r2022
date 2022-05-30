@@ -44,7 +44,6 @@ public class App extends Application implements Initializable
         mainStage.setResizable(false);
         mainStage.setScene(mainScene);
         mainStage.show();
-
     }
 
     private void addProductButtons() {
@@ -102,6 +101,13 @@ public class App extends Application implements Initializable
                                 App.getCache().dumpTo(s);
                             }
                         }.open();
+                    }
+                }.getButton(),
+                new FuncButton("Clear"){
+                    @Override
+                    public void onClicked(){
+                        cacheInstance.clear();
+                        reloadProductButtons();
                     }
                 }.getButton()
         ));

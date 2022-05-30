@@ -72,11 +72,21 @@ public class JsonCache {
 
     public void overwrite(List<BaseProduct> list){
         quickAccess = list;
+        try {
+            updateCache();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void add(List<BaseProduct> list){
         System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : ADDING " + list.size() + " ELEMENTS");
         quickAccess.addAll(list);
+        try {
+            updateCache();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void add(String path) throws IOException{
         if(reader.validate(path)) {
@@ -91,9 +101,15 @@ public class JsonCache {
 
     public void remove(List<BaseProduct> list){
         quickAccess.removeAll(list);
+        try {
+            updateCache();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void remove(BaseProduct p) throws IOException{
         quickAccess.remove(p);
+        updateCache();
     }
 
     public List<BaseProduct> get(){
@@ -159,4 +175,14 @@ public class JsonCache {
         System.out.println("CACHE " + Thread.currentThread().getStackTrace()[1].getLineNumber() + " : DESTROYED ON EXIT: " + cacheFile.delete());
     }
 
+    public void clear() {
+        quickAccess.clear();
+        cacheFile.delete();
+        cacheFile = new File(root + "guiCache.json");
+        try {
+            cacheFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
